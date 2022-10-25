@@ -1,0 +1,11 @@
+{
+  "cssTheme": "Atom",
+  "interfaceFontFamily": "Monolisasimpson",
+  "textFontFamily": "Monolisasimpson",
+  "monospaceFontFamily": "Monolisasimpson",
+  "baseFontSize": 20,
+  "theme": "obsidian",
+  "translucency": false,
+  "baseFontSizeAction": true,
+  "accentColor": ""
+}

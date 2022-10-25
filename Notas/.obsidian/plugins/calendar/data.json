@@ -1,0 +1,10 @@
+{
+  "shouldConfirmBeforeCreate": true,
+  "weekStart": "sunday",
+  "wordsPerDot": 250,
+  "showWeeklyNote": true,
+  "weeklyNoteFormat": "[week ]ww[to52]-2021",
+  "weeklyNoteTemplate": "cabecera",
+  "weeklyNoteFolder": "Week",
+  "localeOverride": "system-default"
+}

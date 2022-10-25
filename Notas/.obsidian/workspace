@@ -1,0 +1,176 @@
+{
+  "main": {
+    "id": "b34b75c60c86c5fa",
+    "type": "split",
+    "children": [
+      {
+        "id": "78ee386649960010",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "Bitcoin/Bitcoinroadmap.md",
+            "mode": "source",
+            "backlinks": false,
+            "source": false
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "1f3161a1db7fdfa6",
+    "type": "split",
+    "children": [
+      {
+        "id": "ad3c44f84f61d73d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "83a4b9340e1cec37",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "0171094e261a40ad",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "mastering",
+                "matchingCase": false,
+                "explainSearch": true,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "e23ed64ee7f5ece8",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 318.5,
+    "collapsed": true
+  },
+  "right": {
+    "id": "cd45ab8311b6c33e",
+    "type": "split",
+    "children": [
+      {
+        "id": "7ba5bb8219616998",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c706df6699c4f46f",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {}
+            }
+          },
+          {
+            "id": "c9d4123c4b8f0470",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Bitcoin/Bitcoinroadmap.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "3ba0ddef9956fe81",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Bitcoin/Bitcoinroadmap.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "116fd8bfb2285b4a",
+            "type": "leaf",
+            "state": {
+              "type": "todo",
+              "state": {}
+            }
+          }
+        ]
+      },
+      {
+        "id": "0a1dbb5f32792198",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bd9efa3c589b7b34",
+            "type": "leaf",
+            "state": {
+              "type": "timeline",
+              "state": {}
+            }
+          },
+          {
+            "id": "a4ce24c2db723e71",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Bitcoin/Bitcoinroadmap.md"
+              }
+            }
+          },
+          {
+            "id": "ab9e54a2b95ca1f5",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 440.3333435058594,
+    "collapsed": true
+  },
+  "active": "78ee386649960010",
+  "lastOpenFiles": [
+    "Bitcoin/andreas talk inversión en infraestructura.md",
+    "Bitcoin/Andreas talk Internet of money.md",
+    "Bitcoin/Paper Original Bitcoin.md",
+    "Bitcoin/Criptografía antes de Bitcoin.md",
+    "Bitcoin/Breve historia del dinero.md",
+    "Bitcoin/Bitcoinroadmap.md",
+    "Bitcoin/Bitcoin y Energía.md",
+    "Bitcoin/bitcoin core.md",
+    "Bitcoin/satoshi nakamoto.md",
+    "Bitcoin/Inflacion.md"
+  ]
+}

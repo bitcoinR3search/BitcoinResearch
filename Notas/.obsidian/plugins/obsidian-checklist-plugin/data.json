@@ -1,0 +1,23 @@
+{
+  "todoPageName": "checklist",
+  "showChecked": false,
+  "groupBy": "page",
+  "sortDirection": "old->new",
+  "ignoreFiles": "Day Planners",
+  "includeFiles": "",
+  "lookAndFeel": "classic",
+  "_collapsedSections": [
+    "Day Planners/Day Planner-20211101.md",
+    "diario/nota 31-10-2021.md",
+    "Day Planners/Day Planner-20211030.md",
+    "Day Planners/Day Planner-20211025.md",
+    "Day Planners/Day Planner-20211024.md",
+    "templates/nota del día.md",
+    "Day Planners/Day Planner-20211022.md",
+    "Day Planners/Day Planner-20211102.md",
+    "diario/wallet.md",
+    "templates/plan díario.md",
+    "diario/nota 02-11-2021.md",
+    "Diario/nota 02-11-2021.md"
+  ]
+}
