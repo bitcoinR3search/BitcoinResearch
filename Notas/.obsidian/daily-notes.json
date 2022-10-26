@@ -1,6 +1,0 @@
-{
-  "folder": "Diario",
-  "template": "Templates/nota del día",
-  "autorun": false,
-  "format": "[Nota ]MM-DD-y"
-}
