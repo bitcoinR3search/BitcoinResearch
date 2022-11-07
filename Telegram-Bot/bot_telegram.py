@@ -230,13 +230,14 @@ def menu_menu(m):
     #Una vez en la menu = 0 se delararon 2 opciones:
     if text == 'Send IP':
         if cid == master:
-            bot.send_chat_action(cid, 'upload_document')
             mess = 'Se envia en txt la salida del comando ifconfig'
             bot.send_message(cid,mess)
             os.popen('ifconfig > ip.txt')
+            bot.send_chat_action(cid, 'upload_document')
             time.sleep(2)
             with open('ip.txt','rb') as ips:
                 bot.send_document(master,ips,reply_markup=menu)
+            os.remove(path_assets+'ip.txt')    
         #se envia el mensaje y se lo deriva al menu (en el mismo lugar) 
         else: 
             bot.send_message(cid,'onepi.local for not the admin',reply_markup=menu)
@@ -246,22 +247,23 @@ def menu_menu(m):
 
 def menu_loop():
     logging.info('Corriendo el Bot')
+    print('Run Bot Run')
     bot.polling(True)
 
 
-if __name__ == '__menu__':
+if __name__ == '__main__':
     #para hacer el bot un poco más robusto 
     #usamos un bucle while y manejo de excepciones  
     logging.info('Iniciando Script Bot Telegram')
-    while(1):
-        try: #ejecuta la función que corre el bot
-            menu_loop()
+    try: #ejecuta la función que corre el bot
+        menu_loop()
             #solo con una interrupcion que corta 
             #proceso, manda un mensaje. En otros casos
             #y errores vuelve a ejecutarse.
-        except KeyboardInterrupt:
-            logging.warning('Salida del Usuario por requerimiento')
-            print('\nExiting by user request.\n')
+    except:
+        logging.error('Error !!')
+        print('\nExiting by user request.\n')
+    
         #lo ideal seria implementar un sistema de logs
         # para otros errores 
 
