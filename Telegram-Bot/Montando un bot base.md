@@ -65,7 +65,7 @@ chmod=0770
 chown=root:admin
 ```
 
-Finalmente se configura el servicio y el bot.
+Finalmente se configura el nuevo servicio, el bot.
 ```
 sudo nano /etc/supervisor/conf.d/my-proccess.conf
 ```
