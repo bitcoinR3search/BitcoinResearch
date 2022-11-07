@@ -10,20 +10,25 @@
 
 # importación de librerias
 import telebot, json, time, os, sys
-import numpy as np
-#from telebot import types
+import numpy as np 
+from telebot import types
 from dotenv import load_dotenv
+
 
 #donde se guardan los tokens como variables de entorno
 path = '/home/ghost/rpibots/'
 load_dotenv(path+'.env')
 
-# autenrtificación y cuenta maestra
-token = os.getenv('token_telegram')
-master = float(os.getenv('master_id'))
+#una variable auxiliar global que nos ordena el menu
+#empieza en 0 pues esta espera /start
+auxiliar = 0
 
+# autenrtificación y cuenta maestra
+token = os.getenv('token')
+master = float(os.getenv('master'))
+print(token)
 #comandos que ingresas al bot ej /start
-commands = {'start'  :   'Inicia el bot',}
+commands = {'start'  :   'Inicia el bot'}
 
 # /start es un comando, 'send_ip' y 'terminal' son botones.
 
@@ -32,13 +37,14 @@ commands = {'start'  :   'Inicia el bot',}
 # KnownUsers es un array de usuarios conocidos
 
 path1 = '/home/ghost/rpibots/BitcoinResearch/Telegram-Bot/'
+
 if(os.path.exists(path1+'knownUsers.npy')):
-	aux         = np.load(path1+'knownUsers.npy', allow_pickle='TRUE')
+	aux         = np.load(path1+'knownUsers.npy', allow_pickle='TRUE') 
 	knownUsers  = aux.tolist()
 else:
     knownUsers = []
     np.save(path1+'knownUsers.npy',knownUsers)
-
+print('Visto Usuarios conocidos')
 
 
 #######################################################################
@@ -51,7 +57,7 @@ else:
 # Por defecto el bot se inicia en el lugar lobby, que espera el comando /start.
 # Este comando inicia un registro y saludo al user y lo posiciona en la sala principal.
 # es como un  menu = 0 que da acceso a otros dos
-# menu = 1 y menu = 2
+# menu = 1 y menu = 2 
 
 menu = types.ReplyKeyboardMarkup(row_width=2,resize_keyboard=True,one_time_keyboard=False)
 menu.add('Send IP','Terminal')
@@ -68,15 +74,18 @@ menu.add('Send IP','Terminal')
 # La función listener corre cada vez que se invoca al bot
 # puede usarse para algún log o para preparar algo previo
 def listener(messages):
-    pass
+    print('aca')
+    for m in messages:
+        pass
 
 #######################################################################
 #****************************Inicializamos el bot**********************#
 #######################################################################
-
+print('usando token')
 #creamos el objeto Telegram Bot
 bot = telebot.TeleBot(token)
 #asignamos nuestra funcion listener al bot
+print('listener')
 bot.set_update_listener(listener)
 
 #######################################################################
@@ -89,8 +98,9 @@ bot.set_update_listener(listener)
 #mira si es un usuario que conoce (en el log) o lo registra si es nuevo
 #la variable auxiliar nos ayuda a llevar un orden de menus.
 #luego del lobby para usar /start, que seria un valor auxiliar = 0
-#viene el menu con dos botones que es como un piso 1, auxiliar = 1
+#viene el menu con dos botones que es como un piso 1, auxiliar = 1 
 def command_start(m):
+    global auxiliar
     cid = m.chat.id  # ID del usuario
     if cid in knownUsers:    #Con el ID busca si es conocido.
         #Si es conocido, le envia un saludo
@@ -101,19 +111,19 @@ def command_start(m):
         #Si no es conocido, le envia una bienvenida
         bot.send_message(cid, "👋Hola, "+str(m.chat.username)+', ¡Bienvenido!',disable_notification= False)
         time.sleep(1)
-        #registra en log
+        #registra en log 
         bot.send_message(cid, "Te voy registrando...",disable_notification= True)
         auxiliar = 1
-        np.save(path+'knownUsers.npy', knownUsers)
+        np.save(path+'knownUsers.npy', knownUsers) 
 
 
     bot.send_message(cid, "Iniciando el bot...",disable_notification= True)
     time.sleep(1)
-    # Te envia al Menú principal por defecto menu con los botones
+    # Te envia al Menú principal por defecto menu con los botones 
     bot.send_message(cid, "🤖Listo ✅...\nPor favor usa los botones.",reply_markup=menu,disable_notification= False)
 
 
-#Ahora se configuran los botones del menu
+#Ahora se configuran los botones del menu 
 # solo tiene 'Send IP' y  'Terminal'
 
 @bot.message_handler(auxiliar = 1)
@@ -129,12 +139,13 @@ def menu_menu(m):
         time.sleep(2)
         with open('ip.txt','rb') as ips:
             bot.send_document(master,ips,reply_markup=menu)
-        #se envia el mensaje y se lo deriva al menu (en el mismo lugar)
+        #se envia el mensaje y se lo deriva al menu (en el mismo lugar) 
+        
     elif text == 'Terminal':
         markup = types.ForceReply(selective=False)
         mess = '''Se ejecuta en terminal el comando enviado en respuesta al mensaje'''
         target_n =  bot.send_message(cid,mess,reply_markup=markup);
-        bot.register_next_step_handler(target_n,teminal)
+        bot.register_next_step_handler(target_n,teminal)        
 
 def terminal(m):
     cid = m.chat.id
@@ -152,16 +163,18 @@ def menu_loop():
 
 
 if __name__ == '__menu__':
-    #para hacer el bot un poco más robusto
-    #usamos un bucle while y manejo de excepciones
-    while(1):
-        try: #ejecuta la función que corre el bot
-            menu_loop()
-            #solo con una interrupcion que corta
+    print('incia')
+    #para hacer el bot un poco más robusto 
+    #usamos un bucle while y manejo de excepciones  
+    try: #ejecuta la función que corre el bot
+        print('sissss')
+        menu_loop()
+            #solo con una interrupcion que corta 
             #proceso, manda un mensaje. En otros casos
             #y errores vuelve a ejecutarse.
-        except KeyboardInterrupt:
-            print('\nExiting by user request.\n')
+    except KeyboardInterrupt:
+        print('\nExiting by user request.\n')
+        sys.exit(0)
         #lo ideal seria implementar un sistema de logs
-        # para otros errores
+        # para otros errores 
 
