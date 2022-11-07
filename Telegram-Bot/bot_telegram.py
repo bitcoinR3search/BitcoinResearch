@@ -31,24 +31,24 @@ path_assets = '/home/ghost/rpibots/BitcoinResearch/Telegram-Bot/'
 
 # Crea un archivo log si no existe.
 
-if not os.path.exists(path_assets+'bot_telegram.log'):
-    with open('bot_telegram.log','w+') as log:
+if not os.path.exists(path_assets+'bins/bot_telegram.log'):
+    with open(path_assets+'bins/bot_telegram.log','w+') as log:
         log.write('#fecha,#hora,#evento,#nivel\n')
 
 #Configurando log del funcionamiento interno del bot. 
-logging.basicConfig(filename=path_assets+'bot_telegram.log',filemode='a+',format='%(asctime)s,%(message)s,%(levelname)s', datefmt='%d-%b-%y,%H:%M:%S',level=logging.INFO)
+logging.basicConfig(filename=path_assets+'bins/bot_telegram.log',filemode='a+',format='%(asctime)s,%(message)s,%(levelname)s', datefmt='%d-%b-%y,%H:%M:%S',level=logging.INFO)
 logging.info('Iniciando Bot telegram')
 # Cargamos los usuarios conocídos. De no existir creamos una lista vacía.
 # KnownUsers es un array de usuarios conocidos
 
-if(os.path.exists(path_assets+'knownUsers.npy')):
+if(os.path.exists(path_assets+'bins/knownUsers.npy')):
     logging.info('Cargando archivo con Usuarios Conocidos')
-    aux         = np.load(path_assets+'knownUsers.npy', allow_pickle='TRUE') 
+    aux         = np.load(path_assets+'bins/knownUsers.npy', allow_pickle='TRUE') 
     knownUsers  = aux.tolist()
 else:
     logging.info('Creando archivo para nuevos usuarios conocidos')
     knownUsers = []
-    np.save(path_assets+'knownUsers.npy',knownUsers)
+    np.save(path_assets+'bins/knownUsers.npy',knownUsers)
 
 # Cargamos el archivo json como un diccionario en python. Para transformarlo
 # usamos una funcion extra
@@ -59,9 +59,9 @@ def jsonKeys2int(x):
             return {int(k):v for k,v in x.items()}
     return x
 
-if(os.path.exists(path_assets+'userStep.json')):
+if(os.path.exists(path_assets+'bins/userStep.json')):
         logging.info('Cargando json userStep')
-        with open(path_assets+'userStep.json','r') as filex:
+        with open(path_assets+'bins/userStep.json','r') as filex:
             userStep=json.load(filex,object_hook=jsonKeys2int) 
 else:
     logging.info('Crendo un diccionario userStep')
@@ -120,14 +120,14 @@ def get_user_step(uid):
     else:
         knownUsers.append(uid)   #En caso de no existir el uid registrado 
         userStep[uid] = 0        #se lo almacena y se inicia su ubicacion en cero
-        np.save(path_assets+'knownUsers.npy', knownUsers)   #en cada nuevo registro, actualiza.
+        np.save(path_assets+'bins/knownUsers.npy', knownUsers)   #en cada nuevo registro, actualiza.
         logging.info('Nuevo usuario!')
         sv()
         return  userStep[uid]
 
 # actualizar el json con el valor de diccionario
 def sv():
-    with open(path_assets+'userStep.json','w') as file:
+    with open(path_assets+'bins/userStep.json','w') as file:
         logging.info('Backup diccionario a Json')
         json.dump(userStep,file)
 
@@ -177,7 +177,7 @@ def command_start(m):
         #registra en log 
         bot.send_message(cid, "Te voy registrando...",disable_notification= True)
         get_user_step(cid)
-        np.save(path+'knownUsers.npy', knownUsers) 
+        np.save(path_assets+'bins/knownUsers.npy', knownUsers) 
 
 
     bot.send_message(cid, "Iniciando el bot...",disable_notification= True)
@@ -237,7 +237,7 @@ def menu_menu(m):
             time.sleep(2)
             with open('ip.txt','rb') as ips:
                 bot.send_document(master,ips,reply_markup=menu)
-            os.remove(path_assets+'ip.txt')    
+            os.remove('ip.txt')    
         #se envia el mensaje y se lo deriva al menu (en el mismo lugar) 
         else: 
             bot.send_message(cid,'onepi.local for not the admin',reply_markup=menu)
@@ -262,8 +262,8 @@ if __name__ == '__main__':
             #y errores vuelve a ejecutarse.
     except:
         logging.error('Error !!')
-        print('\nExiting by user request.\n')
-    
+        print('\nERROR\n')
+
         #lo ideal seria implementar un sistema de logs
         # para otros errores 
 

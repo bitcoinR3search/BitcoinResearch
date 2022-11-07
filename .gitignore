@@ -1,5 +1,2 @@
 # se omiten subir bins
-/Telegram-Bot/bot_telegram.log
-/Telegram-Bot/knownUsers.npy
-/Telegram-Bot/userStep.json
-
+/Telegram-Bot/bins/*
