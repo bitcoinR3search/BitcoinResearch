@@ -1,6 +1,5 @@
 # Bot Telegram Node
 
-![](images/telebot.png)
 
 El bot de telegram base consiste en configurar en un Raspberry pi4 un script de Python que este online 24/7. Se lo ejecuta de tal forma que tenga robustes ante cuelgues, re inicios inesperados y cierre de procesos forzado. 
 
