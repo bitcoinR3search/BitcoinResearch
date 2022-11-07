@@ -28,6 +28,7 @@ path_assets = '/home/ghost/rpibots/BitcoinResearch/Telegram-Bot/'
 # En caso de reinicio o corte abrupto, con estos 3 files se puede recuperar el log de el
 # último registro de error y seguir corriendo donde estaba para cada usuario en separado.
 
+# todos estan en una carpeta bins que no se sube al repositorio
 
 # Crea un archivo log si no existe.
 
