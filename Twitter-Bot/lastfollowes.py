@@ -47,6 +47,7 @@ def banner(path):
 #Como vamos a añadir a los ultimos 5 usuarios
 #Descargamos la imagen y nombre de los ultimos 5 followers para crear imagen
    api = login('/home/ghost/rpibots/')
+   
    user = api.get_user(screen_name='nodobtcbot')
    i=1
    for follower in user.followers()[:5]:
