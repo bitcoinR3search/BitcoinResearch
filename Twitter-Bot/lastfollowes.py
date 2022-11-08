@@ -1,11 +1,10 @@
 '''
 Este script recopila a los últimos 5 seguidores, descarga sus fotos de perfil, crea un banner
-personalizado lo sube y actualiza el nombre de usuario al último bloque verificado por el nodo.
+personalizado lo sube y actualiza
 '''
 from app.twlogin import login
 from PIL import Image, ImageDraw, ImageFont
-import os, requests
-
+import os
 
 def banner(path):
    #creamos la imagen
