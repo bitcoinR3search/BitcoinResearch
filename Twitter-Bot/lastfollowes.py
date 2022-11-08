@@ -2,13 +2,12 @@
 Este script recopila a los últimos 5 seguidores, descarga sus fotos de perfil, crea un banner
 personalizado lo sube y actualiza el nombre de usuario al último bloque verificado por el nodo.
 '''
-from twlogin import login
-from tools import blockclock
+from app.twlogin import login
 from PIL import Image, ImageDraw, ImageFont
 import os, requests
 
 
-def banner(path=''):
+def banner(path):
    #creamos la imagen
    #banner de twitter sugiere estas medidas
    WIDTH = 1500
@@ -17,7 +16,7 @@ def banner(path=''):
    fondo = (5,5,5)
    image = Image.new('RGB', SIZE, fondo)
 
-   wpp  = Image.open(path+'wpp.png')
+   wpp  = Image.open(path+'bins/wpp.png')
    pos = (650,170)
    image.paste(wpp, pos)
 
@@ -25,7 +24,7 @@ def banner(path=''):
 
    #TITULO
    text_color = (250,250,250)
-   TEXT_FONT_TYPE = (path+'MonoLisaSimpson-Regular.ttf')
+   TEXT_FONT_TYPE = (path+'bins/MonoLisaSimpson-Regular.ttf')
    TEXT_SIZE = 55
    TEXT_PADDING_HOR = 550
    TEXT_PADDING_VERT = 50
@@ -47,7 +46,7 @@ def banner(path=''):
 
 #Como vamos a añadir a los ultimos 5 usuarios
 #Descargamos la imagen y nombre de los ultimos 5 followers para crear imagen
-   api = login('/home/ghost/Desktop/proyectos/')
+   api = login('/home/ghost/rpibots/')
    user = api.get_user(screen_name='nodobtcbot')
    i=1
    for follower in user.followers()[:5]:
@@ -67,13 +66,14 @@ def banner(path=''):
       os.remove(path+follower._json['screen_name'][:]+'.jpg')
 
 
-   image.save(path+'out.png')
-   api.update_profile_banner(path+'out.png')
-   os.remove(path+'out.png')
-   tw_user = '⚡₿it₿ol🇧🇴 | in ⌚⛓️'+blockclock() 
-   api.update_profile(name=tw_user)
+   image.save(path+'bins/out.png')
+   api.update_profile_banner(path+'bins/out.png')
+   os.remove(path+'bins/out.png')
+   #tw_user = '⚡₿it₿ol🇧🇴 | in ⌚⛓️'+blockclock() 
+   #api.update_profile(name=tw_user)
 
 
 if __name__=='__main__':
-   p1='/home/ghost/Desktop/proyectos/bots/bitbolnode/app/'
+   p1='/home/ghost/rpibots/BitcoinResearch/Twitter-Bot/'
    banner(path=p1)
+

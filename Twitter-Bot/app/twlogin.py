@@ -21,11 +21,12 @@ def login(path=''):
 
     try:
         api.verify_credentials()
-        print("sesión iniciada")
+        print("Sesión iniciada")
+        return api
     except:
         print("ERROR")
-
+        return False
 
 
 if __name__ == '__main__':
-    login(path='/home/ghost/rpibots/')
+    login('/home/ghost/rpibots/')
