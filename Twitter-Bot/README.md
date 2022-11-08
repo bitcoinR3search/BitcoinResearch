@@ -14,6 +14,5 @@ La idea central de este bot es brindar un servicio automatizado que recopile inf
 
 - Twitter profile Responsive:
   - Cambia el nombre cuando se verifica un nuevo bloque.
-  - Cambia un banner con la foto de los últimos 5 seguidores
-      Esta función la cumple `lastfollowers.py` y se [explica acá como automatizarlo](hrrp..).
-  - automático cada 10min. 
+  - Cambia un banner con la foto de los últimos 5 seguidores cada 10 min.
+      Esta función la cumple `lastfollowers.py` y se explica en [esta nota como automatizarlo](https://github.com/CobraPython/BitcoinResearch/blob/main/Twitter-Bot/autobaner.md).
