@@ -30,7 +30,7 @@ Siendo la base del proyecto un micro ordenador, el Raspberry Pi4 con 4 Gb de RAM
 
 En el apunte :pencil: [Nodo Bitcoin](https://github.com/CobraPython/BitcoinResearch/blob/main/Apuntes/Nodo%20Bitcoin.pdf) se explica paso a paso como instalar un Nodo desde cero. Puedes ver esta guía si te interesa montar un nodo de manera "díficil". Si quieres algo más rápido puedes usar un cliente como [Umbrel](https://umbrel.com/), [Mynode](https://mynodebtc.com/) o [Raspliblits](https://raspiblitz.org/) entre otros, que tienen soporte para un Raspberry pi4. 
 
-Para elabnorar este apunde **nos basamos en la guía** de [Raspibolt](https://raspibolt.org/) que esta en inglés. 
+Para elaborar este apunde **nos basamos en la guía** de [Raspibolt](https://raspibolt.org/) que esta en inglés. 
 
 ### Software
 
