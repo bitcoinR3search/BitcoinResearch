@@ -200,7 +200,7 @@ def command_help(m):
         help_textk = "/" + key + ": "
         help_textk += commands[key] + "\n"
         bot.send_message(cid, help_textk)
-    bot.send_message(cid, "admin site: @jpr3spo",reply_markup=menu) 
+    bot.send_message(cid, "admin site: https://t.me/jpcr3spo",reply_markup=menu) 
 
 
 # EXEC COMANDO
