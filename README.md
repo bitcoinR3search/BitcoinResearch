@@ -20,6 +20,8 @@ El repositorio tiene el siguiente subdirectorio:
 
 ## Hardware-Software
 
+### Hardware
+
 En el apunte :pencil: [Infraestructura para Bitcoin](https://github.com/CobraPython/BitcoinResearch/blob/main/Apuntes/Infraestructura%20para%20Bitcoin..pdf) se amplían las razones para montar un Nodo completo en Bitcoin así como también la lista completa de componentes y costos de energía que consideramos óptima para montar todo el proyecto en sus distintas etapas futuras.
 
 Siendo la base del proyecto un micro ordenador, el Raspberry Pi4 con 4 Gb de RAM y un disco duro externo. 
@@ -30,3 +32,6 @@ En el apunte :pencil: [Nodo Bitcoin](https://github.com/CobraPython/BitcoinResea
 
 Para elabnorar este apunde **nos basamos en la guía** de [Raspibolt](https://raspibolt.org/) que esta en inglés. 
 
+### Software
+
+Para que nuestro nodo pueda 
