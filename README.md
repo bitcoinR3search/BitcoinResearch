@@ -17,6 +17,10 @@ El repositorio tiene el siguiente subdirectorio:
 
 |__ :open_file_folder: Twitter-Bot/ - Un bot para comunicarse por Twitter. 
 
+|__  :open_file_folder: Blockchain-py/ - Un proyecto para montar un Blockchain Bitcoin propio en python. 
+
+|__  :open_file_folder: Python-Scripts/ - Distintos scripts para usar Bitcoin-cli desde python.
+
 
 ## Hardware-Software
 
@@ -50,5 +54,5 @@ El nodo tendrá el desarrollo de tres proyectos en paralelo.
 
 ## Estudiando Bitcoin.
 
-Para comprender y afianzar conceptos, en el diractorio :file_folder: My-PythonBitcoinBlockchain se tiene un proyecto para montar un blockchain python propio. Con la sincronización de distitnos nodos y su propia mineria. En la nota :pencil: [Blockchain-py](https://github.com/CobraPython/BitcoinResearch/tree/main/Blockchain-py) se desarrolla y amplía el código. 
+Para comprender y afianzar conceptos, en el diractorio :file_folder: My-PythonBitcoinBlockchain se tiene un proyecto para montar un blockchain python propio. Con la sincronización de distitnos nodos y su propia mineria. En la nota :pencil: [Blockchain-py](https://github.com/CobraPython/BitcoinResearch/tree/main/Blockchain-py) se desarrolla el código. 
 
