@@ -34,4 +34,21 @@ Para elaborar este apunde **nos basamos en la guía** de [Raspibolt](https://ras
 
 ### Software
 
-Para que nuestro nodo pueda 
+El nodo tendrá el desarrollo de tres proyectos en paralelo. 
+
+   #### 1. Bot en Telegram. 
+   
+   En la nota :pencil: [Telegram-Bot](https://github.com/CobraPython/BitcoinResearch/tree/main/Telegram-Bot) se explican los objetivos para montar un bot de Telegram, en resumen una forma anónima de desplegar datos a solicitud y para controlar el nodo. Esta parte del proyecto esta en desarrollo y ya se encuentra habilitado. Se puede visitar en Telegram en [@onepi_bot](https://t.me/onepi_bot). En la nota :pencil: [Montando un bot Base](https://github.com/CobraPython/BitcoinResearch/blob/main/Telegram-Bot/Montando%20un%20bot%20base.md) se explica paso a paso como montar uno propio. 
+
+   #### 2. Bot en Twitter.
+
+   En la nota :pencil: [Twitter-Bot](https://github.com/CobraPython/BitcoinResearch/blob/main/Twitter-Bot/README.md) se detalla el uso que tendrá con la cuenta [@nodobtcbot](https://twitter.com/nodobtcbot).
+
+   #### 3. Python-Scripts.
+   
+   En este apartado se desarrollan herramientas para extraer/analizar data del blockchain Bitcoin que el mismo nodo ha verificado. En la nota :pencil: [Bitcoin-cli con Python](https://github.com/CobraPython/BitcoinResearch/) se exponen las configuraciones para usar Bitcoin-Core desde Python. 
+
+## Estudiando Bitcoin.
+
+Para comprender y afianzar conceptos, en el diractorio :file_folder: My-PythonBitcoinBlockchain se tiene un proyecto para montar un blockchain python propio. Con la sincronización de distitnos nodos y su propia mineria. En la nota :pencil: [Blockchain.py]() se desarrolla y amplía el código. 
+
