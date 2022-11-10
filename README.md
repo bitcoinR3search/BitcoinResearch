@@ -54,5 +54,5 @@ El nodo tendrá el desarrollo de tres proyectos en paralelo.
 
 ## Estudiando Bitcoin.
 
-Para comprender y afianzar conceptos, en el diractorio :file_folder: My-PythonBitcoinBlockchain se tiene un proyecto para montar un blockchain python propio. Con la sincronización de distitnos nodos y su propia mineria. En la nota :pencil: [Blockchain-py](https://github.com/CobraPython/BitcoinResearch/tree/main/Blockchain-py) se desarrolla el código. 
+Para comprender y afianzar conceptos, en el directorio :file_folder: Blockchain-Py se tiene un proyecto para montar un blockchain python propio. Con la sincronización de distitnos nodos y su propia mineria. En la nota :pencil: [Blockchain-py](https://github.com/CobraPython/BitcoinResearch/tree/main/Blockchain-py) se desarrolla el código. 
 
