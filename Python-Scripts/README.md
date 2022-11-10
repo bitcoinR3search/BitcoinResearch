@@ -1,7 +1,8 @@
 # Python y Bitcoin-cli
 
 
-![rpi](images/rpi.jpg)
+<img alt="jpg" src="./images/rpi.jpg" width="400" height="200" style="vertical-align:middle;margin:10px
+100px 25px">
 
 
 Después de seguir la nota :pencil: [Nodo Bitcoin](https://github.com/CobraPython/BitcoinResearch/blob/main/Apuntes/Nodo%20Bitcoin.pdf) se tiene un Bitcoin-Core configurado y sincronizando el Blockchain.
