@@ -217,8 +217,12 @@ def command_exec(m):
         bot.send_message(cid, "Resultado: " + result,reply_markup=menu)
         logging.info( "Master corrio el comando "+m.text[len('/exec'):])
     else:
-        bot.send_message(cid, "PERMISO DENEGADO, solo el Admin puede acceder",reply_markup=menu)
-        logging.warning( "Alguien no autorizado intenrto usar Terminal!")
+        bot.send_chat_action(cid, 'upload_video')
+	time.sleep(2)
+	bot.send_video(cid, video=open('images/nono.mp4', 'rb'), supports_streaming=True)
+        bot.send_message(cid, "¡No dijistes las palabras mágicas!")
+        bot.send_message(cid,"Solo el Admin puede acceder",reply_markup=menu)
+        logging.warning( "Alguien no autorizado intento usar Terminal!")
 
 #Ahora se configuran los botones del menu 
 
