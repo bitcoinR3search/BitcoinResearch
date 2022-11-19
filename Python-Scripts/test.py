@@ -6,11 +6,9 @@ from pprint import pprint
 
 p = RawProxy()
 
-# info = p.getblockchaininfo()
+info = p.getblockchaininfo()
 
-# sync = float(info['verificationprogress'])
-
-# print(round(sync*100,5))
+pprint(info)
 
 
 #path = '/home/ghost/rpibots/'
