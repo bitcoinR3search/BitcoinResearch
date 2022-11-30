@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   nodo1:
-    build: .
+    image: jpcrespo/blockchainpy:v1
     ports:
       - "3000:3000"
     networks:
@@ -10,7 +10,7 @@ services:
         ipv4_address: 10.5.0.5
 
   nodo2:
-    build: .
+    image: jpcrespo/blockchainpy:v1
     ports:
       - "3001:3000"
     networks:
