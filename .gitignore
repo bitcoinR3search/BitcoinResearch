@@ -2,3 +2,4 @@
 /Telegram-Bot/bins/bot_telegram.log
 /Telegram-Bot/bins/knownUsers.npy
 /Telegram-Bot/bins/userStep.json
+/Python-Scripts/.env
