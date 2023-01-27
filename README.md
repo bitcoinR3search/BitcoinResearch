@@ -27,6 +27,8 @@ El proyecto tiene la siguiente estructura.
   - Análisis de direcciones: estudio de las direcciones Bitcoin, como el número de direcciones activas, el saldo total, el número de transacciones, etc.
   - Análisis de patrones de uso: estudio de la utilización de Bitcoin, como el tipo de transacciones que se realizan, el uso de las direcciones, etc.
 
+---
+
 :open_file_folder: Apuntes/ - 
 
 En esta carpeta esta el contenido para aprender sobre Bitcoin.
@@ -49,9 +51,13 @@ Material probado y testeado en el proyecto para montar la Infraestructura de Bit
 
 Distintas entradas (no son documentos técnicos) con temas variados relacionados con Bitcoin: Energía, Económia, Ciencias Computacionales, etc.
 
+---
+
 :open_file_folder: Bibliografía/ - 
 
 Libros y papers que usamos como bibliografía para profundizar conceptos. 
+
+---
 
 :open_file_folder: Bots/ - 
 
