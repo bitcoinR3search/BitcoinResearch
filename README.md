@@ -1,61 +1,63 @@
+# Bitcoin Research
+
 ![](/images/baner.png)
-# ¡BIENVENIDO!
 
-El proyecto *BitcoinResearch* es un estudio sobre Bitcoin en español.
+## ¡BIENVENIDO!
 
-Se busca mostrar como se implementa un nodo completo en Bitcoin y como se desarrollan herramientas para explotar la información del Blockchain en tiempo real para brindar, por ejemplo, estadísticas y análisis on-chain. 
+Este proyecto (bajo licencia MIT) brinda una plataforma completa para aprender y aplicar el manejo autogestionado y soberano de Bitcoin. Se muestra a detalle, paso a paso como se monta una infraestructura completa que aproveche el Blockchain de Bitcoin directamente, para no depender de ningun servicio/servidor externo o exchange.
 
-El repositorio tiene el siguiente subdirectorio:
+Se cuenta con las siguientes caracteristicas:
 
-|__ :open_file_folder: Apuntes/ - Contiene notas en pdf
+- Servidor Electrum.
+- Explorador de Bloques.
+- Explorador de Mempool.
+- Accesibles mediante TOR.
+- Nodo completo en Mainnet.
+- Nodo completo en Testnet.
 
-|__ :open_file_folder: Bibliografía/ - Libros y papers base
+## Contenido
 
-|__ :open_file_folder: Python-Scripts/ - Distintos scripts en python para recopilar, analizar y compilar data.
+El proyecto tiene la siguiente estructura.
 
-|__ :open_file_folder: Telegram-Bot/ - Un bot para comunicarse mediante Telegram.
+---
 
-|__ :open_file_folder: Twitter-Bot/ - Un bot para comunicarse por Twitter. 
+:open_file_folder: Análisis Onchain/- Al disponer de un nodo sincronizado y actualizado en cada bloque se proponen realizar análisis de datos y obtener métricas. Para obtener la data habilitamos un API en el nodo accesible mediante comandos RPC (Remote Procedure Call) para bitcoin-cli y usando Python realizar análisis de cadena como: 
+  - Análisis de transacciones: estudio de las transacciones realizadas en la red Bitcoin, como el volumen de transacciones, el valor transferido, los principales participantes, etc.
+  - Análisis de minería: estudio de la actividad minera en la red Bitcoin, como la distribución de potencia de hash, la competencia entre mineros, etc.
+  - Análisis de direcciones: estudio de las direcciones Bitcoin, como el número de direcciones activas, el saldo total, el número de transacciones, etc.
+  - Análisis de patrones de uso: estudio de la utilización de Bitcoin, como el tipo de transacciones que se realizan, el uso de las direcciones, etc.
 
-|__  :open_file_folder: Blockchain-py/ - Un proyecto para montar un Blockchain Bitcoin propio en python. 
+:open_file_folder: Apuntes/ - En esta carpeta esta el contenido para aprender sobre Bitcoin.
 
-|__  :open_file_folder: Python-Scripts/ - Distintos scripts para usar Bitcoin-cli desde python.
+------> :open_file_folder: Blockchain Py/ - Es un ejercicio en Python para montar una propia red Bitcoin que tiene: Envío de transacciones, Minería y la prueba de trabajo POW, sincronización y validación de la cadena más larga (compentencia de varios nodos y mineros). 
+
+------> :open_file_folder: Manuales/ - Material probado y testeado en el proyecto para montar la Infraestructura de Bitcoin y entender algunas tecnologías útiles como:
+   - Nodo Competo en Mainnet con servidor Electrum, explorador de bloques, explorador de mempool.
+   - Nodo en testnet, para probar desarrollos de Software para Bitcoin (Apps, scripts, wallets, etc). 
+   - Firmas PGP.
+   - Timestamps.
+   - Opentimestamp.
+   - Como configurar un super shell (portada). 
+
+------> :open_file_folder: Posts/ - Distintas entradas (no son documentos técnicos) con temas variados relacionados con Bitcoin: Energía, Económia, Ciencias Computacionales, etc.
+
+:open_file_folder: Bibliografía/ - Libros y papers que usamos como bibliografía para profundizar conceptos. 
+
+:open_file_folder: Bots/ - Se desarrollan una serie de bots para que el nodo pueda desplegar información e interactuar con el mundo externo.
+
+------> :open_file_folder: Twitter-Bot/ - La cuenta oficial del proyecto es [@nodobtcbot](https://twitter.com/nodobtcbot) 𓅪. Este bot esta hecho en Python y tiene las siguientes capacidades:
+   - Auto generador de Banner con los últimos seguidores.
+   - Despliega información si es invocado con algunos comandos (fee, hashrate, emisión, blockclock).
+   - Tuitea estadísticas diariamente.
+
+------> :open_file_folder: Twitter-Bot/ - El nodo tiene una cuenta Bot 🤖 de Telegram: [@onepi_bot](https://t.me/onepi_bot) desarrollado en Python tiene las siguientes capacidades:
+   - Facilita la gestión del operador del nodo.
+   - Herramienta para verificar archivos `.ots`
+   - Herramienta para solicitar información de algun bloque o transacción para verificar las confirmaciones sin dar datos personales.
+
+      ⚠️ Telegram no almacena el IP y con la configuración de privacidad adecuada no deja rastros de otros datos como nombres. El proyecto no almacena ni recopila datos (más que estadisticas de uso).
+
+---
 
 
-## Hardware-Software
-
-### Hardware
-
-En el apunte :pencil: [Infraestructura para Bitcoin](https://github.com/CobraPython/BitcoinResearch/blob/main/Apuntes/Infraestructura%20para%20Bitcoin..pdf) se amplían las razones para montar un Nodo completo en Bitcoin así como también la lista completa de componentes y costos de energía que consideramos óptima para montar todo el proyecto en sus distintas etapas futuras.
-
-Siendo la base del proyecto un micro ordenador, el Raspberry Pi4 con 4 Gb de RAM y un disco duro externo. 
-
-
-
-<img align="right" alt="jpg" src="./images/rpi4.jpg" width="420" height="300" />
-
-
-En el apunte :pencil: [Nodo Bitcoin](https://github.com/CobraPython/BitcoinResearch/blob/main/Apuntes/Nodo%20Bitcoin.pdf) se explica paso a paso como instalar un Nodo desde cero. Puedes ver esta guía si te interesa montar un nodo de manera "díficil". Si quieres algo más rápido puedes usar un cliente como [Umbrel](https://umbrel.com/), [Mynode](https://mynodebtc.com/) o [Raspliblits](https://raspiblitz.org/) entre otros, que tienen soporte para un Raspberry pi4. 
-
-Para elaborar este apunde **nos basamos en la guía** de [Raspibolt](https://raspibolt.org/) que esta en inglés. 
-
-### Software
-
-El nodo tendrá el desarrollo de tres proyectos en paralelo. 
-
-   #### 1. Bot en Telegram. 
-   
-   En la nota :pencil: [Telegram-Bot](https://github.com/CobraPython/BitcoinResearch/tree/main/Telegram-Bot) se explican los objetivos para montar un bot de Telegram, en resumen una forma anónima de desplegar datos a solicitud y para controlar el nodo. Esta parte del proyecto esta en desarrollo y ya se encuentra habilitado. Se puede visitar en Telegram en [@onepi_bot](https://t.me/onepi_bot). En la nota :pencil: [Montando un bot Base](https://github.com/CobraPython/BitcoinResearch/blob/main/Telegram-Bot/Montando%20un%20bot%20base.md) se explica paso a paso como montar uno propio. 
-
-   #### 2. Bot en Twitter.
-
-   En la nota :pencil: [Twitter-Bot](https://github.com/CobraPython/BitcoinResearch/blob/main/Twitter-Bot/README.md) se detalla el uso que tendrá con la cuenta [@nodobtcbot](https://twitter.com/nodobtcbot).
-
-   #### 3. Python-Scripts.
-   
-   En este apartado se desarrollan herramientas para extraer/analizar data del blockchain Bitcoin que el mismo nodo ha verificado. En la nota :pencil: [Bitcoin-cli con Python](https://github.com/CobraPython/BitcoinResearch/) se exponen las configuraciones para usar Bitcoin-Core desde Python. 
-
-## Estudiando Bitcoin.
-
-Para comprender y afianzar conceptos, en el directorio :file_folder: Blockchain-Py se tiene un proyecto para montar un blockchain usando python. Con la sincronización de distitnos nodos y su propia mineria. En la nota :pencil: [Blockchain-py](https://github.com/CobraPython/BitcoinResearch/tree/main/Blockchain-py) se desarrolla el código. 
 
