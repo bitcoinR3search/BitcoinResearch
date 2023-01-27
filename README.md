@@ -42,6 +42,7 @@ Es un ejercicio en Python para montar una propia red Bitcoin que tiene: Envío d
 Material probado y testeado en el proyecto para montar la Infraestructura de Bitcoin y entender algunas tecnologías útiles como:
    - Nodo Competo en Mainnet con servidor Electrum, explorador de bloques, explorador de mempool.
    - Nodo en testnet, para probar desarrollos de Software para Bitcoin (Apps, scripts, wallets, etc). 
+   - Entendiendo 'Bitcoin.conf'
    - Firmas PGP.
    - Timestamps.
    - Opentimestamp.
