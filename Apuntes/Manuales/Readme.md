@@ -1,6 +1,6 @@
 # Manuales 
 
-Aunque se trata de que cada pdf sea autoconetido se sugiere el siguiente orden:
+Se intenta que cada pdf sea autoconetido, sin embargo,  se sugiere el siguiente orden:
 
 ## ¿Que hardware necesito?
 
