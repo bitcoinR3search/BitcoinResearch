@@ -1,5 +1,6 @@
 # se omiten subir bins
-/Telegram-Bot/bins/bot_telegram.log
-/Telegram-Bot/bins/knownUsers.npy
-/Telegram-Bot/bins/userStep.json
-/Python-Scripts/.env
+/Bots/Telegram-Bot/bins/bot_telegram.log
+/Bots/Telegram-Bot/bins/knownUsers.npy
+/Bots/Telegram-Bot/bins/userStep.json
+/Onchain/test/.env
+/Onchain/Base.db
