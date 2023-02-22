@@ -1,5 +1,6 @@
 from bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException
 from dotenv import load_dotenv
+from pprint import pprint
 import os
 
 load_dotenv('test/.env')
@@ -13,6 +14,6 @@ rpc_password=os.getenv('pass')
 rpc_connection = AuthServiceProxy("http://%s:%s@nodebtc.local:8332"%(rpc_user, rpc_password))
 
 best = rpc_connection.getblockchaininfo()
-print(best['verificationprogress'])
+pprint(best)
 
 
