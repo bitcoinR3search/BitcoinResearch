@@ -187,7 +187,8 @@ Luego se grafica la relación número vs tamaño para ver como cambió el uso de
 
 conmutatividad:
 
-$$A+B = B+A $$
+$$A+B = B+A$$
+$$A\cdot B = B\cdot A$$
 
-$$A*B = B*A$$
+otros cambio
 
