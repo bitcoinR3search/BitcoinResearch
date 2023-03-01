@@ -184,3 +184,10 @@ El número de bloques ronda los 770 mil y el tamaño que se espera en promedio e
 
 Luego se grafica la relación número vs tamaño para ver como cambió el uso de memoria a lo largo del tiempo. 
 
+
+conmutatividad:
+
+$$A+B = B+A $$
+
+$$A*B = B*A$$
+
