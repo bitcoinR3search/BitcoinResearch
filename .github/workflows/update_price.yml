@@ -11,6 +11,6 @@ jobs:
 		steps:
 			- name: Checkout code
 			  uses: actions/checkout@v2
-			- name: Run script
+			- name: Run script update
 			  run: Onchain/scripts/updateprice.py
 			
