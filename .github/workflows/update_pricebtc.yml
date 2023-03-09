@@ -16,4 +16,4 @@ jobs:
         with:
           python-version: "3.11"
       - name: execute python script
-        run: python BitcoinResearch/Onchain/scripts/updateprice.py >> /BitcoinResearch/Onchain/scripts/bins/pricebtc.txt
+        run: python /BitcoinResearch/Onchain/scripts/updateprice.py 
