@@ -21,6 +21,9 @@ jobs:
       - name: Change permissions
         working-directory: Onchain/scripts/
         run: chmod +x updateprice.py
-        run: chmod +w bins/pricebtc.txt
+      - name: Change permissions
+        working-directory: Onchain/scripts/bins
+        run: chmod +w pricebtc.txt
       - name: execute python script
+        working-directory: Onchain/scripts
         run: python updateprice.py >> bins/pricebtc.txt
