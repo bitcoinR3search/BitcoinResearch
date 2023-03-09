@@ -56,7 +56,7 @@ else:
    last = -1
    logging.info('Iniciando con bloque gen')
 
-lote = 700000 # cada 10 bloques, de funcionar se sube
+lote = 50000 # cada 10 bloques, de funcionar se sube
 
 for n in range(last+1,last+lote+1):
    #evitamos que un rango sea mayor al bloque mas alto   
