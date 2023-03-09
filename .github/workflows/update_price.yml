@@ -1,16 +1,16 @@
 name: Update Price BTC
-
 on:
 	workflow_dispatch:
 	schedule:
 		- cron: "0 */1 * * *"
+		
 jobs:
 	update_price:
 		name: Update Price BTC
 		runs-on: ubuntu-latest
 		steps:
 			- name: Checkout code
-			  uses: actions/checkout@v2
+			uses: actions/checkout@v2
 			- name: Run script update
-			  run: Onchain/scripts/updateprice.py
+			run: Onchain/scripts/updateprice.py
 			
