@@ -7,6 +7,10 @@ on:
 jobs:
 	update_price:
 		name: Update Price BTC
-		runs-on:ubuntu-latest
+		runs-on: ubuntu-latest
 		steps:
-			-uses"
+			- name: Checkout code
+			  uses: actions/checkout@v2
+			- name: Run script
+			  run: Onchain/scripts/updateprice.py
+			
