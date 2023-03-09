@@ -18,6 +18,9 @@ jobs:
           python-version: "3.11"
       - name: instalar request
         run: pip install requests
-      - name: execute python script
+      - name: Change permissions
         working-directory: Onchain/scripts/
+        run: chmod +x updateprice.py
+        run: chmod +w bins/pricebtc.txt
+      - name: execute python script
         run: python updateprice.py >> bins/pricebtc.txt
