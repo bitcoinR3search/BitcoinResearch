@@ -16,5 +16,7 @@ jobs:
         uses: actions/setup-python@v3
         with:
           python-version: "3.11"
+      - name: instalar request
+        run: pip install requests
       - name: execute python script
         run: python Onchain/scripts/updateprice.py
