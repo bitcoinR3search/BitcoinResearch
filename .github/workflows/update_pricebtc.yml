@@ -2,7 +2,7 @@ name: Update Price BTC
 
 on:
   schedule:
-    - cron: "*/2  * * * *"
+    - cron: "*/2 * * * *"
 
 jobs:
   update_price:
