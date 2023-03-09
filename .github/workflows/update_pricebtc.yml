@@ -1,0 +1,19 @@
+name: Update Price BTC
+
+on:
+  schedule:
+    - cron: "0 */1 * * *"
+
+jobs:
+  update_price:
+    name: Update Price BTC
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
+      - name: execute python script
+        run: python BitcoinResearch/Onchain/scripts/updateprice.py
