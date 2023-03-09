@@ -5,4 +5,4 @@
 /Onchain/scripts/.env
 /Onchain/scripts/bins/database.npz
 /Onchain/scripts/bins/recopilador.log
-
+/Onchain/scripts/auto_price.sh
