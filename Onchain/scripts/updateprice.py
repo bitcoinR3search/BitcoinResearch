@@ -4,7 +4,7 @@
 import json, requests, datetime
 import sys
 
-sys.stdout = open('bins/pricebtc.txt', 'a')
+sys.stdout = open('Onchain/scripts/bins/pricebtc.txt', 'a')
 
 def func():
    now = datetime.datetime.now()
