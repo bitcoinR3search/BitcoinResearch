@@ -19,4 +19,5 @@ jobs:
       - name: instalar request
         run: pip install requests
       - name: execute python script
-        run: python Onchain/scripts/updateprice.py >> Onchain/scripts/bins/pricebtc.txt
+        working-directory: Onchain/scripts/
+        run: python updateprice.py >> bins/pricebtc.txt
