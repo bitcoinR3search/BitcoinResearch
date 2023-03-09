@@ -4,6 +4,7 @@
 import json, requests, datetime
 import sys
 
+sys.stdout = open('bins/pricebtc.txt', 'a')
 
 def func():
    now = datetime.datetime.now()
@@ -18,3 +19,5 @@ def func():
 
 if __name__== "__main__":
    func()
+
+sys.stdout.close()
