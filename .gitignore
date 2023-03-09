@@ -2,5 +2,7 @@
 /Bots/Telegram-Bot/bins/bot_telegram.log
 /Bots/Telegram-Bot/bins/knownUsers.npy
 /Bots/Telegram-Bot/bins/userStep.json
-/Onchain/test/.env
-/Onchain/Base.db
+/Onchain/scripts/.env
+/Onchain/scripts/bins/database.npz
+/Onchain/scripts/bins/recopilador.log
+
