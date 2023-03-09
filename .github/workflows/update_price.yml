@@ -1,0 +1,12 @@
+name: Update Price BTC
+
+on:
+	workflow_dispatch:
+	schedule:
+		- cron: "0 */1 * * *"
+jobs:
+	update_price:
+		name: Update Price BTC
+		runs-on:ubuntu-latest
+		steps:
+			-uses"
