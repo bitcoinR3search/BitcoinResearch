@@ -1,5 +1,5 @@
 name: Btc update price
-on: [ BitcoinResearch ]
+on: [ pull_request_target  ]
 
 permissions:
   contents: read
