@@ -21,8 +21,19 @@ jobs:
       - name: Change permissions
         working-directory: Onchain/scripts/
         run: chmod +x updateprice.py
+      - name: Change permissions
+        working-directory: Onchain/scripts/
+        run: chmod +w pricebtc.txt
       - name: execute python script
         working-directory: Onchain/scripts
         run: python updateprice.py 
-        with:
-          repo-token: ${{ secrets.TOKEN }}
+      - name: Commit and push changes
+        working-directory: Onchain/scripts/bins
+        run: |
+          git config --global user.name "jpi"
+          git config --global user.email "jp.cr3spo@pm.me"
+          git add pricebtc.txt
+          git commit -m "Update price of BTC"
+          git push origin HEAD:BitcoinResearch
+      env:
+        TOKEN: ${{ secrets.TOKEN }}
