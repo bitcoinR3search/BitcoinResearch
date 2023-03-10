@@ -1,9 +1,9 @@
-name: Update Price BTC
+name: Pull request labeler
+on: [ pull_request_target ]
 
-on:
-  push:
-#  schedule:
-#    - cron: "*/2 * * * *"
+permissions:
+  contents: read
+  pull-requests: write
 
 jobs:
   update_price:
@@ -24,3 +24,5 @@ jobs:
       - name: execute python script
         working-directory: Onchain/scripts
         run: python updateprice.py 
+        with:
+          repo-token: ${{ secrets.TOKEN }}
