@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from pprint import pprint
 import os
 
-load_dotenv('scripts/.env')
+load_dotenv('/home/ghost/.env')
 
 
 #RPC remote procedure call
