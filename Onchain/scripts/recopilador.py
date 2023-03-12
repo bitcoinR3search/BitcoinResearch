@@ -15,12 +15,12 @@ from tqdm import tqdm
 
 
 # cargamos variables de autentificacion
-load_dotenv('.env')
+load_dotenv('/home/ghost/.env')
 rpc_user=  os.getenv('user')
 rpc_password=os.getenv('pass')
 
 # iniciamos logs 
-logging.basicConfig(filename='bins/recopilador.log',filemode='a+',format='%(asctime)s,%(message)s,%(levelname)s', datefmt='%d-%b-%y,%H:%M:%S',level=logging.INFO)
+logging.basicConfig(filename='/home/ghost/BitcoinResearch/Onchain/scripts/bins/recopilador.log',filemode='a+',format='%(asctime)s,%(message)s,%(levelname)s', datefmt='%d-%b-%y,%H:%M:%S',level=logging.INFO)
 logging.info('*****************START***************************')
 logging.info('Corriendo script '+f"{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 # autentificación
@@ -40,9 +40,9 @@ except:
 # Este script reconoce si existen los binarios y base de datos. 
 # de no ser asi, empieza creandolos.
 
-if(os.path.exists('bins/database.npz')):
+if(os.path.exists('/home/ghost/BitcoinResearch/Onchain/scripts/bins/database.npz')):
    logging.info('Se detecto la db en bins/database.npz')
-   aux         =  np.load('bins/database.npz', allow_pickle='TRUE') 
+   aux         =  np.load('/home/ghost/BitcoinResearch/Onchain/scripts/bins/database.npz', allow_pickle='TRUE') 
    n_block     =  aux['n_block']
    time_b        =  aux['time_b']
    size        =  aux['size']
@@ -136,7 +136,7 @@ for ix in range(int(a),int(nn)+1):
             time.sleep(3)
    last=stop+1
    print('LOTE TERMINADO: ',ix)
-   np.savez('bins/database.npz', n_block=n_block, date=date,time_b=time_b,size=size,ntx=ntx,bits=bits,chainwork=chainwork,strippedsize=strippedsize,weight=weight)
+   np.savez('/home/ghost/BitcoinResearch/Onchain/scripts/bins/database.npz', n_block=n_block, date=date,time_b=time_b,size=size,ntx=ntx,bits=bits,chainwork=chainwork,strippedsize=strippedsize,weight=weight)
    logging.info('Guardando db lote: %d',ix)
 
 logging.info('******************EXIT**************************')
