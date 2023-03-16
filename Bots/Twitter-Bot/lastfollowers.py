@@ -5,6 +5,7 @@ personalizado lo sube y actualiza
 from app.twlogin import login
 from PIL import Image, ImageDraw, ImageFont
 import os
+from app.tools import blockclock
 
 def banner(path):
    #creamos la imagen
@@ -45,9 +46,8 @@ def banner(path):
 
 #Como vamos a añadir a los ultimos 5 usuarios
 #Descargamos la imagen y nombre de los ultimos 5 followers para crear imagen
-   api = login('/home/ghost/rpibots/')
-   
-   user = api.get_user(screen_name='nodobtcbot')
+   api = login('/home/ghost/')
+   user = api.get_user(screen_name='bitcoinr3')
    i=1
    for follower in user.followers()[:5]:
       target  = follower._json['profile_image_url']
@@ -69,11 +69,11 @@ def banner(path):
    image.save(path+'bins/out.png')
    api.update_profile_banner(path+'bins/out.png')
    os.remove(path+'bins/out.png')
-   #tw_user = '⚡₿it₿ol🇧🇴 | in ⌚⛓️'+blockclock() 
-   #api.update_profile(name=tw_user)
+   tw_user = '₿itcoinR3search | in ⌚⛓️'+ blockclock()
+   api.update_profile(name=tw_user)
 
 
 if __name__=='__main__':
-   p1='/home/ghost/rpibots/BitcoinResearch/Twitter-Bot/'
+   p1='/home/ghost/BitcoinResearch/Bots/Twitter-Bot/'
    banner(path=p1)
 

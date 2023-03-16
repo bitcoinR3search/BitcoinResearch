@@ -1,4 +1,4 @@
-# Este script ejecuta un bot de twitter con la capacidad de 
+# Este script ejecuta un bot de twitter con la capacidad de
 # estar escuchando menciones de otros usuarios de twitter.
 # Dependiendo del comando puede entregar respuestas
 
@@ -11,11 +11,11 @@ import sys, os, re
 def execute(order):
    txt = order._json['full_text'].lower()
    aux_txt = txt.replace('\n',' ')
-   txt_split= aux_txt.split(" ")   
+   txt_split= aux_txt.split(" ")
    link = [re.sub('http\S+','',word) for word in txt_split]
    signs =  '[/#@\'!"$%&()*+,-.:\;<=>?¿^`{|}~]'
    link_signs = [re.sub(signs,'',word) for word in link]
-    
+
    for word in link_signs:
       if word in ['blockclock','btcclock','btc_clock','clock','tic']:
          api.update_status(status='👋 @'+order._json['user']['screen_name']+' ➡️ El ⌚️ tiempo en #Bitcoin '+blockclock()+' 📌',in_reply_to_status_id=order._json['id_str'],auto_populate_reply_metadata=True)
@@ -114,13 +114,13 @@ def main(p1=''):
 if __name__ == "__main__":
    #para automatizar un proceso este método es sugerido en python:
    #llamar a una función main() con excepciones para volver a ejecutar el programa.
-   p_env='/home/ghost/Desktop/proyectos/'
+   p_env='/home/ghost/'
    api = login(path=p_env)
    while True:
       try:
-         main(p1='/home/ghost/Desktop/proyectos/bots/bitbolnode/app/')
+         main(p1='/home/ghost/BitcoinResearch/Bots/Twitter-Bot/app/')
       except KeyboardInterrupt:
          print('Exiting by user request.\n')
          sys.exit(0)
       finally:
-         sleep(90)
+         sleep(300)
