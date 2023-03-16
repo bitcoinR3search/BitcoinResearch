@@ -49,11 +49,17 @@ n_block     =  aux['n_block']
 time_b        =  aux['time_b']
 size        =  aux['size']
 ntx         =  aux['ntx']
+bits        =  aux['bits']
+chainwork = aux['chainwork']
+strippedsize = aux['strippedsize']
+weight = aux['weight']
 
 num_dates = mdates.date2num(time_b)
 
 plt.title('Bitcoin Blockchain \n Block Size History',fontsize=20,fontproperties=prop,color=tableau20[1])
-plt.plot(n_block,size/1000)
+plt.plot(n_block,size/1000,)
+#plt.plot(n_block,weight/1000,)
+#plt.plot(n_block,strippedsize/1000,)
 
 plt.xlabel('Número de Bloque',fontsize=13,fontproperties=prop,color=tableau20[1])
 plt.ylabel('Tamaño en Kbytes',fontsize=13,fontproperties=prop,color=tableau20[1])
@@ -62,7 +68,7 @@ plt.xticks(fontsize=10,rotation=45,fontproperties=prop,color=tableau20[1])
 plt.yticks(fontsize=10,rotation=45,fontproperties=prop,color=tableau20[1])
 
 plt.xlim(0)
-plt.ylim(0,1.3*max(size/1000))
+plt.ylim(0,1.2*max(weight/1000))
 plt.gca().xaxis.set_major_formatter(ticker.FormatStrFormatter('%d'))
 plt.gca().yaxis.grid(linestyle='--',linewidth=0.5,dashes=(2,1))
 # Ajusta los márgenes de la figura para hacer espacio para el eje x
