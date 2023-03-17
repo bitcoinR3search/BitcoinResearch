@@ -79,7 +79,7 @@ for a in range(0,10):
 progress += ' '
 
 message += '\n➯ Halving en proceso: ' +progress+str(round(100*c/d,2))+'% (~4/abril/24)'
-message += '\n\n                 𝕀 ℕ   ℂ 𝕆 𝔻 𝔼   𝕎 𝔼   𝕋 ℝ 𝕌 𝕊 𝕋'
+message += '\n\n 𝕀 ℕ  ℂ 𝕆 𝔻 𝔼   𝕎 𝔼   𝕋 ℝ 𝕌 𝕊 𝕋'
 
 
 api = login()
