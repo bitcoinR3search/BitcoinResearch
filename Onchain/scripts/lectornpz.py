@@ -11,10 +11,12 @@ bits        =  aux['bits']
 chainwork = aux['chainwork']
 strippedsize = aux['strippedsize']
 weight = aux['weight']
+total = aux['total']
 
 print('*********************')
 print('El total de bloques procesados:',end=' ')
-print(int(n_block.shape[0]))
+print(int(n_block.shape[0]),end=' ')
+print('Total: ',total)
 print('Datos del último bloque: ')
 print('n_block,time,size,ntx')
 print(n_block[-1],time_b[-1],size[-1],ntx[-1])

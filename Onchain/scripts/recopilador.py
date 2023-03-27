@@ -85,6 +85,8 @@ def func():
          #debe realizar el recorrido hasta el último bloque.
          n_max =  node.getblockcount()
          n = ((n_max // lote)+1)
+         general = node.getblockchaininfo()
+         total_size = general['size_on_disk']
          flag = False
       except:
          time.sleep(3)
@@ -105,7 +107,7 @@ def func():
 
 
    print('Recopilando... TOTAL %d bloques'%n_max)
-   print('%d Lotes de: %d bloques'%(n,lote))
+   print('%d Lotes de: %d bloques'%(n-1,lote))
    print('El último bloque en DB: ',int(last))
    
 # encontramos el indice de lote donde corresponde la busqueda
@@ -114,8 +116,8 @@ def func():
    else:
       a = (last // lote)+1
 
-   for ix in range(int(a),int(n)): 
-      print('-> lote: ',ix)
+   for ix in range(int(a),int(n)+1): 
+      print('-> lote: ',ix-1)
 
       if ix==n:
          stop = n_max
@@ -166,7 +168,7 @@ def func():
 
       print('LOTE TERMINADO: ',ix)
       logging.info('Guardado en DB  Last Block %d ',last)
-      np.savez('bins/database.npz', n_block=n_block,time_b=time_b,size=size,ntx=ntx,bits=bits,chainwork=chainwork,strippedsize=strippedsize,weight=weight)
+      np.savez('bins/database.npz', n_block=n_block,time_b=time_b,size=size,ntx=ntx,bits=bits,chainwork=chainwork,strippedsize=strippedsize,weight=weight,total=total_size)
 
 
    logging.info('******************EXIT**************************')
