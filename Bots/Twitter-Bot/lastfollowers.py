@@ -76,4 +76,6 @@ def banner(path):
 if __name__=='__main__':
    p1='/home/ghost/BitcoinResearch/Bots/Twitter-Bot/'
    banner(path=p1)
+   #test
+   
 
