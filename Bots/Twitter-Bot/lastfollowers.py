@@ -69,13 +69,13 @@ def banner(path):
    image.save(path+'bins/out.png')
    api.update_profile_banner(path+'bins/out.png')
    os.remove(path+'bins/out.png')
-   tw_user = '₿itcoinR3search | in ⌚⛓️'+ blockclock()
-   api.update_profile(name=tw_user)
+#   tw_user = '₿itcoinR3search | in ⌚⛓️'+ blockclock()
+#   api.update_profile(name=tw_user)
 
 
 if __name__=='__main__':
    p1='/home/ghost/BitcoinResearch/Bots/Twitter-Bot/'
    banner(path=p1)
    #test
-   
+
 
