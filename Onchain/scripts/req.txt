@@ -1,5 +1,4 @@
-numpy==1.24.2
 python-bitcoinlib==0.11.2
 python-bitcoinrpc==1.0
 python-dotenv==0.21.1
-tqdm==4.65.0
+python-tqdm==4.65.0

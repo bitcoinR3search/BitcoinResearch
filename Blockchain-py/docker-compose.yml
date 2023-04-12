@@ -1,0 +1,24 @@
+version: '3.3'
+
+services:
+  nodo1:
+    image: jpcrespo/blockchainpy:v1
+    ports:
+      - "3000:3000"
+    networks:
+      test_red:
+        ipv4_address: 10.5.0.5
+
+  nodo2:
+    image: jpcrespo/blockchainpy:v1
+    ports:
+      - "3001:3000"
+    networks:
+      test_red:
+        ipv4_address: 10.5.0.4
+
+networks:
+  test_red:
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
