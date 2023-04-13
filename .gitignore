@@ -1,9 +1,3 @@
 # se omiten subir bins
-/Bots/Telegram-Bot/bins/bot_telegram.log
-/Bots/Telegram-Bot/bins/knownUsers.npy
-/Bots/Telegram-Bot/bins/userStep.json
-/Onchain/scripts/.env
-/Onchain/scripts/bins/database.npz
-/Onchain/scripts/bins/recopilador.log
-/Onchain/scripts/auto_price.sh
-/Onchain/scripts/bins/MonoLisaSimpson-Regular.ttf
+scripts/bins/database.npz
+scripts/bins/recopilador.log
