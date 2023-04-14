@@ -25,10 +25,10 @@ rpc_user = os.getenv('user')
 rpc_password = os.getenv('pass')
 
 # iniciamos logs
-logging.basicConfig(filename='bins/recopilador.log', filemode='a+',
+logging.basicConfig(filename='/home/ghost/BitcoinResearch/scripts/bins/recopilador.log', filemode='a+',
                     format='%(asctime)s,%(message)s,%(levelname)s', datefmt='%d-%b-%y,%H:%M:%S', level=logging.INFO)
 logging.info('*****************START***************************')
-logging.info('Corriendo script ' +datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+logging.info('Corriendo script ' +datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
 
 # autentificación
 
@@ -50,9 +50,9 @@ def func():
     # Este script reconoce si existen los binarios y base de datos.
     # de no ser asi, empieza creandolos.
 
-    if(os.path.exists('bins/database.npz')):
+    if os.path.exists('/home/ghost/BitcoinResearch/scripts/bins/database.npz'):
         logging.info('Se detecto la db en bins/database.npz')
-        aux = np.load('bins/database.npz', allow_pickle='TRUE')
+        aux = np.load('/home/ghost/BitcoinResearch/scripts/bins/database.npz', allow_pickle='TRUE')
         n_block = aux['n_block']
         time_b = aux['time_b']
         size = aux['size']
@@ -87,11 +87,11 @@ def func():
     lote = 10000  # en nuestro caso procesaremos lotes de X bloques
 
     flag = True
-    while(flag):
+    while flag:
         try:
             # debe realizar el recorrido hasta el último bloque.
             n_max = node.getblockcount()
-            n = ((n_max // lote)+1)
+            n = (n_max // lote)+1
             general = node.getblockchaininfo()
             total_size = general['size_on_disk']
             flag = False
@@ -178,7 +178,7 @@ def func():
 
         print('LOTE TERMINADO: ', ix)
         logging.info('Guardado en DB  Last Block %d ', last)
-        np.savez('bins/database.npz', n_block=n_block, time_b=time_b, size=size, ntx=ntx, bits=bits,
+        np.savez('/home/ghost/BitcoinResearch/scripts/bins/database.npz', n_block=n_block, time_b=time_b, size=size, ntx=ntx, bits=bits,
                  chainwork=chainwork, strippedsize=strippedsize, weight=weight, total=total_size)
 
     logging.info('******************EXIT**************************')

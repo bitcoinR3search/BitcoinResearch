@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 
 
 
-load_dotenv('scripts/.env')
+load_dotenv('/home/ghost/.env')
 
 
 # RPC remote procedure call

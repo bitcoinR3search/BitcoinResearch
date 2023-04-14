@@ -1,4 +1,4 @@
-cd /home/ghost/BitcoinResearch/Onchain/scripts/bins
+cd /home/ghost/BitcoinResearch/scripts/bins
 
 git pull origin main
 git add -A
