@@ -7,7 +7,7 @@ por recopilador.py son correctos
 import numpy as np
 
 
-aux = np.load('bins/database.npz', allow_pickle='TRUE')
+aux = np.load('/home/ghost/BitcoinResearch/scripts/bins/database.npz', allow_pickle='TRUE')
 n_block = aux['n_block']
 time_b = aux['time_b']
 size = aux['size']
@@ -18,9 +18,10 @@ strippedsize = aux['strippedsize']
 weight = aux['weight']
 total = aux['total']
 
+
 print('*********************')
 print('El total de bloques procesados:', end=' ')
-print(int(n_block.shape[0]), end=' ')
+print(len(n_block), end=' ')
 print('Total: ', total)
 print('Datos del último bloque: ')
 print('n_block,time,size,ntx')
