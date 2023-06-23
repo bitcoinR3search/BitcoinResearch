@@ -1,4 +1,4 @@
-cd /home/ghost/BitcoinResearch/BitcoinResearch/scripts/bins
+cd /home/ghost/BitcoinResearch/scripts/bins
 
 
 git add -A
