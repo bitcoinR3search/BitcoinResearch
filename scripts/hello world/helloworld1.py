@@ -15,8 +15,12 @@ load_dotenv('/home/ghost/.env')
 # RPC remote procedure call
 rpc_user = os.getenv('user')
 rpc_password = os.getenv('pass')
-p = RawProxy(service_url='http://%s:%s@nodeone.local:8332' %
+#p = RawProxy(service_url='http://%s:%s@nodeone.local:8332' %
+#             (rpc_user, rpc_password))
+
+p = RawProxy(service_url='http://%s:%s@192.168.1.29:18332' %
              (rpc_user, rpc_password))
+
 
 info = p.getblockchaininfo()
 
