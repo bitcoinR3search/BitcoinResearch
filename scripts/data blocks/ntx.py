@@ -15,8 +15,8 @@ import matplotlib.image as mpimg
 from matplotlib import font_manager as fm, rcParams
 import matplotlib.ticker as ticker
 from datetime import datetime, timedelta
-import locale
-locale.setlocale(locale.LC_TIME, 'es')
+#import locale
+#locale.setlocale(locale.LC_TIME, 'es')
 
 
 fpath = os.path.join(r'bins/MonoLisaSimpson-Regular.ttf')

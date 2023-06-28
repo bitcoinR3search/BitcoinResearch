@@ -1,3 +1,4 @@
+
 # este script construye la gráfica histórica
 # del tamaño de bloques en Bitcoin
 
@@ -16,10 +17,10 @@ from matplotlib import font_manager as fm, rcParams
 import matplotlib.ticker as ticker
 from datetime import datetime, timedelta
 import locale
-locale.setlocale(locale.LC_TIME, 'es')
+#locale.setlocale(locale.LC_TIME, 'es')
 
 
-fpath = os.path.join(r'bins/MonoLisaSimpson-Regular.ttf')
+fpath = os.path.join(r'/home/ghost/BitcoinResearch/scripts/bins/MonoLisaSimpson-Regular.ttf')
 prop = fm.FontProperties(fname=fpath)
 fname = os.path.split(fpath)[1]
 
@@ -37,7 +38,7 @@ for i in range(len(tableau20)):
 
 # Cargamos los datos a usar como arrays
 
-aux = np.load('bins/database.npz', allow_pickle='TRUE')
+aux = np.load('/home/ghost/BitcoinResearch/scripts/bins/database.npz', allow_pickle='TRUE')
 n_block = aux['n_block']
 time_b = aux['time_b']
 size = aux['size']
@@ -141,7 +142,7 @@ plt.text(datetime(2020, 6, 1), 4600, 'Peso de Bloques\n'+str(round(total[-1]/100
     round(total_btc/10000000000, 2))+' GB', fontsize=22, fontproperties=prop, color=tableau20[10])
 
 
-tw1 = mpimg.imread('pics/segwit.png')
+tw1 = mpimg.imread('/home/ghost/BitcoinResearch/scripts/pics/segwit.png')
 imagebox = OffsetImage(tw1, zoom=0.45)
 firma = AnnotationBbox(imagebox, (datetime(2011, 12, 8), 1200))
 plt.gca().add_artist(firma)
@@ -149,14 +150,14 @@ plt.annotate('Presentación\nSegWit', xy=(datetime(2011, 12, 8), 0), xytext=(dat
     2010, 11, 1), 200), fontsize=15, fontproperties=prop, arrowprops=dict(facecolor='red', shrink=0.10))
 
 
-tw2 = mpimg.imread('pics/ordinals.png')
+tw2 = mpimg.imread('/home/ghost/BitcoinResearch/scripts/pics/ordinals.png')
 imagebox = OffsetImage(tw2, zoom=0.175)
 firma2 = AnnotationBbox(imagebox, (datetime(2020, 10, 7), 2600))
 plt.gca().add_artist(firma2)
 plt.annotate('Primer\nOrdinal', xy=(datetime(2021, 10, 7), 0), xytext=(datetime(
     2020, 10, 8), 300), fontsize=15, fontproperties=prop, arrowprops=dict(facecolor='red', shrink=0.10))
 
-tw3 = mpimg.imread('pics/satoshi.png')
+tw3 = mpimg.imread('/home/ghost/BitcoinResearch/scripts/pics/satoshi.png')
 imagebox = OffsetImage(tw3, zoom=0.08)
 firma3 = AnnotationBbox(imagebox, (datetime(2009, 6, 1), 250))
 plt.gca().add_artist(firma3)
@@ -179,7 +180,7 @@ ax2.set_ylabel('\nTamaño acumulado', fontsize=30,
                fontproperties=prop, color=tableau20[6])
 
 
-plt.savefig('pics/blocksize.png', bbox_inches='tight')
+plt.savefig('/home/ghost/BitcoinResearch/scripts/pics/blocksize.png', bbox_inches='tight')
 
 
 print('hola mundio')
