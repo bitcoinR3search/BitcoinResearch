@@ -34,21 +34,19 @@ c=np.linspace(1,len(a),len(a))
 #copia el contenido del arreglo time_b
 i=0
 z=len(a)
+diferencias=[]
+for i in range(1,len(a)):
+    fecha_anterior=datetime.strptime(a[i-1], "%Y-%m-%d %H:%M:%S")
+    fecha_actual = datetime.strptime(a[i], "%Y-%m-%d %H:%M:%S")
+    diferencia = (fecha_actual - fecha_anterior).total_seconds()
+    diferencias.append(diferencia)
 
-a=pd.to_datetime(a,format='%Y%m%d %H:%M:%s')
-#convierte los datos de fecha en 
-#a=datetime.strptime("%Y%m%d , %H:%M:%s ").timestamp()
-while i<z-1:
-     b=((a[i]-a[i+1])**2)**(1/2)
-     i=i+1
-print(a[0],a[1])
-#print(b[2])
-#print(z)
-#print(type(z))
+print(diferencias[0],diferencias[1])
+
 
 fig,ax=plt.subplots()
 #crea un objeto graficable del tipo fig
-ax.scatter(c,b)
+ax.scatter(c,diferencias)
 #crea una grafica de sipersion y toma como eje x al arreglo "c", eje y a "b"
 
 
