@@ -42,11 +42,11 @@ for i in range(1,len(a)):
     diferencias.append(diferencia)
 
 print(diferencias[0],diferencias[1])
+print(len(diferencias))
 
-
-fig,ax=plt.subplots()
+#fig,ax=plt.subplots()
 #crea un objeto graficable del tipo fig
-ax.scatter(c,diferencias)
+#ax.scatter(c,diferencias)
 #crea una grafica de sipersion y toma como eje x al arreglo "c", eje y a "b"
 
 
