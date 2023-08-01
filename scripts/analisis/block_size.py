@@ -27,19 +27,19 @@ fname = os.path.split(fpath)[1]
 
 tipo='estilo_dark'
 
-#def crear_imagen(tipo='estilo_dark'):
-    # Color del fondo
-fig, ax = plt.subplots(figsize=(10,7), dpi=300)
-#    tipos = {'color':Estilos[tipo][2],'fontproperties':prop}
-fig.patch.set_facecolor(Estilos[tipo][0])
-plt.axes().patch.set_facecolor(Estilos[tipo][1])
+def crear_imagen(tipo='estilo_dark'):
+        # Color del fondo
+    fig, ax = plt.subplots(figsize=(10,7), dpi=300)
+    #    tipos = {'color':Estilos[tipo][2],'fontproperties':prop}
+    fig.patch.set_facecolor(Estilos[tipo][1])
+    plt.axes().patch.set_facecolor(Estilos[tipo][1])
 
-plt.title("Bitcoin Block Size History",fontsize=30)#
-plt.plot([1, 2, 3, 4],[3, 1, 4, 5])
-plt.savefig('historial_block_size.png',bbox_inches='tight')
+    plt.title("Bitcoin Block Size History",fontsize=30)#
+    plt.plot([1, 2, 3, 4],[3, 1, 4, 5])
+    plt.savefig('BitcoinResearch/scripts/analisis/resultados/1_block_size_'+tipo+'.png',bbox_inches='tight')
 
 
-#crear_imagen()
+crear_imagen('estilo_blanco')
 
 # plt.title(r"$\bf{BITCOIN:\ HISTORIAL\ DEL\ TAMAÑO\ DE\ BLOQUE}$" "\n" r"$\it{Comparación\ del\ size\ y\ strippedsize\ desde:\ bloque\ 1\ a\ }$" +
 #           f"{int(n_block[-1])}", fontsize=40, color=tableau20[6], fontproperties=prop)
