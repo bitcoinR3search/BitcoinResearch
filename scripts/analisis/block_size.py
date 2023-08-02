@@ -16,127 +16,140 @@ from matplotlib import font_manager as fm, rcParams
 import matplotlib.ticker as ticker
 from datetime import datetime, timedelta
 from app.styles import Estilos, colores
+from app.readata import leer_data,time_data,estado_data
 
 # Cambiar la tipografia
-fpath = os.path.join('MonoLisaSimpson.ttf')
+
+current_dir = os.getcwd()
+os.chdir(current_dir+'/BitcoinResearch/scripts/')
+
+
+fpath = os.path.join('bins/MonoLisaSimpson.ttf')
 prop = fm.FontProperties(fname=fpath)
 fname = os.path.split(fpath)[1]
 
 
-#total = np.cumsum(size)s
+# #total = np.cumsum(size)s
 
-tipo='estilo_dark'
 
 def crear_imagen(tipo='estilo_dark'):
         # Color del fondo
-    fig, ax = plt.subplots(figsize=(10,7), dpi=300)
-    #    tipos = {'color':Estilos[tipo][2],'fontproperties':prop}
+    fig, ax = plt.subplots(figsize=(13,5), dpi=200)
+    tipos = {'color':Estilos[tipo][2],'fontproperties':prop}
     fig.patch.set_facecolor(Estilos[tipo][1])
     plt.axes().patch.set_facecolor(Estilos[tipo][1])
 
-    plt.title("Bitcoin Block Size History",fontsize=30)#
-    plt.plot([1, 2, 3, 4],[3, 1, 4, 5])
-    plt.savefig('BitcoinResearch/scripts/analisis/resultados/1_block_size_'+tipo+'.png',bbox_inches='tight')
+    preferencias = {'color':Estilos[tipo][0],'fontproperties':prop}
+    plt.suptitle("Bitcoin Block Size\n  History 2009-2023",fontsize=25,x=0.25,y=1.15,**preferencias)
+    size,time = leer_data('size','time_b')
+    time = time_data(time)
+    plt.plot(time,size)
+    ax.tick_params([],[])
+    
+    
+    plt.savefig('analisis/resultados/1_block_size_'+tipo+'.png',bbox_inches='tight')
 
 
-crear_imagen('estilo_blanco')
-
-# plt.title(r"$\bf{BITCOIN:\ HISTORIAL\ DEL\ TAMAÑO\ DE\ BLOQUE}$" "\n" r"$\it{Comparación\ del\ size\ y\ strippedsize\ desde:\ bloque\ 1\ a\ }$" +
-#           f"{int(n_block[-1])}", fontsize=40, color=tableau20[6], fontproperties=prop)
-# plt.xlabel('Fecha de Confirmación del Bloque', fontsize=35,
-#            fontproperties=prop, color=tableau20[6])
-# plt.ylabel('Tamaño del Bloque', fontsize=35,
-#            fontproperties=prop, color=tableau20[6])
-# plt.gca().yaxis.grid(linestyle='-', linewidth=2, dashes=(5, 3))
-# plt.xlim(num_dates[0], num_dates[-1])
-# plt.ylim(0, 1.5*max(size))
-# ax.set_yticks([], [])
-# ax.set_xticks([], [])
-# ytick_labels = ['0 MB', '1 MB', '2 MB', '3 MB', '4 MB']
-# plt.yticks([0, 1000, 2000, 3000, 4000], ytick_labels,
-#            fontsize=20, fontproperties=prop, color=tableau20[6])
 
 
-# plt.plot_date(num_dates, size, ".", color=tableau20[0], markersize=0.3)
-# plt.plot_date(num_dates, strippedsize, ".", color=tableau20[2], markersize=0.3)
+crear_imagen('estilo_dark2')
 
-# plt.plot_date(num_dates, total_b, "--", color=tableau20[10], linewidth=8)
-
-
-# plt.fill_between(num_dates, strippedsize,
-#                  facecolor=tableau20[2], alpha=0.7, label='StrippedSize')
-# plt.fill_between(num_dates, size, strippedsize,
-#                  facecolor=tableau20[0], alpha=0.7, label='Size')
-
-
-# plt.legend(loc='upper left', fontsize=20)
-
-
-# locator = mdates.MonthLocator(interval=11)
-# formatter = mdates.DateFormatter('%B\n%Y')
-# plt.gca().xaxis.set_major_locator(locator)
-# plt.gca().xaxis.set_major_formatter(formatter)
-# plt.gca().xaxis.set_tick_params(labelsize=10, rotation=20)
-# plt.tick_params(axis='x', colors=tableau20[6])
-
-# plt.axvline(datetime(2012, 11, 28), color="g", label="Min")
-# plt.text(datetime(2012, 12, 28), 4100, '1er Halv',
-#          fontsize=18, fontproperties=prop)
-# plt.axvline(datetime(2016, 7, 9), color="g", label="Min")
-# plt.text(datetime(2016, 8, 9), 4100, '2do Halv',
-#          fontsize=18, fontproperties=prop)
-# plt.axvline(datetime(2020, 5, 11), color="g", label="Min")
-# plt.text(datetime(2020, 6, 11), 4100, '3er Halv',
-#          fontsize=18, fontproperties=prop)
-
-# plt.annotate('Inicio\nSegWit', xy=(datetime(2017, 1, 24), 0), xytext=(datetime(
-#     2016, 1, 24), 300), fontsize=15, fontproperties=prop, arrowprops=dict(facecolor='red', shrink=0.10))
+# # plt.title(r"$\bf{BITCOIN:\ HISTORIAL\ DEL\ TAMAÑO\ DE\ BLOQUE}$" "\n" r"$\it{Comparación\ del\ size\ y\ strippedsize\ desde:\ bloque\ 1\ a\ }$" +
+# #           f"{int(n_block[-1])}", fontsize=40, color=tableau20[6], fontproperties=prop)
+# # plt.xlabel('Fecha de Confirmación del Bloque', fontsize=35,
+# #            fontproperties=prop, color=tableau20[6])
+# # plt.ylabel('Tamaño del Bloque', fontsize=35,
+# #            fontproperties=prop, color=tableau20[6])
+# # plt.gca().yaxis.grid(linestyle='-', linewidth=2, dashes=(5, 3))
+# # plt.xlim(num_dates[0], num_dates[-1])
+# # plt.ylim(0, 1.5*max(size))
+# # ax.set_yticks([], [])
+# # ax.set_xticks([], [])
+# # ytick_labels = ['0 MB', '1 MB', '2 MB', '3 MB', '4 MB']
+# # plt.yticks([0, 1000, 2000, 3000, 4000], ytick_labels,
+# #            fontsize=20, fontproperties=prop, color=tableau20[6])
 
 
-# # anotando el acumulado del Blockchain
-# plt.text(datetime(2020, 6, 1), 4600, 'Peso de Bloques\n'+str(round(total[-1]/10000000000, 2))+' GB\nTotal: '+str(
-#     round(total_btc/10000000000, 2))+' GB', fontsize=22, fontproperties=prop, color=tableau20[10])
+# # plt.plot_date(num_dates, size, ".", color=tableau20[0], markersize=0.3)
+# # plt.plot_date(num_dates, strippedsize, ".", color=tableau20[2], markersize=0.3)
+
+# # plt.plot_date(num_dates, total_b, "--", color=tableau20[10], linewidth=8)
 
 
-# tw1 = mpimg.imread('/home/ghost/BitcoinResearch/scripts/pics/segwit.png')
-# imagebox = OffsetImage(tw1, zoom=0.45)
-# firma = AnnotationBbox(imagebox, (datetime(2011, 12, 8), 1200))
-# plt.gca().add_artist(firma)
-# plt.annotate('Presentación\nSegWit', xy=(datetime(2011, 12, 8), 0), xytext=(datetime(
-#     2010, 11, 1), 200), fontsize=15, fontproperties=prop, arrowprops=dict(facecolor='red', shrink=0.10))
+# # plt.fill_between(num_dates, strippedsize,
+# #                  facecolor=tableau20[2], alpha=0.7, label='StrippedSize')
+# # plt.fill_between(num_dates, size, strippedsize,
+# #                  facecolor=tableau20[0], alpha=0.7, label='Size')
 
 
-# tw2 = mpimg.imread('/home/ghost/BitcoinResearch/scripts/pics/ordinals.png')
-# imagebox = OffsetImage(tw2, zoom=0.175)
-# firma2 = AnnotationBbox(imagebox, (datetime(2020, 10, 7), 2600))
-# plt.gca().add_artist(firma2)
-# plt.annotate('Primer\nOrdinal', xy=(datetime(2021, 10, 7), 0), xytext=(datetime(
-#     2020, 10, 8), 300), fontsize=15, fontproperties=prop, arrowprops=dict(facecolor='red', shrink=0.10))
-
-# tw3 = mpimg.imread('/home/ghost/BitcoinResearch/scripts/pics/satoshi.png')
-# imagebox = OffsetImage(tw3, zoom=0.08)
-# firma3 = AnnotationBbox(imagebox, (datetime(2009, 6, 1), 250))
-# plt.gca().add_artist(firma3)
-# plt.annotate('Lanzamiento de\nBitcoin\n9 de enero de 2009 ', xy=(datetime(2009, 2, 3), 0), xytext=(
-#     datetime(2009, 2, 3), 600), fontsize=15, fontproperties=prop, arrowprops=dict(facecolor='red', shrink=0.10))
+# # plt.legend(loc='upper left', fontsize=20)
 
 
-# plt.xticks(fontsize=20, fontproperties=prop)
+# # locator = mdates.MonthLocator(interval=11)
+# # formatter = mdates.DateFormatter('%B\n%Y')
+# # plt.gca().xaxis.set_major_locator(locator)
+# # plt.gca().xaxis.set_major_formatter(formatter)
+# # plt.gca().xaxis.set_tick_params(labelsize=10, rotation=20)
+# # plt.tick_params(axis='x', colors=tableau20[6])
+
+# # plt.axvline(datetime(2012, 11, 28), color="g", label="Min")
+# # plt.text(datetime(2012, 12, 28), 4100, '1er Halv',
+# #          fontsize=18, fontproperties=prop)
+# # plt.axvline(datetime(2016, 7, 9), color="g", label="Min")
+# # plt.text(datetime(2016, 8, 9), 4100, '2do Halv',
+# #          fontsize=18, fontproperties=prop)
+# # plt.axvline(datetime(2020, 5, 11), color="g", label="Min")
+# # plt.text(datetime(2020, 6, 11), 4100, '3er Halv',
+# #          fontsize=18, fontproperties=prop)
+
+# # plt.annotate('Inicio\nSegWit', xy=(datetime(2017, 1, 24), 0), xytext=(datetime(
+# #     2016, 1, 24), 300), fontsize=15, fontproperties=prop, arrowprops=dict(facecolor='red', shrink=0.10))
 
 
-# ax2 = ax.twinx()
-
-# # Establecer límites del segundo eje Y
-# ax2.set_ylim(0, 1.5*max(size))
-# ax2.set_yticks([0, 1000, 2000, 3000, 4000])
-# ytick_labels = ['0 GB', '1 GB', '2 GB', '3 GB', '4 GB']
-# ax2.set_yticklabels(ytick_labels, fontsize=20,
-#                     fontproperties=prop, color=tableau20[6])
-# ax2.set_ylabel('\nTamaño acumulado', fontsize=30,
-#                fontproperties=prop, color=tableau20[6])
+# # # anotando el acumulado del Blockchain
+# # plt.text(datetime(2020, 6, 1), 4600, 'Peso de Bloques\n'+str(round(total[-1]/10000000000, 2))+' GB\nTotal: '+str(
+# #     round(total_btc/10000000000, 2))+' GB', fontsize=22, fontproperties=prop, color=tableau20[10])
 
 
-# plt.savefig('/home/ghost/BitcoinResearch/scripts/pics/blocksize.png', bbox_inches='tight')
+# # tw1 = mpimg.imread('/home/ghost/BitcoinResearch/scripts/pics/segwit.png')
+# # imagebox = OffsetImage(tw1, zoom=0.45)
+# # firma = AnnotationBbox(imagebox, (datetime(2011, 12, 8), 1200))
+# # plt.gca().add_artist(firma)
+# # plt.annotate('Presentación\nSegWit', xy=(datetime(2011, 12, 8), 0), xytext=(datetime(
+# #     2010, 11, 1), 200), fontsize=15, fontproperties=prop, arrowprops=dict(facecolor='red', shrink=0.10))
 
 
-# print('hola mundio')
+# # tw2 = mpimg.imread('/home/ghost/BitcoinResearch/scripts/pics/ordinals.png')
+# # imagebox = OffsetImage(tw2, zoom=0.175)
+# # firma2 = AnnotationBbox(imagebox, (datetime(2020, 10, 7), 2600))
+# # plt.gca().add_artist(firma2)
+# # plt.annotate('Primer\nOrdinal', xy=(datetime(2021, 10, 7), 0), xytext=(datetime(
+# #     2020, 10, 8), 300), fontsize=15, fontproperties=prop, arrowprops=dict(facecolor='red', shrink=0.10))
+
+# # tw3 = mpimg.imread('/home/ghost/BitcoinResearch/scripts/pics/satoshi.png')
+# # imagebox = OffsetImage(tw3, zoom=0.08)
+# # firma3 = AnnotationBbox(imagebox, (datetime(2009, 6, 1), 250))
+# # plt.gca().add_artist(firma3)
+# # plt.annotate('Lanzamiento de\nBitcoin\n9 de enero de 2009 ', xy=(datetime(2009, 2, 3), 0), xytext=(
+# #     datetime(2009, 2, 3), 600), fontsize=15, fontproperties=prop, arrowprops=dict(facecolor='red', shrink=0.10))
+
+
+# # plt.xticks(fontsize=20, fontproperties=prop)
+
+
+# # ax2 = ax.twinx()
+
+# # # Establecer límites del segundo eje Y
+# # ax2.set_ylim(0, 1.5*max(size))
+# # ax2.set_yticks([0, 1000, 2000, 3000, 4000])
+# # ytick_labels = ['0 GB', '1 GB', '2 GB', '3 GB', '4 GB']
+# # ax2.set_yticklabels(ytick_labels, fontsize=20,
+# #                     fontproperties=prop, color=tableau20[6])
+# # ax2.set_ylabel('\nTamaño acumulado', fontsize=30,
+# #                fontproperties=prop, color=tableau20[6])
+
+
+# # plt.savefig('/home/ghost/BitcoinResearch/scripts/pics/blocksize.png', bbox_inches='tight')
+
+
+# # print('hola mundio')

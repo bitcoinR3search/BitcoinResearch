@@ -4,15 +4,15 @@ import matplotlib.dates as mdates
 
 
 def leer_data(*args):
-    aux = np.load('database.npz', allow_pickle='TRUE')
+    aux = np.load('bins/database.npz', allow_pickle='TRUE')
     if len(args) == 1:
         return aux[args[0]]
     else:
         return [aux[arg] for arg in args]
 
 
-def estado_data(path=''):
-    aux = np.load(path+'database.npz', allow_pickle='TRUE')
+def estado_data():
+    aux = np.load('bins/database.npz', allow_pickle='TRUE')
     last_n_block = aux['n_block'][-1]
     variables = list(aux.files)
     return print('Last block: '+str(int(last_n_block))+'\nVariables :'+', '.join(variables))
