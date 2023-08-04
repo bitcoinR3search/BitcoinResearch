@@ -35,24 +35,60 @@ fname = os.path.split(fpath)[1]
 def crear_imagen(tipo='estilo_dark'):
         # Color del fondo
     fig, ax = plt.subplots(figsize=(13,5), dpi=200)
-    tipos = {'color':Estilos[tipo][2],'fontproperties':prop}
+
     fig.patch.set_facecolor(Estilos[tipo][1])
-    plt.axes().patch.set_facecolor(Estilos[tipo][1])
+    ax.patch.set_facecolor(Estilos[tipo][1])
 
     preferencias = {'color':Estilos[tipo][0],'fontproperties':prop}
-    plt.suptitle("Bitcoin Block Size\n  History 2009-2023",fontsize=25,x=0.25,y=1.15,**preferencias)
+    plt.suptitle("  Bitcoin: Block Size\nHistory 2009-2023",fontsize=30,x=0.30,y=1.25,**preferencias)
     size,time = leer_data('size','time_b')
+    size = np.array(size)/1000000
     time = time_data(time)
-    plt.plot(time,size)
-    ax.tick_params([],[])
     
+    ax.plot(time,size)
     
-    plt.savefig('analisis/resultados/1_block_size_'+tipo+'.png',bbox_inches='tight')
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+
+
+    locator = mdates.MonthLocator(interval=17)
+    formatter = mdates.DateFormatter('%B\n%Y')
+    ax.xaxis.set_major_locator(locator)
+    ax.xaxis.set_major_formatter(formatter)
+    ax.xaxis.set_tick_params(labelsize=13, rotation=30)
+    ax.tick_params(axis='both',colors=Estilos[tipo][0])
+    ax.set_ylabel('Size per Block', fontsize=20,**preferencias)
+
+    ax.set_yticks([0,1,2,3,4])
+    ytick_labels = ['0 MB', '1 MB', '2 MB', '3 MB', '4 MB']
+    ax.set_yticklabels(ytick_labels,fontsize=15)
+
+#    ax.set_yticklabels
+    ax2 = ax.twinx()
+    # Establecer límites del segundo eje Y
+    ax2.set_yticks([0,1,2,3,4])
+
+    last_block = leer_data('n_block')[-1]
+    total_bd = 'Through Block '+str(round(last_block))+'\nthe total blockchain\nsize is '+str(round(leer_data('total')/1_000_000_000,2))+' GB\n'
+    ytick_labels = ['','','','', total_bd]
+    ax2.set_yticklabels(ytick_labels, fontsize=15,color=Estilos[tipo][0])
+# ax2.set_ylabel('BTC', fontsize=15, color=tableau20[9])
+
+    # for spine in ax.spines.values():
+    #     spine.set_color(Estilos[tipo][0])
+
+    for spine in ax2.spines.values():
+        spine.set_color(Estilos[tipo][0])
+
+
+    plt.savefig('analisis/resultados/1_block_size_'+tipo+'.png',bbox_inches='tight',pad_inches=0.5)
 
 
 
 
-crear_imagen('estilo_dark2')
+
+
+crear_imagen('estilo_dark')
 
 # # plt.title(r"$\bf{BITCOIN:\ HISTORIAL\ DEL\ TAMAÑO\ DE\ BLOQUE}$" "\n" r"$\it{Comparación\ del\ size\ y\ strippedsize\ desde:\ bloque\ 1\ a\ }$" +
 # #           f"{int(n_block[-1])}", fontsize=40, color=tableau20[6], fontproperties=prop)
