@@ -35,14 +35,23 @@ fname = os.path.split(fpath)[1]
 def crear_imagen(tipo='estilo_dark'):
         # Color del fondo
     fig, ax = plt.subplots(figsize=(13,5), dpi=200)
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> dff2b37 (F_4AGO)
     fig.patch.set_facecolor(Estilos[tipo][1])
     ax.patch.set_facecolor(Estilos[tipo][1])
 
     preferencias = {'color':Estilos[tipo][0],'fontproperties':prop}
     plt.suptitle("  Bitcoin: Block Size\nHistory 2009-2023",fontsize=30,x=0.30,y=1.25,**preferencias)
     size,time = leer_data('size','time_b')
+<<<<<<< HEAD
     size = np.array(size)/1000000
+=======
+    #numero_de_bloque,NTX=leer_data('n_block','ntx')
+
+>>>>>>> dff2b37 (F_4AGO)
     time = time_data(time)
     
     ax.plot(time,size)
@@ -86,9 +95,13 @@ def crear_imagen(tipo='estilo_dark'):
 
 
 
+<<<<<<< HEAD
 
 
 crear_imagen('estilo_dark')
+=======
+crear_imagen('estilo_blanco')
+>>>>>>> dff2b37 (F_4AGO)
 
 # # plt.title(r"$\bf{BITCOIN:\ HISTORIAL\ DEL\ TAMAÑO\ DE\ BLOQUE}$" "\n" r"$\it{Comparación\ del\ size\ y\ strippedsize\ desde:\ bloque\ 1\ a\ }$" +
 # #           f"{int(n_block[-1])}", fontsize=40, color=tableau20[6], fontproperties=prop)
