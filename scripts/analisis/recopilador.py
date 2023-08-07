@@ -35,7 +35,7 @@ logging.info('Corriendo script ' +datetime.datetime.now().strftime('%Y-%m-%d %H:
 
 def func():
     try:
-        node = RawProxy(service_url='http://%s:%s@192.168.1.16:8332' %
+        node = RawProxy(service_url='http://%s:%s@nodeone.local:8332' %
                         (rpc_user, rpc_password))
         # si todo esta ok y el nodo esta online acepta sesion
         logging.info('Autentificando sesion')
@@ -100,7 +100,7 @@ def func():
             try:
                 logging.info('Error conección server, reconectando... ')
                 node = RawProxy(
-                    service_url='http://%s:%s@192.168.1.16:8332' % (rpc_user, rpc_password))
+                    service_url='http://%s:%s@nodeone.local:8332' % (rpc_user, rpc_password))
                 # si todo esta ok y el nodo esta online acepta sesion
             except:
                 # si el nodo esta offline o no se logra autentificar
@@ -163,7 +163,7 @@ def func():
                         logging.info(
                             'Error conección server, reconectando... ')
                         node = RawProxy(
-                            service_url='http://%s:%s@192.168.1.16:8332' % (rpc_user, rpc_password))
+                            service_url='http://%s:%s@nodeone.local:8332' % (rpc_user, rpc_password))
                         # si todo esta ok y el nodo esta online acepta sesion
                     except:
                         # si el nodo esta offline o no se logra autentificar
