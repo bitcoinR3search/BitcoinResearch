@@ -9,24 +9,27 @@ la recompensa inicial son 50*10^8 sats (50 btc)
 
 # librerias a usar
 import os
-from datetime import datetime, timedelta
+from datetime import datetime
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import matplotlib.image as mpimg
+from matplotlib import font_manager as fm
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
+from PIL import Image
+from app.styles import Estilos, colores
 
 
-path_actual = os.getcwd()
+os.chdir('D:\proyectos\BitcoinResearch\BitcoinResearch\scripts')
 
 
-PRIZE = 50*10**8  # premio inicial
+PRIZE = 50*10**8  # premio inicial expresedo en satoshis
 
 # un halv ocurre cada 210 000 bloques
 LIM = 210_000  # limite de division
 BTC = 0  # se inicia con cero bitcoin
 HALV = 0  # contador de halvings
 BLOCKS = 0  # contador de bloques
-DATE = datetime(2009, 1, 3, 18, 15)  # fecha inicio Bloques
+DATE = datetime(2009, 1, 8, 22, 00)  # fecha inicio Bloques
 
 # los datos se almacenan en una lista
 H = [0,]  # Halv
@@ -69,28 +72,16 @@ A1 = [(100*a/10**8)/(BTC/10**8) for a in A]
 B1 = [b.date() for b in B]
 # Creamos la imagen
 
-# Tabla de colores
-tableau20 = [(31, 119, 180), (174, 199, 232), (255, 127, 14), (255, 187, 120),
-             (44, 44, 44), (255, 255, 248), (255, 255, 255), (255, 152, 150),
-             (148, 103, 189), (197, 176, 213), (140, 86, 75), (196, 156, 148),
-             (227, 119, 194), (247, 182, 210), (127, 127, 127), (199, 199, 199),
-             (188, 189, 34), (219, 219, 141), (23, 190, 207), (158, 218, 229)]
 
-for i, color in enumerate(tableau20):
-    r, g, b = color
-    tableau20[i] = (r / 255., g / 255., b / 255.)
+def crear_imagen(tipo='estilo_dark'):
 
+    fig, ax = plt.subplots(figsize=(13,5), dpi=200)
 
-# Creamos la imagen y su fondo
-fig, ax = plt.subplots(figsize=(10, 5), dpi=200)
-fig.patch.set_facecolor(tableau20[4])
-plt.axes().patch.set_facecolor(tableau20[5])
-
-
-plt.title("2009 - 2140 ", fontsize=23,
-          color=tableau20[0], loc='left', fontweight='light', fontstyle='italic', pad=20)
-plt.suptitle("\nBITCOIN SUPPLY", fontsize=30,
-             color=tableau20[6], fontweight='heavy', fontstyle='oblique', x=0.33)
+    fig.patch.set_facecolor(Estilos[tipo][1])
+    ax.patch.set_facecolor(Estilos[tipo][1])
+    preferencias = {'color':Estilos[tipo][0],'fontproperties':prop}
+    plt.suptitle("Bitcoin Supply\n2009 - 2140", fontsize=23,x=0.20,y=1.23,**preferencias)
+    ax
 plt.ylabel('BTC Supply %', fontsize=15,
            color=tableau20[6])
 plt.xlabel('\nYear', fontsize=15,
