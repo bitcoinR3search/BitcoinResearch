@@ -139,4 +139,7 @@ def crear_imagen(tipo='estilo_dark'):
 
 
 
-crear_imagen('estilo_dark')
+#crear_imagen('estilo_dark')
+#crear_imagen('estilo_dark2')
+crear_imagen('estilo_blanco')
+crear_imagen('estilo_blanco2')
