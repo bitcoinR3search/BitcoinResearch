@@ -1,36 +1,293 @@
-'''
-Este script realiza el analisis de la serie de tiempo de la 
-dificultad de la red.
-'''
+# este script construye la gráfica histórica
+# del tamaño de bloques en Bitcoin
 
-#usar comandos del sistema
+# este script construye un gráfico de la evolución del tamaño de bloques
+# a lo largo del cada bloque
+
+# librerias a usar
 import os
-#manejo numerico
 import numpy as np
-#graficar
 import matplotlib.pyplot as plt
-#libreria manejo de tipografia
-from matplotlib import font_manager as fm, rcParams
-from app.styles import *
+import matplotlib.dates as mdates
+from matplotlib import font_manager as fm
+from PIL import Image
+from datetime import datetime
+from app.styles import Estilos, colores
+from app.readata import leer_data,time_data,estado_data,last_block
 
-#cambiar la typografia
-fpath = os.path.join(r'MonoLisaSimpson-Regular.ttf')
+
+# Cambiar la tipografia
+fpath = os.path.join('bins/MonoLisaSimpson.ttf')
 prop = fm.FontProperties(fname=fpath)
 fname = os.path.split(fpath)[1]
 
+def bits_to_difficulty(bits):
+   bits = int(bits, 16)
+   # Convertir bits a un número de 256 bits en formato big-endian
+   target = (bits & 0x007fffff) * 2 ** (8 * ((bits >> 24) - 3)) 
+   # Calcular la dificultad como el cociente entre el objetivo máximo y el objetivo actual
+   max_target = 0xffff * 2 ** (8 * (0x1d - 3))
+   difficulty = max_target / target
+   return difficulty
 
 
+def crear_imagen_total(tipo='estilo_dark'):
+#         # Color del fondo
+    fig, ax = plt.subplots(1,2,figsize=(16,5), dpi=200)
+    fig.patch.set_facecolor(Estilos[tipo][1])
+    ax[0].patch.set_facecolor(Estilos[tipo][1])
+    ax[0].patch.set_facecolor(Estilos[tipo][1])
 
+    preferencias = {'color':Estilos[tipo][0],'fontproperties':prop}
 
-
-def crear_imagen(estilo='estilo_dark'):
-    fig, ax = plt.subplots(figsize=(10,7),dpi=200)
-    fig.patch.set_facecolor(Estilos[estilo][1])
-    ax.set_facecolor(Estilos[estilo][2])
+    plt.suptitle("  Bitcoin: Difficulty\nscale semilogy",fontsize=35,x=0.20,y=1.23,**preferencias)
+    bits,time = leer_data('bits','time_b')
+    difficulty = np.array([bits_to_difficulty(a) for a in bits])
+    time = time_data(time)
     
+    ax[0].plot(time,difficulty,color=colores[3])
+    ax[0].set_yscale('log')
+    locator = mdates.MonthLocator(interval=17)
+    formatter = mdates.DateFormatter('%B\n%Y')
+    ax[0].xaxis.set_major_locator(locator)
+    ax[0].xaxis.set_major_formatter(formatter)
+    ax[0].xaxis.set_tick_params(labelsize=13, rotation=30,length=5,width=3)
+    ax[0].tick_params(axis='both',colors=Estilos[tipo][0])
+    ax[0].set_ylabel('Difficulty\n', fontsize=23,**preferencias)
     
-    plt.show()
+    # ax.set_yticks([0,10,20,30,40,50])
+    # ytick_labels = ['0','10T','20T','30T','40T','50T']
+    # ax.set_yticklabels(ytick_labels,rotation=25,**preferencias)
+    # ax.yaxis.set_tick_params(labelsize=15)
+
+
+    for spine in ax[0].spines.values():
+        spine.set_color(Estilos[tipo][0])
+
+    if tipo[7:8]=='d':
+        tw1 = Image.open('bins/br_w.png')
+    else:
+        tw1 = Image.open('bins/br_d.png')
+
+
+    tw1_resized = tw1.resize((int(tw1.width * 0.5), int(tw1.height * 0.5)))  # Reduce el tamaño de la imagen a la mitad
+# Convierte la imagen de PIL a una matriz de numpy para que matplotlib pueda trabajar con ella
+    tw1_array = np.array(tw1_resized)
+
+    fig.figimage(tw1_array, xo=1950, yo=900, alpha=0.55, zorder=1)
+    plt.savefig('analisis/resultados/dificultad_total_'+tipo+'.png',bbox_inches='tight',pad_inches=0.5)
+
+
+def crear_imagen_h(tipo='estilo_dark'):
+#         # Color del fondo
+    fig, ax = plt.subplots(2,2,figsize=(13,6), dpi=200)
+
+    fig.patch.set_facecolor(Estilos[tipo][1])
+    ax[0,0].patch.set_facecolor(Estilos[tipo][1])
+    ax[0,1].patch.set_facecolor(Estilos[tipo][1])
+    ax[1,0].patch.set_facecolor(Estilos[tipo][1])
+    ax[1,1].patch.set_facecolor(Estilos[tipo][1])
+
+
+    preferencias = {'color':Estilos[tipo][0],'fontproperties':prop}
+
+    plt.suptitle("Difficulty\nper Halving",fontsize=35,x=0.20,y=1.23,**preferencias)
+    bits,time = leer_data('bits','time_b')
+
+    difficulty_1 = np.array([bits_to_difficulty(a) for a in bits[:210000-1]])
+    time_1 = time_data(time[:210000-1])
+
+    difficulty_2 = np.array([bits_to_difficulty(a) for a in bits[210000:2*210000-1]])
+    time_2 = time_data(time[210000:2*210000-1])
+
+    difficulty_3 = np.array([bits_to_difficulty(a)/10**12 for a in bits[2*210000:3*210000-1]])
+    time_3 = time_data(time[210000*2:3*210000-1])
+
+    difficulty_4 = np.array([bits_to_difficulty(a)/10**12 for a in bits[3*210000:]])
+    time_4 = time_data(time[3*210000:])
+
+
+    
+
+
+    for spine in ax[0,0].spines.values():
+        spine.set_color(Estilos[tipo][0])
+    for spine in ax[0,1].spines.values():
+        spine.set_color(Estilos[tipo][0])
+    for spine in ax[1,0].spines.values():
+        spine.set_color(Estilos[tipo][0])
+    for spine in ax[1,1].spines.values():
+        spine.set_color(Estilos[tipo][0])
 
 
 
-crear_imagen()
+    locator1 = mdates.MonthLocator(interval=9)
+    formatter1 = mdates.DateFormatter('%B\n%Y')
+    ax[0,0].xaxis.set_major_locator(locator1)
+    ax[0,0].xaxis.set_major_formatter(formatter1)
+    ax[0,0].xaxis.set_tick_params(labelsize=12, rotation=30,length=5,width=3)
+    ax[0,0].tick_params(axis='both',colors=Estilos[tipo][0])
+    ax[0,0].set_ylabel('Difficulty\n', fontsize=13,**preferencias)
+    
+
+    date = datetime(2010, 7, 18)
+    x_value = mdates.date2num(date) 
+    ax[0,0].scatter(x_value,5e1,s=300,color=colores[3])
+    ax[0,0].scatter(x_value,5e1,s=75,color=colores[4])
+    ax[0,0].scatter(x_value,5e1,s=5,color=colores[0])
+    ax[0,0].vlines(x_value,0,1e1, colors=Estilos[tipo][0], linestyles='dashed')
+    date = datetime(2010,4,1)
+    x_value = mdates.date2num(date) 
+    ax[0,0].text(x_value,1e3, 'GPU Art Fozt\nOpenCL GPU', color=Estilos[tipo][0], ha='right', va='center',size=13)
+
+
+    date = datetime(2011, 5, 20)
+    x_value = mdates.date2num(date) 
+    ax[0,0].scatter(x_value,5e5,s=300,color=colores[3], zorder=0)
+    ax[0,0].scatter(x_value,5e5,s=75,color=colores[4], zorder=0)
+    ax[0,0].scatter(x_value,5e5,s=5,color=colores[0], zorder=0)
+    ax[0,0].vlines(x_value,0,1e5, colors=Estilos[tipo][0], linestyles='dashed')
+    date = datetime(2012,1, 20)
+    x_value = mdates.date2num(date) 
+    ax[0,0].text(x_value,1e4, 'FPGA\nMiner', color=Estilos[tipo][0], ha='right', va='center',size=13)
+
+
+    locator2 = mdates.MonthLocator(interval=8)
+    formatter2 = mdates.DateFormatter('%B\n%Y')
+    ax[0,1].xaxis.set_major_locator(locator2)
+    ax[0,1].xaxis.set_major_formatter(formatter2)
+    ax[0,1].xaxis.set_tick_params(labelsize=12, rotation=30,length=5,width=3)
+    ax[0,1].tick_params(axis='both',colors=Estilos[tipo][0])
+    ax[0,1].set_ylabel('Difficulty\n', fontsize=13,**preferencias)
+    
+
+    date = datetime(2013, 5, 1)
+    x_value = mdates.date2num(date) 
+    ax[0,1].scatter(x_value,1e7,s=300,color=colores[3])
+    ax[0,1].scatter(x_value,1e7,s=75,color=colores[4])
+    ax[0,1].scatter(x_value,1e7,s=5,color=colores[0])
+    ax[0,1].vlines(x_value,0,1e7, colors=Estilos[tipo][0], linestyles='dashed')
+    date = datetime(2013,12, 1)
+    x_value = mdates.date2num(date) 
+    ax[0,1].text(x_value,9e9, 'First ASIC\nCannan miner\nChip 130nm', color=Estilos[tipo][0], ha='right', va='center',size=12)
+
+
+
+    date = datetime(2015, 1, 1)
+    x_value = mdates.date2num(date) 
+    ax[0,1].scatter(x_value,5e10,s=300,color=colores[3])
+    ax[0,1].scatter(x_value,5e10,s=75,color=colores[4])
+    ax[0,1].scatter(x_value,5e10,s=5,color=colores[0])
+    ax[0,1].vlines(x_value,0,5e10, colors=Estilos[tipo][0], linestyles='dashed')
+    date = datetime(2015,9, 1)
+    x_value = mdates.date2num(date) 
+    ax[0,1].text(x_value,1e9, 'ASIC\n16nm', color=Estilos[tipo][0], ha='right', va='center',size=13)
+
+
+    locator3 = mdates.MonthLocator(interval=9)
+    formatter3 = mdates.DateFormatter('%B\n%Y')
+    ax[1,0].xaxis.set_major_locator(locator3)
+    ax[1,0].xaxis.set_major_formatter(formatter3)
+    ax[1,0].xaxis.set_tick_params(labelsize=12, rotation=30,length=5,width=3)
+    ax[1,0].tick_params(axis='both',colors=Estilos[tipo][0])
+    ax[1,0].set_ylabel('Difficulty\n', fontsize=13,**preferencias)
+    
+    ax[1,0].set_yticks([0,5,10,15])
+    ytick_labels = ['0.1T','5T','10T','15T']
+    ax[1,0].set_yticklabels(ytick_labels,**preferencias)
+    ax[1,0].yaxis.set_tick_params(labelsize=12)
+
+
+    date = datetime(2017, 1, 1)
+    x_value = mdates.date2num(date) 
+    ax[1,0].scatter(x_value,.21,s=300,color=colores[3])
+    ax[1,0].scatter(x_value,.21,s=75,color=colores[4])
+    ax[1,0].scatter(x_value,.21,s=5,color=colores[0])
+    ax[1,0].vlines(x_value,0,.21, colors=Estilos[tipo][0], linestyles='dashed')
+    date = datetime(2017,10, 1)
+    x_value = mdates.date2num(date) 
+    ax[1,0].text(x_value,4, 'ASIC\n14nm', color=Estilos[tipo][0], ha='right', va='center',size=13)
+
+    date = datetime(2019, 1, 1)
+    x_value = mdates.date2num(date) 
+    ax[1,0].scatter(x_value,5,s=300,color=colores[3])
+    ax[1,0].scatter(x_value,5,s=75,color=colores[4])
+    ax[1,0].scatter(x_value,5,s=5,color=colores[0])
+    ax[1,0].vlines(x_value,0,5, colors=Estilos[tipo][0], linestyles='dashed')
+    date = datetime(2019,3, 1)
+    x_value = mdates.date2num(date) 
+    ax[1,0].text(x_value,10, 'ASIC\n7nm', color=Estilos[tipo][0], ha='right', va='center',size=13)
+
+
+    locator4 = mdates.MonthLocator(interval=7)
+    formatter4 = mdates.DateFormatter('%B\n%Y')
+    ax[1,1].xaxis.set_major_locator(locator4)
+    ax[1,1].xaxis.set_major_formatter(formatter4)
+    ax[1,1].xaxis.set_tick_params(labelsize=12, rotation=30,length=5,width=3)
+    ax[1,1].tick_params(axis='both',colors=Estilos[tipo][0])
+    ax[1,1].set_ylabel('Difficulty\n', fontsize=13,**preferencias)
+    
+    ax[1,1].set_yticks([10,20,30,40,50])
+    ytick_labels = ['10T','20T','30T','40T','50T']
+    ax[1,1].set_yticklabels(ytick_labels,**preferencias)
+    ax[1,1].yaxis.set_tick_params(labelsize=12)
+
+    date = datetime(2023, 1, 1)
+    x_value = mdates.date2num(date) 
+    ax[1,1].scatter(x_value,38,s=300,color=colores[3])
+    ax[1,1].scatter(x_value,38,s=75,color=colores[4])
+    ax[1,1].scatter(x_value,38,s=5,color=colores[0])
+    ax[1,1].vlines(x_value,0,38, colors=Estilos[tipo][0], linestyles='dashed')
+    date = datetime(2023,7, 1)
+    x_value = mdates.date2num(date) 
+    ax[1,1].text(x_value,20,'ASIC\n5nm', color=Estilos[tipo][0], ha='right', va='center',size=13)
+
+
+
+    ax[0,0].plot(time_1,difficulty_1,color=colores[3],zorder=1)
+    ax[0,0].set_yscale('log')
+    ax[0,1].plot(time_2,difficulty_2,color=colores[3])
+    ax[0,1].set_yscale('log')
+    ax[1,0].plot(time_3,difficulty_3,color=colores[3])
+    #ax[1,0].set_yscale('log')
+    ax[1,1].plot(time_4,difficulty_4,color=colores[3])
+    #ax[1,1].set_yscale('log')
+
+    ax[0,0].set_title("1st Halving\n2009-2012                       scale:'logy'",fontsize=25,loc='left', **preferencias)
+    ax[0,1].set_title("2nd Halving\n2012-2016                       scale:'logy'",fontsize=25,loc='left', **preferencias)
+    ax[1,0].set_title("3rd Halving\n2016-2020",fontsize=25,loc='left', **preferencias)
+    ax[1,1].set_title("4th Halving\n2020-2024",fontsize=25,loc='left', **preferencias)
+
+    if tipo[7:8]=='d':
+        tw1 = Image.open('bins/br_w.png')
+    else:
+        tw1 = Image.open('bins/br_d.png')
+
+    total_diff = np.array([bits_to_difficulty(a)/10**12 for a in bits])
+    me1 = 'All-time High: '+str(round(total_diff.max(),2))+' T'
+    me2 = '\nLast Block '+str(last_block())+' : '+str(round(total_diff[-1],2))+' T'
+
+
+    
+    date = datetime(2013, 1, 1)
+    x_value = mdates.date2num(date) 
+    ax[0,0].text(x_value,1e10,me1+me2, color=Estilos[tipo][0], ha='right', va='center',size=13)
+
+
+    tw1_resized = tw1.resize((int(tw1.width * 0.5), int(tw1.height * 0.5)))  # Reduce el tamaño de la imagen a la mitad
+# Convierte la imagen de PIL a una matriz de numpy para que matplotlib pueda trabajar con ella
+    tw1_array = np.array(tw1_resized)
+
+
+
+
+    fig.figimage(tw1_array, xo=1500, yo=1050, alpha=0.55, zorder=1)
+    plt.subplots_adjust(wspace=0.3, hspace=1)
+    plt.savefig('analisis/resultados/dificultad_halv_'+tipo+'.png',bbox_inches='tight',pad_inches=0.5)
+
+
+
+for a in Estilos.keys():
+    #crear_imagen_h(a)
+
+    crear_imagen_total(a)

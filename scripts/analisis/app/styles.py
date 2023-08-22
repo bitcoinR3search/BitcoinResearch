@@ -12,20 +12,11 @@ Colores de los datos -> colores
 # estilo[1] = Fondo principal
 # estilo[2] = Fondo imagen
 estilo_dark=[(124/255., 130/255., 178/255.), (23/255., 32/255., 65/255.), (23/255., 32/255., 65/255.)]
-estilo_dark2=[(237/255., 237/255., 237/255.), (64/255., 64/255., 64/255.), (64/255., 64/255., 64/255.)]
-estilo_dark3=[(253/255., 253/255., 253/255.), (44/255., 44/255., 44/255.), (254/255., 254/255., 244/255.)]
 estilo_blanco=[(58/255., 53/255., 59/255.), (255/255., 255/255., 255/255.), (255/255., 255/255., 255/255.)]
-estilo_blanco2=[(80/255., 82/255., 81/255.), (255/255., 255/255., 255/255.), (255/255., 255/255., 255/255.)]
-
-
 
 Estilos = {
     'estilo_dark': estilo_dark,
-    'estilo_dark2': estilo_dark2,
-    'estilo_dark3': estilo_dark3,
-    'estilo_blanco': estilo_blanco,
-    'estilo_blanco2': estilo_blanco2
-}
+    'estilo_blanco': estilo_blanco}
 
 
 # colores: ESTA VARIABLE CONTIENE COLORES

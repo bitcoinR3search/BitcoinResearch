@@ -134,12 +134,8 @@ def crear_imagen(tipo='estilo_dark'):
     ax2.tick_params(axis='y', length=0)
 # Añade la imagen a la figura
     fig.figimage(tw1_array, xo=2400, yo=1000, alpha=0.55, zorder=1)
-    plt.savefig('analisis/resultados/1_block_size_'+tipo+'.png',bbox_inches='tight',pad_inches=0.5)
+    plt.savefig('analisis/resultados/block_size_'+tipo+'.png',bbox_inches='tight',pad_inches=0.5)
 
 
-
-
-#crear_imagen('estilo_dark')
-#crear_imagen('estilo_dark2')
-crear_imagen('estilo_blanco')
-crear_imagen('estilo_blanco2')
+for a in Estilos.keys():
+    crear_imagen(a)
