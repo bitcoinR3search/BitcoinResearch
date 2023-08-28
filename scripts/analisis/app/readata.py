@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.dates as mdates
 
-os.chdir('/home/richard/TRABAJO/BitcoinResearch/scripts')
+os.chdir('D:/proyectos/BitcoinResearch//BitcoinResearch/scripts/')
 
 
 

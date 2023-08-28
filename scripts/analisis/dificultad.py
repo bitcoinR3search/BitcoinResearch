@@ -30,38 +30,68 @@ def bits_to_difficulty(bits):
    difficulty = max_target / target
    return difficulty
 
-
 def crear_imagen_total(tipo='estilo_dark'):
-#         # Color del fondo
-    fig, ax = plt.subplots(1,2,figsize=(16,5), dpi=200)
+        # Color del fondo
+    fig, ax = plt.subplots(1,2,figsize=(20,5), dpi=200)
     fig.patch.set_facecolor(Estilos[tipo][1])
     ax[0].patch.set_facecolor(Estilos[tipo][1])
-    ax[0].patch.set_facecolor(Estilos[tipo][1])
+    ax[1].patch.set_facecolor(Estilos[tipo][1])
 
     preferencias = {'color':Estilos[tipo][0],'fontproperties':prop}
 
-    plt.suptitle("  Bitcoin: Difficulty\nscale semilogy",fontsize=35,x=0.20,y=1.23,**preferencias)
-    bits,time = leer_data('bits','time_b')
+    plt.suptitle("Bitcoin\n   Difficulty",fontsize=50,y=1.5,x=0.1,**preferencias)
+    bits,time_s = leer_data('bits','time_b')
     difficulty = np.array([bits_to_difficulty(a) for a in bits])
-    time = time_data(time)
+    time = time_data(time_s)
     
-    ax[0].plot(time,difficulty,color=colores[3])
-    ax[0].set_yscale('log')
-    locator = mdates.MonthLocator(interval=17)
+    ax[0].plot(time,difficulty,color=colores[3],zorder=1,linewidth=7)
+    ax[0].plot(time,difficulty,color=colores[2],zorder=1,linewidth=3)
+    ax[0].plot(time,difficulty,color=colores[1],zorder=1,linewidth=0.5)
+    
+
+
+    #ax[0].set_yscale('log')
+    locator = mdates.MonthLocator(interval=24)
     formatter = mdates.DateFormatter('%B\n%Y')
     ax[0].xaxis.set_major_locator(locator)
     ax[0].xaxis.set_major_formatter(formatter)
     ax[0].xaxis.set_tick_params(labelsize=13, rotation=30,length=5,width=3)
     ax[0].tick_params(axis='both',colors=Estilos[tipo][0])
     ax[0].set_ylabel('Difficulty\n', fontsize=23,**preferencias)
+    ax[0].set_title("Scale:'linear'",loc='right',fontsize=15,color='white')
+    ax[0].axhline(difficulty.max(),linestyle='dashed',color='red',linewidth=0.75)
+    ax[1].axhline(difficulty.max(),linestyle='dashed',color='red',linewidth=0.75)
+
+    ax[1].plot(time,difficulty,color=colores[3],zorder=1,linewidth=7)
+    ax[1].plot(time,difficulty,color=colores[2],zorder=1,linewidth=3)
+    ax[1].plot(time,difficulty,color=colores[1],zorder=1,linewidth=0.5)
     
-    # ax.set_yticks([0,10,20,30,40,50])
-    # ytick_labels = ['0','10T','20T','30T','40T','50T']
-    # ax.set_yticklabels(ytick_labels,rotation=25,**preferencias)
-    # ax.yaxis.set_tick_params(labelsize=15)
+
+
+    ax[1].set_yscale('log')
+    locator = mdates.MonthLocator(interval=24)
+    formatter = mdates.DateFormatter('%B\n%Y')
+    ax[1].xaxis.set_major_locator(locator)
+    ax[1].xaxis.set_major_formatter(formatter)
+    ax[1].xaxis.set_tick_params(labelsize=13, rotation=30,length=5,width=3)
+    ax[1].tick_params(axis='both',colors=Estilos[tipo][0])
+    ax[1].set_ylabel('Difficulty\n', fontsize=23,**preferencias)
+
+    ax[1].set_title("Scale:'logy'",loc='right',fontsize=15,color='white')
+       
+    ax[0].set_yticks([0,1e13,2e13,3e13,4e13,5e13])
+    ytick_labels = ['0',r"$1\times10^{13}$",r"$2\times10^{13}$",r"$3\times10^{13}$",r"$4\times10^{13}$",r"$5\times10^{13}$"]
+    ax[0].set_yticklabels(ytick_labels,rotation=23,**preferencias)
+    ax[0].yaxis.set_tick_params(labelsize=15)
+
+    ax[1].tick_params(axis='y',labelsize=15,rotation=25)  # Cambia 20 al tamaño que prefieras
+
+    
 
 
     for spine in ax[0].spines.values():
+        spine.set_color(Estilos[tipo][0])
+    for spine in ax[1].spines.values():
         spine.set_color(Estilos[tipo][0])
 
     if tipo[7:8]=='d':
@@ -70,12 +100,25 @@ def crear_imagen_total(tipo='estilo_dark'):
         tw1 = Image.open('bins/br_d.png')
 
 
-    tw1_resized = tw1.resize((int(tw1.width * 0.5), int(tw1.height * 0.5)))  # Reduce el tamaño de la imagen a la mitad
+    tw1_resized = tw1.resize((int(tw1.width * 0.65), int(tw1.height * 0.65)))  # Reduce el tamaño de la imagen a la mitad
 # Convierte la imagen de PIL a una matriz de numpy para que matplotlib pueda trabajar con ella
     tw1_array = np.array(tw1_resized)
 
-    fig.figimage(tw1_array, xo=1950, yo=900, alpha=0.55, zorder=1)
+
+# Usa el índice para obtener la fecha correspondiente
+    fecha_datetime = datetime.strptime(time_s[np.argmax(difficulty)][:10],'%Y-%m-%d')
+    formatted_date = fecha_datetime.strftime('%d of %B %Y')
+    mss1 = '*Up to block ' + str(last_block())+'\nthe All-Time High\nwas '
+    mss2 = str(round(difficulty.max()/1e12,2))+' T on\n'+str(formatted_date)
+
+    fig.text(0.5,1.15,mss1+mss2, ha='center', va='center', fontsize=20,**preferencias)
+
+    fig.figimage(tw1_array, xo=3100, yo=1000, alpha=0.55, zorder=1)
+    plt.subplots_adjust(wspace=0.25)
     plt.savefig('analisis/resultados/dificultad_total_'+tipo+'.png',bbox_inches='tight',pad_inches=0.5)
+
+
+
 
 
 def crear_imagen_h(tipo='estilo_dark'):
@@ -244,7 +287,11 @@ def crear_imagen_h(tipo='estilo_dark'):
 
 
 
-    ax[0,0].plot(time_1,difficulty_1,color=colores[3],zorder=1)
+    ax[0,0].plot(time_1,difficulty_1,color=colores[3],zorder=1,linewidth=3)
+    ax[0,0].plot(time_1,difficulty_1,color=colores[2],zorder=1,linewidth=2)
+    ax[0,0].plot(time_1,difficulty_1,color=colores[1],zorder=1,linewidth=0.5)
+    
+    
     ax[0,0].set_yscale('log')
     ax[0,1].plot(time_2,difficulty_2,color=colores[3])
     ax[0,1].set_yscale('log')
@@ -288,6 +335,5 @@ def crear_imagen_h(tipo='estilo_dark'):
 
 
 for a in Estilos.keys():
-    #crear_imagen_h(a)
-
+    crear_imagen_h(a)
     crear_imagen_total(a)
