@@ -1,119 +1,238 @@
-# este script construye la gráfica histórica
-# con el número de transacciones por cada bloque
-# asi como el acumulado
-
-
-#librerias a usar
-import os
-import sys
-import pandas as pd
 import numpy as np
+import os
 import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
-from matplotlib.offsetbox import TextArea, DrawingArea, OffsetImage, AnnotationBbox
-import matplotlib.image as mpimg
-from matplotlib import font_manager as fm, rcParams
-import matplotlib.ticker as ticker
+import pandas as pd
 from datetime import datetime, timedelta
-#import locale
-#locale.setlocale(locale.LC_TIME, 'es')
+from app.styles import Estilos, colores
+import matplotlib.dates as mdates
+from matplotlib import font_manager as fm
+from PIL import Image
+#print(os.getcwd())
+os.chdir('/home/richard/TRABAJO/BitcoinResearch/scripts/analisis')
+print(os.getcwd())
 
-
-fpath = os.path.join(r'bins/MonoLisaSimpson-Regular.ttf')
-prop = fm.FontProperties(fname=fpath)
-fname = os.path.split(fpath)[1]
-
-
-# These are the "Tableau 20" colors as RGB.    
-tableau20 = [(31, 119, 180), (174, 199, 232), (255, 127, 14), (255, 187, 120),  
-    (44, 44, 44), (255, 255, 248), (255, 255, 255), (255, 152, 150),  
-    (148, 103, 189), (197, 176, 213), (140, 86, 75), (196, 156, 148),  
-    (227, 119, 194), (247, 182, 210), (127, 127, 127), (199, 199, 199),  
-    (188, 189, 34), (219, 219, 141), (23, 190, 207), (158, 218, 229)] 
-
-for i in range(len(tableau20)):    
-    r, g, b = tableau20[i]    
-    tableau20[i] = (r / 255., g / 255., b / 255.)   
-
-
-
-# Cargamos los datos a usar como arrays
-
-aux         =  np.load('bins/database.npz', allow_pickle='TRUE') 
-n_block     =  aux['n_block']
-time_b        =  aux['time_b']
-size        =  aux['size']
-ntx         =  aux['ntx']
-bits        =  aux['bits']
+aux = np.load('/home/richard/Escritorio/datos/database.npz', allow_pickle='TRUE')
+n_block = aux['n_block']
+time_b = aux['time_b']
+size = aux['size']
+ntx = aux['ntx']
+bits = aux['bits']
 chainwork = aux['chainwork']
 strippedsize = aux['strippedsize']
 weight = aux['weight']
-
-# Las fechas tienen un tratamiento especial.
-# la mejor forma de hacerlo es pasarlos como objetos
-# que matplot interpreta como fechas.
-
-time_b = pd.to_datetime(time_b) #time_b es un array con fechas en str
-#las convertimos a datetime y solo guardamos la fecha (no la hora)
-time_b = time_b.date 
-
-# un nuevo array contendra los valores para q matplotlib maneje fechas.
-# estos valores son números. No se rescatan. 
-num_dates = mdates.date2num(time_b)
-
-#La gráfica deberia reunir a todos los puntos.
-#sin embargo para facilidad tomamos el primero valor 
-#de cada corrección de dificultad
-
-num_dates=num_dates[::2016]
-# se dividen enter mil para mostrar el dato en KB
-ntx=ntx[::2016]
+total = aux['total']
 
 
-### GENERANDO LA IMAGEN
+fpath = os.path.join('/home/richard/TRABAJO/BitcoinResearch/scripts/bins/MonoLisaSimpson.ttf')
+prop = fm.FontProperties(fname=fpath)
+fname = os.path.split(fpath)[1]
 
-fig, ax = plt.subplots(figsize=(33,11),dpi=300)
+#=======NTX VS N_BLOCKS
+def crear_imagen_total(tipo='estilo_dark'):
+    fig, ax = plt.subplots(1,2,figsize=(20,5), dpi=200)
+    preferencias = {'color':Estilos[tipo][0],'fontproperties':prop}
+    indice=np.where((ntx==np.max(ntx)))[0][0]
+    ntx_max=ntx[indice]
 
-#Color del fondo
-fig.patch.set_facecolor(tableau20[4])
-plt.axes().patch.set_facecolor(tableau20[5])
+    fig.patch.set_facecolor(Estilos[tipo][1])
+    ax[0].patch.set_facecolor(Estilos[tipo][1])
+    ax[1].patch.set_facecolor(Estilos[tipo][1])
 
-plt.title(r"$\bf{BITCOIN:\ HISTORIAL\ DEL\ NÚMERO\ DE\ TX}$" "\n" r"$\it{Comparación\ por\ bloque\ y\ por\ acumulado}$",fontsize=40,color=tableau20[6],fontproperties=prop)
-plt.xlabel('Fecha Confirmación del Bloque',fontsize=35,fontproperties=prop,color=tableau20[6])
-plt.ylabel('Número de Tx',fontsize=35,fontproperties=prop,color=tableau20[6])
-plt.gca().yaxis.grid(linestyle='-',linewidth=2,dashes=(5,3))
-plt.xlim(num_dates[0],num_dates[-1])
-plt.ylim(0,1.1*max(ntx))
-ax.set_yticks([], [])
-ax.set_xticks([], [])
-#ytick_labels = ['0 MB','1 MB','2 MB','3 MB','4 MB']
-#plt.yticks([0, 1000, 2000, 3000, 4000],ytick_labels,fontsize=20,fontproperties=prop,color=tableau20[6]);
-
-plt.plot_date(num_dates, ntx, "--", color=tableau20[0], linewidth=1)
-plt.fill_between(num_dates, ntx, facecolor =tableau20[2], alpha = 0.7)
-
-plt.plot_date(num_dates, np.cumsum(ntx)/100, "--", color=tableau20[10], linewidth=8)
+    for spine in ax[0].spines.values():
+        spine.set_color(Estilos[tipo][0])
+    for spine in ax[1].spines.values():
+        spine.set_color(Estilos[tipo][0])
 
 
+    plt.suptitle("Bitcoin\n   Difficulty",fontsize=50,y=1.5,x=0.1,**preferencias)
 
 
-locator = mdates.MonthLocator(interval=11)
-formatter = mdates.DateFormatter('%B\n%Y')
-plt.gca().xaxis.set_major_locator(locator)
-plt.gca().xaxis.set_major_formatter(formatter)
-plt.gca().xaxis.set_tick_params(labelsize=10,rotation=20)
-plt.tick_params(axis='x', colors=tableau20[6])
-
-plt.xticks(fontsize=20,fontproperties=prop);
-plt.yticks(fontsize=20,fontproperties=prop,color=tableau20[6]);
-
-
-tw3 = mpimg.imread('pics/satoshi.png')
-imagebox = OffsetImage(tw3,zoom=0.08)
-firma3 = AnnotationBbox(imagebox,(datetime(2009, 6, 1),250))
-plt.gca().add_artist(firma3)
-plt.annotate('Lanzamiento de\nBitcoin\n9 de enero de 2009 ', xy=(datetime(2009, 2, 3),0),xytext=(datetime(2009, 2, 3),500),fontsize=15,fontproperties=prop,arrowprops=dict(facecolor='red', shrink=0.10))
+    ax[0].scatter(n_block[indice], ntx_max, color ='red',label='Máximo', s=20)
+    ax[0].annotate(f'Max: {ntx_max}', (n_block[indice], ntx_max), xytext=(20, 20), textcoords='offset points',
+                arrowprops=dict(arrowstyle='->', color='red'), fontsize=12, color='red')
+        
+    ax[0].plot(n_block,ntx ,label="number of transactions per block",alpha=0.8)
+    ax[0].set_ylabel('Number of transactions\n', fontsize=23,**preferencias)
+    ax[0].set_xlabel('Number of Blocks\n', fontsize=23,**preferencias)
+    ax[0].axvline(x=210000, color=Estilos[tipo][0], linestyle='--', linewidth=1)
+    ax[0].axvline(x=210000*2, color=Estilos[tipo][0], linestyle='--', linewidth=1)
+    ax[0].axvline(x=210000*3, color=Estilos[tipo][0], linestyle='--', linewidth=1)
+    ax[0].tick_params(axis='both',colors=Estilos[tipo][0])
+    #ax[0].axvline(x=210000*3, color='red', linestyle='--', linewidth=1)
 
 
+    ax[1].scatter(n_block[indice], np.log(ntx_max), color ='red',label='Máximo', s=20)
+    ax[1].annotate(f'Max: {np.log(ntx_max)}', (n_block[indice], np.log(ntx_max)), xytext=(20, 20), textcoords='offset points',
+                arrowprops=dict(arrowstyle='->', color='red'), fontsize=12, color='red')
 
-plt.savefig('pics/ntx.png',bbox_inches='tight')
+    ax[1].plot(n_block,np.log(ntx) ,label="number of transactions per block",alpha=0.8)
+    ax[1].set_ylabel('Number of transactions \n', fontsize=23,**preferencias)
+    ax[1].set_xlabel('Number of Blocks\n', fontsize=23,**preferencias)
+    ax[1].scatter(n_block[indice], np.log(ntx_max), color ='red',label='Máximo', s=20)
+    ax[1].axvline(x=210000, color=Estilos[tipo][0], linestyle='--', linewidth=1)
+    ax[1].axvline(x=210000*2, color=Estilos[tipo][0], linestyle='--', linewidth=1)
+    ax[1].axvline(x=210000*3, color=Estilos[tipo][0], linestyle='--', linewidth=1)
+    ax[1].tick_params(axis='both',colors=Estilos[tipo][0])
+
+    tw1 = Image.open('/home/richard/TRABAJO/BitcoinResearch/scripts/bins/br_w.png')
+    # tw1 = Image.open('bins/br_w.png')
+    tw1_resized = tw1.resize((int(tw1.width * 0.65), int(tw1.height * 0.65)))
+    tw1_array = np.array(tw1_resized)
+    fig.figimage(tw1_array, xo=2800, yo=1000, alpha=0.55, zorder=1)
+    plt.subplots_adjust(wspace=0.25)
+    plt.savefig('analisis/resultados/Numero_de_transacciones_'+tipo+'.png',bbox_inches='tight',pad_inches=0.5)
+    #plt.show()
+
+crear_imagen_total(tipo='estilo_dark')
+
+
+
+
+def crear_imagen_h(tipo='estilo_dark'):
+
+    fig, ax = plt.subplots(2,2,figsize=(13,6), dpi=200)
+
+    fig.patch.set_facecolor(Estilos[tipo][1])
+    ax[0,0].patch.set_facecolor(Estilos[tipo][1])
+    ax[0,1].patch.set_facecolor(Estilos[tipo][1])
+    ax[1,0].patch.set_facecolor(Estilos[tipo][1])
+    ax[1,1].patch.set_facecolor(Estilos[tipo][1])
+
+
+    preferencias = {'color':Estilos[tipo][0],'fontproperties':prop}
+
+    plt.suptitle("Number of blocks\nper Halving",fontsize=35,x=0.20,y=1.23,**preferencias)
+    #ntx,n_block = leer_data('ntx','n_block')
+
+
+    for spine in ax[0,0].spines.values():
+        spine.set_color(Estilos[tipo][0])
+    for spine in ax[0,1].spines.values():
+        spine.set_color(Estilos[tipo][0])
+    for spine in ax[1,0].spines.values():
+        spine.set_color(Estilos[tipo][0])
+    for spine in ax[1,1].spines.values():
+        spine.set_color(Estilos[tipo][0])
+############################3
+    ########
+    hist, edges = np.histogram(ntx[:210000],bins=50)   
+    HIST2=sorted(hist,reverse=True) 
+    e=[]
+    for i in HIST2[:10]:
+        e.append(f'{(i/np.sum(hist))*100:.2f}')
+    labels=[f'{x}%'for x in e]
+
+    ax[0,0].bar(range(0, 10), hist[:10], color=Estilos[tipo][0],edgecolor='black',width=0.4,tick_label=labels,label=labels)
+    ax[0,0].set_ylabel('Block Count\n', fontsize=13,**preferencias)
+    ax[0,0].set_xlabel('Number of Transactions\n', fontsize=13,**preferencias)
+    for i, freq in enumerate(hist[:8]):
+        ax[0,0].text(i, freq, str(freq), ha='center', va='bottom', fontsize=9, color='black', rotation=0)
+
+    # Etiquetas de intervalos en el eje x
+    interval_labels = [f'{int(edges[i])} - {int(edges[i+1])}' for i in range(len(edges)-1)]
+    ax[0,0].set_xticks(range(0,8))
+    ax[0,0].set_xticklabels(interval_labels[:8], rotation=45)
+    ax[0,0].set_ylim(0,185000)
+    
+    legend = ax[0,0].legend(labels[:4],title="4 highest frecuencys", loc='upper right',title_fontsize='6')
+    plt.setp(legend.get_texts(), fontsize=7)
+    legend.get_frame().set_alpha(0.0)
+
+############
+    hist, edges = np.histogram(ntx[210000:2*210000],bins=50)
+    HIST2=sorted(hist,reverse=True)
+    e=[]
+    for i in HIST2[:15]:
+        e.append(f'{(i/np.sum(hist))*100:.2f}')
+    labels=[f'{x}%'for x in e]    
+
+    ax[0,1].bar(range(0, 15), hist[:15], color=Estilos[tipo][0],edgecolor='black',width=0.4,tick_label=labels,label=labels)
+    ax[0,1].set_ylabel('Block Count\n', fontsize=13,**preferencias)
+    ax[0,1].set_xlabel('Number of Transactions\n', fontsize=13,**preferencias)
+    for i, freq in enumerate(hist[:15]):
+        ax[0,1].text(i, freq, str(freq), ha='center', va='bottom', fontsize=9, color='black', rotation=45)
+
+    # Etiquetas de intervalos en el eje x
+    interval_labels = [f'{int(edges[i])} - {int(edges[i+1])}' for i in range(len(edges)-1)]
+    ax[0,1].set_xticks(range(0,15))
+    ax[0,1].set_xticklabels(interval_labels[:15], rotation=45)
+    ax[0,1].set_ylim(0,98000)
+    
+    legend = ax[0,1].legend(labels[:4], title="4 highest frecuencys",loc='upper right',title_fontsize='6')
+    plt.setp(legend.get_texts(), fontsize=7)
+    legend.get_frame().set_alpha(0.0)       
+###################
+    hist, edges = np.histogram(ntx[210000:3*210000],bins=50)
+    HIST2=sorted(hist,reverse=True)
+    e=[]
+    for i in HIST2[:15]:
+        e.append(f'{(i/np.sum(hist))*100:.2f}')
+    labels=[f'{x}%'for x in e]     
+    ax[1,0].bar(range(0, 15), hist[:15], color=Estilos[tipo][0],edgecolor='black',width=0.4,tick_label=labels,label=labels)
+    ax[1,0].set_ylabel('Block Count\n', fontsize=13,**preferencias)
+    ax[1,0].set_xlabel('Number of Transactions\n', fontsize=13,**preferencias)
+    for i, freq in enumerate(hist[:15]):
+        ax[1,0].text(i, freq, str(freq), ha='center', va='bottom', fontsize=9, color='black', rotation=55)
+
+    # Etiquetas de intervalos en el eje x
+    interval_labels = [f'{int(edges[i])} - {int(edges[i+1])}' for i in range(len(edges)-1)]
+    ax[1,0].set_xticks(range(0,15))
+    ax[1,0].set_xticklabels(interval_labels[:15], rotation=45)
+    ax[1,0].set_ylim(0,130000)
+    
+    legend = ax[1,0].legend(labels[:4],title="4 highest frecuencys", loc='upper right',title_fontsize='6')
+    plt.setp(legend.get_texts(), fontsize=7)
+    legend.get_frame().set_alpha(0.0)  
+#######################
+    hist, edges = np.histogram(ntx[3*210000:],bins=50)
+    HIST2=sorted(hist,reverse=True)
+    e=[]
+    for i in HIST2[:35]:
+        e.append(f'{(i/np.sum(hist))*100:.2f}')
+    labels=[f'{x}% 'for x in e]         
+    ax[1,1].bar(range(0, 35), hist[:35], color=Estilos[tipo][0],edgecolor='black',width=0.4,align='edge',tick_label=labels,label=labels)
+    ax[1,1].set_ylabel('Block Count\n', fontsize=13,**preferencias)
+    ax[1,1].set_xlabel('Number of Transactions\n', fontsize=13,**preferencias)
+    for i, freq in enumerate(hist[:35]):
+        ax[1,1].text(i, freq, str(freq), ha='center', va='bottom', fontsize=9, color='black', rotation=75)
+
+    # Etiquetas de intervalos en el eje x
+    xticks_positions = [i for i in range(0, 35, 2)]  # Aquí se muestra una etiqueta cada 2 barras   
+    interval_labels = [f'{int(edges[i])} - {int(edges[i+1])}' for i in range(len(edges)-1)]
+    ax[1,1].set_xticks(xticks_positions)
+    ax[1,1].set_xticklabels([interval_labels[i] for i in xticks_positions], rotation=45)
+    ax[1,1].set_ylim(0,16500)
+    
+    legend = ax[1,1].legend(labels[:4],title="4 highest frecuencys", loc='upper right',title_fontsize='6')
+    plt.setp(legend.get_texts(), fontsize=7)  
+    legend.get_frame().set_alpha(0.0)
+    ax[0,0].set_title("1st Halving\n2009-2012",fontsize=25,loc='left', **preferencias)
+    ax[0,1].set_title("2nd Halving\n2012-2016",fontsize=25,loc='left', **preferencias)
+    ax[1,0].set_title("3rd Halving\n2016-2020",fontsize=25,loc='left', **preferencias)
+    ax[1,1].set_title("4th Halving\n2020-2024",fontsize=25,loc='left', **preferencias)
+
+    
+    #tw1 = Image.open('/home/richard/TRABAJO/BitcoinResearch/scripts/bins/br_d.png')
+    tw1 = Image.open('/home/richard/TRABAJO/BitcoinResearch/scripts/bins/br_w.png')
+
+
+    tw1_resized = tw1.resize((int(tw1.width * 0.5), int(tw1.height * 0.5)))  # Reduce el tamaño de la imagen a la mitad
+ # Convierte la imagen de PIL a una matriz de numpy para que matplotlib pueda trabajar con ella
+    tw1_array = np.array(tw1_resized)
+
+
+
+
+    fig.figimage(tw1_array, xo=1500, yo=1550, alpha=0.55, zorder=1)
+    plt.subplots_adjust(wspace=0.3, hspace=1)
+    
+    plt.savefig('analisis/resultados/Numero_de_transacciones_halv_'+tipo+'.png',bbox_inches='tight',pad_inches=0.5)
+    #plt.show()
+
+
+
+for a in Estilos.keys():
+#    crear_imagen_h(a)    
+    crear_imagen_h(a)    
+
+
