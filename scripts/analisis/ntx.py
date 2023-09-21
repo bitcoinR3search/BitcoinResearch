@@ -8,7 +8,7 @@ import matplotlib.dates as mdates
 from matplotlib import font_manager as fm
 from PIL import Image
 #print(os.getcwd())
-os.chdir('/home/richard/TRABAJO/BitcoinResearch/scripts/analisis')
+os.chdir('/home/richard/TRABAJO/BitcoinResearch/scripts/')
 print(os.getcwd())
 
 aux = np.load('/home/richard/Escritorio/datos/database.npz', allow_pickle='TRUE')
@@ -86,8 +86,6 @@ def crear_imagen_total(tipo='estilo_dark'):
 crear_imagen_total(tipo='estilo_dark')
 
 
-
-
 def crear_imagen_h(tipo='estilo_dark'):
 
     fig, ax = plt.subplots(2,2,figsize=(13,6), dpi=200)
@@ -113,99 +111,83 @@ def crear_imagen_h(tipo='estilo_dark'):
         spine.set_color(Estilos[tipo][0])
     for spine in ax[1,1].spines.values():
         spine.set_color(Estilos[tipo][0])
-############################3
+############################
     ########
-    hist, edges = np.histogram(ntx[:210000],bins=50)   
-    HIST2=sorted(hist,reverse=True) 
-    e=[]
-    for i in HIST2[:10]:
-        e.append(f'{(i/np.sum(hist))*100:.2f}')
-    labels=[f'{x}%'for x in e]
-
-    ax[0,0].bar(range(0, 10), hist[:10], color=Estilos[tipo][0],edgecolor='black',width=0.4,tick_label=labels,label=labels)
-    ax[0,0].set_ylabel('Block Count\n', fontsize=13,**preferencias)
-    ax[0,0].set_xlabel('Number of Transactions\n', fontsize=13,**preferencias)
-    for i, freq in enumerate(hist[:8]):
-        ax[0,0].text(i, freq, str(freq), ha='center', va='bottom', fontsize=9, color='black', rotation=0)
-
-    # Etiquetas de intervalos en el eje x
-    interval_labels = [f'{int(edges[i])} - {int(edges[i+1])}' for i in range(len(edges)-1)]
-    ax[0,0].set_xticks(range(0,8))
-    ax[0,0].set_xticklabels(interval_labels[:8], rotation=45)
-    ax[0,0].set_ylim(0,185000)
+    hist, edges = np.histogram(ntx[:210000],bins=50)
     
-    legend = ax[0,0].legend(labels[:4],title="4 highest frecuencys", loc='upper right',title_fontsize='6')
-    plt.setp(legend.get_texts(), fontsize=7)
-    legend.get_frame().set_alpha(0.0)
+    top_10_indices = np.argpartition(hist, -5)[-5:]
+    
+    ax[0, 0].bar(range(0,10), hist[:10], color=Estilos[tipo][0], edgecolor='black', width=0.4, align='edge')
+    
+    for i in top_10_indices:
+        freq = hist[i]
+        label = f'{(freq / np.sum(hist)) * 100:.2f}%'
+        ax[0, 0].text(i, freq, label, ha='center', va='bottom', fontsize=9, color=Estilos[tipo][0], rotation=0)
 
-############
+    
+    xticks_positions = [i for i in range(0, 10)] 
+    interval_labels = [f'{int(edges[i])} - {int(edges[i+1])}' for i in range(len(edges)-1)]
+    ax[0, 0].set_xticks(xticks_positions)
+    ax[0, 0].set_xticklabels([interval_labels[i] for i in xticks_positions], color=Estilos[tipo][0], rotation=45)
+    ax[0, 0].tick_params(axis='y', colors=Estilos[tipo][0])
+    ax[0, 0].set_ylim(0, 185000)
+#________________________
     hist, edges = np.histogram(ntx[210000:2*210000],bins=50)
-    HIST2=sorted(hist,reverse=True)
-    e=[]
-    for i in HIST2[:15]:
-        e.append(f'{(i/np.sum(hist))*100:.2f}')
-    labels=[f'{x}%'for x in e]    
-
-    ax[0,1].bar(range(0, 15), hist[:15], color=Estilos[tipo][0],edgecolor='black',width=0.4,tick_label=labels,label=labels)
-    ax[0,1].set_ylabel('Block Count\n', fontsize=13,**preferencias)
-    ax[0,1].set_xlabel('Number of Transactions\n', fontsize=13,**preferencias)
-    for i, freq in enumerate(hist[:15]):
-        ax[0,1].text(i, freq, str(freq), ha='center', va='bottom', fontsize=9, color='black', rotation=45)
-
-    # Etiquetas de intervalos en el eje x
-    interval_labels = [f'{int(edges[i])} - {int(edges[i+1])}' for i in range(len(edges)-1)]
-    ax[0,1].set_xticks(range(0,15))
-    ax[0,1].set_xticklabels(interval_labels[:15], rotation=45)
-    ax[0,1].set_ylim(0,98000)
     
-    legend = ax[0,1].legend(labels[:4], title="4 highest frecuencys",loc='upper right',title_fontsize='6')
-    plt.setp(legend.get_texts(), fontsize=7)
-    legend.get_frame().set_alpha(0.0)       
-###################
-    hist, edges = np.histogram(ntx[210000:3*210000],bins=50)
-    HIST2=sorted(hist,reverse=True)
-    e=[]
-    for i in HIST2[:15]:
-        e.append(f'{(i/np.sum(hist))*100:.2f}')
-    labels=[f'{x}%'for x in e]     
-    ax[1,0].bar(range(0, 15), hist[:15], color=Estilos[tipo][0],edgecolor='black',width=0.4,tick_label=labels,label=labels)
-    ax[1,0].set_ylabel('Block Count\n', fontsize=13,**preferencias)
-    ax[1,0].set_xlabel('Number of Transactions\n', fontsize=13,**preferencias)
-    for i, freq in enumerate(hist[:15]):
-        ax[1,0].text(i, freq, str(freq), ha='center', va='bottom', fontsize=9, color='black', rotation=55)
-
-    # Etiquetas de intervalos en el eje x
-    interval_labels = [f'{int(edges[i])} - {int(edges[i+1])}' for i in range(len(edges)-1)]
-    ax[1,0].set_xticks(range(0,15))
-    ax[1,0].set_xticklabels(interval_labels[:15], rotation=45)
-    ax[1,0].set_ylim(0,130000)
+    top_10_indices = np.argpartition(hist, -5)[-5:]
     
-    legend = ax[1,0].legend(labels[:4],title="4 highest frecuencys", loc='upper right',title_fontsize='6')
-    plt.setp(legend.get_texts(), fontsize=7)
-    legend.get_frame().set_alpha(0.0)  
-#######################
-    hist, edges = np.histogram(ntx[3*210000:],bins=50)
-    HIST2=sorted(hist,reverse=True)
-    e=[]
-    for i in HIST2[:35]:
-        e.append(f'{(i/np.sum(hist))*100:.2f}')
-    labels=[f'{x}% 'for x in e]         
-    ax[1,1].bar(range(0, 35), hist[:35], color=Estilos[tipo][0],edgecolor='black',width=0.4,align='edge',tick_label=labels,label=labels)
-    ax[1,1].set_ylabel('Block Count\n', fontsize=13,**preferencias)
-    ax[1,1].set_xlabel('Number of Transactions\n', fontsize=13,**preferencias)
-    for i, freq in enumerate(hist[:35]):
-        ax[1,1].text(i, freq, str(freq), ha='center', va='bottom', fontsize=9, color='black', rotation=75)
-
-    # Etiquetas de intervalos en el eje x
-    xticks_positions = [i for i in range(0, 35, 2)]  # Aquí se muestra una etiqueta cada 2 barras   
-    interval_labels = [f'{int(edges[i])} - {int(edges[i+1])}' for i in range(len(edges)-1)]
-    ax[1,1].set_xticks(xticks_positions)
-    ax[1,1].set_xticklabels([interval_labels[i] for i in xticks_positions], rotation=45)
-    ax[1,1].set_ylim(0,16500)
+    ax[0, 1].bar(range(0,15), hist[:15], color=Estilos[tipo][0], edgecolor='black', width=0.4, align='edge')
     
-    legend = ax[1,1].legend(labels[:4],title="4 highest frecuencys", loc='upper right',title_fontsize='6')
-    plt.setp(legend.get_texts(), fontsize=7)  
-    legend.get_frame().set_alpha(0.0)
+    for i in top_10_indices:
+        freq = hist[i]
+        label = f'{(freq / np.sum(hist)) * 100:.2f}%'
+        ax[0, 1].text(i, freq, label, ha='center', va='bottom', fontsize=9, color=Estilos[tipo][0], rotation=45)
+
+    xticks_positions = [i for i in range(0, 15)] 
+    interval_labels = [f'{int(edges[i])} - {int(edges[i+1])}' for i in range(len(edges)-1)]
+    ax[0, 1].set_xticks(xticks_positions)
+    ax[0, 1].set_xticklabels([interval_labels[i] for i in xticks_positions], color=Estilos[tipo][0], rotation=45)
+    ax[0, 1].tick_params(axis='y', colors=Estilos[tipo][0])
+    ax[0, 1].set_ylim(0, 98000)
+#_______________________
+    hist, edges = np.histogram(ntx[2*210000:3*210000],bins=50)
+    
+    top_10_indices = np.argpartition(hist, -5)[-5:]
+    
+    ax[1, 0].bar(range(0, 35), hist[:35], color=Estilos[tipo][0], edgecolor='black', width=0.4, align='edge')
+
+    for i in top_10_indices:
+        freq = hist[i]
+        label = f'{(freq / np.sum(hist)) * 100:.2f}%'
+        ax[1, 0].text(i, freq, label, ha='center', va='bottom', fontsize=9, color=Estilos[tipo][0], rotation=75)
+
+    
+    xticks_positions = [i for i in range(0, 35, 2)]  
+    interval_labels = [f'{int(edges[i])} - {int(edges[i+1])}' for i in range(len(edges)-1)]
+    ax[1, 0].set_xticks(xticks_positions)
+    ax[1, 0].set_xticklabels([interval_labels[i] for i in xticks_positions], color=Estilos[tipo][0], rotation=45)
+    ax[1, 0].tick_params(axis='y', colors=Estilos[tipo][0])
+    ax[1, 0].set_ylim(0, 15000)
+    #=================================
+    hist, edges = np.histogram(ntx[3*210000:], bins=50)
+    
+    top_10_indices = np.argpartition(hist, -5)[-5:]
+    
+    ax[1, 1].bar(range(0,35), hist[:35], color=Estilos[tipo][0], edgecolor='black', width=0.4, align='edge')
+
+    for i in top_10_indices:
+        freq = hist[i]
+        label = f'{(freq / np.sum(hist)) * 100:.2f}%'
+        ax[1, 1].text(i, freq, label, ha='center', va='bottom', fontsize=9, color=Estilos[tipo][0], rotation=75)
+
+    xticks_positions = [i for i in range(0, 35, 2)]  
+    interval_labels = [f'{int(edges[i])} - {int(edges[i+1])}' for i in range(len(edges)-1)]
+    ax[1, 1].set_xticks(xticks_positions)
+    ax[1, 1].set_xticklabels([interval_labels[i] for i in xticks_positions], color=Estilos[tipo][0], rotation=45)
+    ax[1, 1].tick_params(axis='y', colors=Estilos[tipo][0])
+    ax[1, 1].set_ylim(0, 16500)
+    #====================================
+    
     ax[0,0].set_title("1st Halving\n2009-2012",fontsize=25,loc='left', **preferencias)
     ax[0,1].set_title("2nd Halving\n2012-2016",fontsize=25,loc='left', **preferencias)
     ax[1,0].set_title("3rd Halving\n2016-2020",fontsize=25,loc='left', **preferencias)
@@ -223,7 +205,7 @@ def crear_imagen_h(tipo='estilo_dark'):
 
 
 
-    fig.figimage(tw1_array, xo=1500, yo=1550, alpha=0.55, zorder=1)
+    fig.figimage(tw1_array, xo=1500, yo=1000, alpha=0.55, zorder=1)
     plt.subplots_adjust(wspace=0.3, hspace=1)
     
     plt.savefig('analisis/resultados/Numero_de_transacciones_halv_'+tipo+'.png',bbox_inches='tight',pad_inches=0.5)
@@ -234,5 +216,3 @@ def crear_imagen_h(tipo='estilo_dark'):
 for a in Estilos.keys():
 #    crear_imagen_h(a)    
     crear_imagen_h(a)    
-
-
