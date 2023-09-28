@@ -19,7 +19,7 @@ rpc_password = os.getenv('pass')
 #p = RawProxy(service_url='http://%s:%s@nodeone.local:8332' %
 #             (rpc_user, rpc_password))
 
-p = RawProxy(service_url='http://%s:%s@192.168.1.29:18332' %
+p = RawProxy(service_url='http://%s:%s@192.168.1.4:8332' %
              (rpc_user, rpc_password))
 
 
