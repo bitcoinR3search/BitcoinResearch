@@ -51,7 +51,7 @@ def crear_imagen_total(tipo='estilo_dark'):
     ax[0].annotate(f'Max: {ntx_max}', (n_block[indice], ntx_max), xytext=(20, 20), textcoords='offset points',
                 arrowprops=dict(arrowstyle='->', color='red'), fontsize=12, color='red')
         
-    ax[0].plot(n_block,ntx ,label="number of transactions per block",alpha=0.8)
+    ax[0].plot(n_block,ntx ,label="number of transactions per block",alpha=0.8,color=colores[3])
     ax[0].set_ylabel('Number of transactions\n', fontsize=23,**preferencias)
     ax[0].set_xlabel('Number of Blocks\n', fontsize=23,**preferencias)
     ax[0].axvline(x=210000, color=Estilos[tipo][0], linestyle='--', linewidth=1)
@@ -65,7 +65,7 @@ def crear_imagen_total(tipo='estilo_dark'):
     ax[1].annotate(f'Max: {np.log(ntx_max)}', (n_block[indice], np.log(ntx_max)), xytext=(20, 20), textcoords='offset points',
                 arrowprops=dict(arrowstyle='->', color='red'), fontsize=12, color='red')
 
-    ax[1].plot(n_block,np.log(ntx) ,label="number of transactions per block",alpha=0.8)
+    ax[1].plot(n_block,np.log(ntx) ,label="number of transactions per block",alpha=0.8,color=colores[3])
     ax[1].set_ylabel('Number of transactions \n', fontsize=23,**preferencias)
     ax[1].set_xlabel('Number of Blocks\n', fontsize=23,**preferencias)
     ax[1].scatter(n_block[indice], np.log(ntx_max), color ='red',label='Máximo', s=20)

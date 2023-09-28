@@ -45,8 +45,8 @@ def crear_imagen_total(tipo='estilo_dark'):
     time = time_data(time_s)
     
     ax[0].plot(time,difficulty,color=colores[3],zorder=1,linewidth=7)
-    ax[0].plot(time,difficulty,color=colores[2],zorder=1,linewidth=3)
-    ax[0].plot(time,difficulty,color=colores[1],zorder=1,linewidth=0.5)
+    #ax[0].plot(time,difficulty,color=colores[2],zorder=1,linewidth=3)
+    #ax[0].plot(time,difficulty,color=colores[1],zorder=1,linewidth=0.5)
     
 
 
@@ -63,8 +63,8 @@ def crear_imagen_total(tipo='estilo_dark'):
     ax[1].axhline(difficulty.max(),linestyle='dashed',color='red',linewidth=0.75)
 
     ax[1].plot(time,difficulty,color=colores[3],zorder=1,linewidth=7)
-    ax[1].plot(time,difficulty,color=colores[2],zorder=1,linewidth=3)
-    ax[1].plot(time,difficulty,color=colores[1],zorder=1,linewidth=0.5)
+    #ax[1].plot(time,difficulty,color=colores[2],zorder=1,linewidth=3)
+    #ax[1].plot(time,difficulty,color=colores[1],zorder=1,linewidth=0.5)
     
 
 
