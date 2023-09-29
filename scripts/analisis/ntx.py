@@ -4,26 +4,13 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from datetime import datetime, timedelta
 from app.styles import Estilos, colores
+from app.readata import leer_data
 import matplotlib.dates as mdates
 from matplotlib import font_manager as fm
 from PIL import Image
-#print(os.getcwd())
-os.chdir('/home/richard/TRABAJO/BitcoinResearch/scripts/')
-print(os.getcwd())
-
-aux = np.load('/home/richard/Escritorio/datos/database.npz', allow_pickle='TRUE')
-n_block = aux['n_block']
-time_b = aux['time_b']
-size = aux['size']
-ntx = aux['ntx']
-bits = aux['bits']
-chainwork = aux['chainwork']
-strippedsize = aux['strippedsize']
-weight = aux['weight']
-total = aux['total']
 
 
-fpath = os.path.join('/home/richard/TRABAJO/BitcoinResearch/scripts/bins/MonoLisaSimpson.ttf')
+fpath = os.path.join('bins/MonoLisaSimpson.ttf')
 prop = fm.FontProperties(fname=fpath)
 fname = os.path.split(fpath)[1]
 
@@ -31,9 +18,9 @@ fname = os.path.split(fpath)[1]
 def crear_imagen_total(tipo='estilo_dark'):
     fig, ax = plt.subplots(1,2,figsize=(20,5), dpi=200)
     preferencias = {'color':Estilos[tipo][0],'fontproperties':prop}
+    ntx,n_block = leer_data('ntx','n_block')
     indice=np.where((ntx==np.max(ntx)))[0][0]
     ntx_max=ntx[indice]
-
     fig.patch.set_facecolor(Estilos[tipo][1])
     ax[0].patch.set_facecolor(Estilos[tipo][1])
     ax[1].patch.set_facecolor(Estilos[tipo][1])
@@ -74,22 +61,22 @@ def crear_imagen_total(tipo='estilo_dark'):
     ax[1].axvline(x=210000*3, color=Estilos[tipo][0], linestyle='--', linewidth=1)
     ax[1].tick_params(axis='both',colors=Estilos[tipo][0])
 
-    tw1 = Image.open('/home/richard/TRABAJO/BitcoinResearch/scripts/bins/br_w.png')
-    # tw1 = Image.open('bins/br_w.png')
+    if tipo[7:8]=='d':
+        tw1 = Image.open('bins/br_w.png')
+    else:
+        tw1 = Image.open('bins/br_d.png')
     tw1_resized = tw1.resize((int(tw1.width * 0.65), int(tw1.height * 0.65)))
     tw1_array = np.array(tw1_resized)
-    fig.figimage(tw1_array, xo=2800, yo=1000, alpha=0.55, zorder=1)
+    fig.figimage(tw1_array, xo=2600, yo=1100, alpha=0.55, zorder=1)
     plt.subplots_adjust(wspace=0.25)
     plt.savefig('analisis/resultados/Numero_de_transacciones_'+tipo+'.png',bbox_inches='tight',pad_inches=0.5)
     #plt.show()
-
-crear_imagen_total(tipo='estilo_dark')
 
 
 def crear_imagen_h(tipo='estilo_dark'):
 
     fig, ax = plt.subplots(2,2,figsize=(13,6), dpi=200)
-
+    ntx,n_block = leer_data('ntx','n_block')
     fig.patch.set_facecolor(Estilos[tipo][1])
     ax[0,0].patch.set_facecolor(Estilos[tipo][1])
     ax[0,1].patch.set_facecolor(Estilos[tipo][1])
@@ -194,25 +181,20 @@ def crear_imagen_h(tipo='estilo_dark'):
     ax[1,1].set_title("4th Halving\n2020-2024",fontsize=25,loc='left', **preferencias)
 
     
-    #tw1 = Image.open('/home/richard/TRABAJO/BitcoinResearch/scripts/bins/br_d.png')
-    tw1 = Image.open('/home/richard/TRABAJO/BitcoinResearch/scripts/bins/br_w.png')
-
+    if tipo[7:8]=='d':
+        tw1 = Image.open('bins/br_w.png')
+    else:
+        tw1 = Image.open('bins/br_d.png')
 
     tw1_resized = tw1.resize((int(tw1.width * 0.5), int(tw1.height * 0.5)))  # Reduce el tamaño de la imagen a la mitad
  # Convierte la imagen de PIL a una matriz de numpy para que matplotlib pueda trabajar con ella
     tw1_array = np.array(tw1_resized)
 
-
-
-
-    fig.figimage(tw1_array, xo=1500, yo=1000, alpha=0.55, zorder=1)
+    fig.figimage(tw1_array, xo=1500, yo=1150, alpha=0.55, zorder=1)
     plt.subplots_adjust(wspace=0.3, hspace=1)
-    
     plt.savefig('analisis/resultados/Numero_de_transacciones_halv_'+tipo+'.png',bbox_inches='tight',pad_inches=0.5)
-    #plt.show()
-
 
 
 for a in Estilos.keys():
-#    crear_imagen_h(a)    
-    crear_imagen_h(a)    
+    crear_imagen_h(a)
+    crear_imagen_total(a)
