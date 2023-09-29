@@ -1,3 +1,4 @@
+import socket
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
 
@@ -5,10 +6,15 @@ app = FastAPI()
 
 @app.middleware("http")
 async def check_ip_middleware(request: Request, call_next):
-    client_host = request.client.host
-    allowed_host = "nodeone.local"  # Sustituye esto con la resolución correcta si es necesario
-    if client_host != allowed_host:
+    client_ip = request.client.host
+    try:
+        allowed_ip = socket.gethostbyname('nodeone.local')
+    except socket.gaierror:
+        return JSONResponse(content={"error": "Hostname resolution failed"}, status_code=500)
+    
+    if client_ip != allowed_ip:
         return JSONResponse(content={"error": "Forbidden"}, status_code=403)
+    
     response = await call_next(request)
     return response
 
