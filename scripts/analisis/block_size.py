@@ -15,7 +15,6 @@ from PIL import Image
 from datetime import datetime
 from app.styles import Estilos, colores
 from app.readata import leer_data,time_data,estado_data
-from app.readata import leer_data,time_data,estado_data
 
 # Cambiar la tipografia
 fpath = os.path.join('bins/MonoLisaSimpson.ttf')
