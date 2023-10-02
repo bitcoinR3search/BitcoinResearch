@@ -1,5 +1,4 @@
 /scripts/bins/.env
-/scripts/bins/br*
 /scripts/bins/database.npz
 /scripts/bins/MonoLisaSimpson.ttf
 
