@@ -20,7 +20,7 @@ from PIL import Image
 from app.styles import Estilos, colores
 from app.readata import bitcoins_emitidos,punto_halv, last_block
 
-os.chdir('D:\proyectos\BitcoinResearch\BitcoinResearch\scripts')
+#os.chdir('D:\proyectos\BitcoinResearch\BitcoinResearch\scripts')
 # Cambiar la tipografia
 fpath = os.path.join('bins/MonoLisaSimpson.ttf')
 prop = fm.FontProperties(fname=fpath)

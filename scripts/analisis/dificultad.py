@@ -47,7 +47,7 @@ def crear_imagen_total(tipo='estilo_dark'):
     if tipo[7:8]=='d':
         ax[0].plot(time,difficulty,color=colores[3],zorder=1,linewidth=3)
     else:
-        ax[0].plot(time,difficulty,color=colores[8],zorder=1,linewidth=3)
+        ax[0].plot(time,difficulty,color=colores[10],zorder=1,linewidth=3)
 
     ##ax[0].plot(time,difficulty,color=colores[8],zorder=1,linewidth=7)
     #ax[0].plot(time,difficulty,color=colores[2],zorder=1,linewidth=3)
@@ -70,9 +70,9 @@ def crear_imagen_total(tipo='estilo_dark'):
     #ax[1].plot(time,difficulty,color=colores[3],zorder=1,linewidth=7)
 
     if tipo[7:8]=='d':
-        ax[1].plot(time,difficulty,color=colores[3],zorder=1,linewidth=7)
+        ax[1].plot(time,difficulty,color=colores[3],zorder=1,linewidth=3)
     else:
-        ax[1].plot(time,difficulty,color=colores[8],zorder=1,linewidth=7)
+        ax[1].plot(time,difficulty,color=colores[10],zorder=1,linewidth=3)
     #ax[1].plot(time,difficulty,color=colores[8],zorder=1,linewidth=7)
     #ax[1].plot(time,difficulty,color=colores[2],zorder=1,linewidth=3)
     #ax[1].plot(time,difficulty,color=colores[1],zorder=1,linewidth=0.5)
@@ -204,7 +204,7 @@ def crear_imagen_h(tipo='estilo_dark'):
     date = datetime(2012,1, 20)
     x_value = mdates.date2num(date) 
     ax[0,0].text(x_value,1e4, 'FPGA\nMiner', color=Estilos[tipo][0], ha='right', va='center',size=13)
-
+    
 
     locator2 = mdates.MonthLocator(interval=8)
     formatter2 = mdates.DateFormatter('%B\n%Y')
@@ -297,9 +297,15 @@ def crear_imagen_h(tipo='estilo_dark'):
     ax[1,1].text(x_value,20,'ASIC\n5nm', color=Estilos[tipo][0], ha='right', va='center',size=13)
 
     if tipo[7:8]=='d':
-        ax[0,0].plot(time_1,difficulty_1,color=colores[3],zorder=1,linewidth=3)
+        ax[0,0].plot(time_1,difficulty_1,color=colores[3],zorder=1)#,linewidth=1)
+        ax[0,1].plot(time_2,difficulty_2,color=colores[3])
+        ax[1,0].plot(time_3,difficulty_3,color=colores[3])
+        ax[1,1].plot(time_4,difficulty_4,color=colores[3])
     else:
-        ax[0,0].plot(time_1,difficulty_1,color=colores[8],zorder=1,linewidth=3)
+        ax[0,0].plot(time_1,difficulty_1,color=colores[10],zorder=1)#,linewidth=1)
+        ax[0,1].plot(time_2,difficulty_2,color=colores[10])
+        ax[1,0].plot(time_3,difficulty_3,color=colores[10])
+        ax[1,1].plot(time_4,difficulty_4,color=colores[10])
 
     #ax[0,0].plot(time_1,difficulty_1,color=colores[3],zorder=1,linewidth=3)
     #ax[0,0].plot(time_1,difficulty_1,color=colores[2],zorder=1,linewidth=2)
@@ -307,11 +313,11 @@ def crear_imagen_h(tipo='estilo_dark'):
     
     
     ax[0,0].set_yscale('log')
-    ax[0,1].plot(time_2,difficulty_2,color=colores[3])
+    ####ax[0,1].plot(time_2,difficulty_2,color=colores[3])
     ax[0,1].set_yscale('log')
-    ax[1,0].plot(time_3,difficulty_3,color=colores[3])
+    ####ax[1,0].plot(time_3,difficulty_3,color=colores[3])
     #ax[1,0].set_yscale('log')
-    ax[1,1].plot(time_4,difficulty_4,color=colores[3])
+    ####ax[1,1].plot(time_4,difficulty_4,color=colores[3])
     #ax[1,1].set_yscale('log')
 
     ax[0,0].set_title("1st Halving\n2009-2012                       scale:'logy'",fontsize=25,loc='left', **preferencias)
