@@ -60,7 +60,5 @@ if __name__ == '__main__':
     import uvicorn
 
     # Antes de empezar a lanzar el servidor, actualiza la base de datos
-    
-
 
     uvicorn.run(app, host='0.0.0.0', port=8000)
