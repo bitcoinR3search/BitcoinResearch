@@ -143,5 +143,6 @@ def crear_imagen(tipo='estilo_dark'):
 
     plt.savefig('analisis/resultados/supply_btc_'+tipo+'.png',bbox_inches='tight',pad_inches=0.75)
 
-for a in Estilos.keys():
-    crear_imagen(a)
+# for a in Estilos.keys():
+#     crear_imagen(a)
+crear_imagen('estilo_dark')

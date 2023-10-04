@@ -65,8 +65,8 @@ def crear_imagen(tipo='estilo_dark'):
     date = datetime(2017, 7, 24)
     x_value = mdates.date2num(date) 
     ax.scatter(x_value,2.5,s=350,color=colores[3])
-    ax.scatter(x_value,2.5,s=100,color=colores[4])
-    ax.scatter(x_value,2.5,s=5,color=colores[0])
+    ax.scatter(x_value,2.5,s=100,color=colores[8])
+    ax.scatter(x_value,2.5,s=5,color=colores[5])
     ax.vlines(x_value,0,2.275, colors=Estilos[tipo][0], linestyles='dashed')
     ax.text(x_value,3.3, 'Segwit\nactivate in\nBlock 481824', color=Estilos[tipo][0], ha='right', va='center',size=15)
 
@@ -75,8 +75,8 @@ def crear_imagen(tipo='estilo_dark'):
     date = datetime(2022, 12, 14)
     x_value = mdates.date2num(date) 
     ax.scatter(x_value,5.5,s=350,color=colores[3])
-    ax.scatter(x_value,5.5,s=100,color=colores[4])
-    ax.scatter(x_value,5.5,s=5,color=colores[0])
+    ax.scatter(x_value,5.5,s=100,color=colores[8])
+    ax.scatter(x_value,5.5,s=5,color=colores[5])
     ax.vlines(x_value,0,5.28, colors=Estilos[tipo][0], linestyles='dashed')
     ax.text(x_value,6.2, 'Ordinals\nBRC-20', color=Estilos[tipo][0], ha='right', va='center',size=15)
 
@@ -84,8 +84,8 @@ def crear_imagen(tipo='estilo_dark'):
     date = datetime(2021, 11, 14)
     x_value = mdates.date2num(date) 
     ax.scatter(x_value,4.5,s=350,color=colores[3])
-    ax.scatter(x_value,4.5,s=100,color=colores[4])
-    ax.scatter(x_value,4.5,s=5,color=colores[0])
+    ax.scatter(x_value,4.5,s=100,color=colores[8])
+    ax.scatter(x_value,4.5,s=5,color=colores[5])
     ax.vlines(x_value,0,4.25, colors=Estilos[tipo][0], linestyles='dashed')
     
     date = datetime(2021, 8, 1)
@@ -95,8 +95,8 @@ def crear_imagen(tipo='estilo_dark'):
     date = datetime(2010, 5, 22)
     x_value = mdates.date2num(date) 
     ax.scatter(x_value,1.5,s=350,color=colores[3])
-    ax.scatter(x_value,1.5,s=100,color=colores[4])
-    ax.scatter(x_value,1.5,s=5,color=colores[0])
+    ax.scatter(x_value,1.5,s=100,color=colores[8])
+    ax.scatter(x_value,1.5,s=5,color=colores[5])
     ax.vlines(x_value,0,1.28, colors=Estilos[tipo][0], linestyles='dashed')
     ax.text(x_value,2.2,'Bitcoin\nPizza Day', color=Estilos[tipo][0], ha='right', va='center',size=15)
     
@@ -135,6 +135,6 @@ def crear_imagen(tipo='estilo_dark'):
     fig.figimage(tw1_array, xo=2400, yo=1000, alpha=0.55, zorder=1)
     plt.savefig('analisis/resultados/block_size_'+tipo+'.png',bbox_inches='tight',pad_inches=0.5)
 
-
-for a in Estilos.keys():
-    crear_imagen(a)
+crear_imagen('estilo_dark')
+# for a in Estilos.keys():
+#     crear_imagen(a)

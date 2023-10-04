@@ -211,6 +211,8 @@ def crear_imagen_h(tipo='estilo_dark'):
     plt.savefig('analisis/resultados/Numero_de_transacciones_halv_'+tipo+'.png',bbox_inches='tight',pad_inches=0.5)
 
 
-for a in Estilos.keys():
-    crear_imagen_h(a)
-    crear_imagen_total(a)
+# for a in Estilos.keys():
+#     crear_imagen_h(a)
+#     crear_imagen_total(a)
+crear_imagen_total('estilo_dark')
+crear_imagen_h('estilo_dark')
