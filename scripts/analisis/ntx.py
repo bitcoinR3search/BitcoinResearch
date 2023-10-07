@@ -20,7 +20,7 @@ def crear_imagen_total(tipo='estilo_dark'):
     preferencias = {'color':Estilos[tipo][0],'fontproperties':prop}
     ntx,n_block = leer_data('ntx','n_block')
     indice=np.where((ntx==np.max(ntx)))[0][0]
-    ntx_max=ntx[indice]
+    ntx_max=int(ntx[indice])
     fig.patch.set_facecolor(Estilos[tipo][1])
     ax[0].patch.set_facecolor(Estilos[tipo][1])
     ax[1].patch.set_facecolor(Estilos[tipo][1])
@@ -31,7 +31,7 @@ def crear_imagen_total(tipo='estilo_dark'):
         spine.set_color(Estilos[tipo][0])
 
 
-    plt.suptitle("Bitcoin\n   Difficulty",fontsize=50,y=1.5,x=0.1,**preferencias)
+    plt.suptitle("Number of\n   Transactions",fontsize=50,y=1.5,x=0.1,**preferencias)
     if tipo[7:8]=='d':        
         ax[0].plot(n_block,ntx ,label="number of transactions per block",alpha=0.8,color=colores[3])
         ax[0].scatter(n_block[indice], ntx_max, color ='white',label='Máximo', s=40)
@@ -40,29 +40,39 @@ def crear_imagen_total(tipo='estilo_dark'):
         
         ax[1].plot(n_block,np.log(ntx) ,label="number of transactions per block",alpha=0.8,color=colores[3])
         ax[1].scatter(n_block[indice], np.log(ntx_max), color ='white',label='Máximo', s=40)
-        ax[1].annotate(f'Max: {np.log(ntx_max)}', (n_block[indice], np.log(ntx_max)), xytext=(20, 30), textcoords='offset points',
+        ax[1].annotate(f'Max: {np.log(float(ntx_max)):.2f}', (n_block[indice], np.log(ntx_max)), xytext=(20, 30), textcoords='offset points',
                 arrowprops=dict(arrowstyle='->', color='white', linewidth=3), fontsize=18, color='white')
     else:        
         ax[0].plot(n_block,ntx ,label="number of transactions per block",alpha=0.8,color=colores[10])
         ax[0].scatter(n_block[indice], ntx_max, color ='black',label='Máximo', s=40)
-        ax[0].annotate(f'Max: {ntx_max}', (n_block[indice], ntx_max), xytext=(20, 30), textcoords='offset points',
+        ax[0].annotate(f'Max: {int(ntx_max)}', (n_block[indice], ntx_max), xytext=(20, 30), textcoords='offset points',
                 arrowprops=dict(arrowstyle='->', color='black', linewidth=3), fontsize=18, color='black')
 
+        #VALOR_MAX="{:.2f}".format(np.log(ntx.max))
+        
         ax[1].plot(n_block,np.log(ntx) ,label="number of transactions per block",alpha=0.8,color=colores[10])
-        ax[1].scatter(n_block[indice], np.log(ntx_max), color ='black',label='Máximo', s=40)
-        ax[1].annotate(f'Max: {np.log(ntx_max)}', (n_block[indice], np.log(ntx_max)), xytext=(20, 30), textcoords='offset points',
-                arrowprops=dict(arrowstyle='->', color='black', linewidth=3), fontsize=18, color='black')
-
+        ax[1].scatter(n_block[indice], np.log(ntx_max), color ='black',label='Máximo', s=40)        
+        ax[1].annotate(f'Max: {np.log(float(ntx_max)):.2f}', (n_block[indice], np.log(ntx_max)), xytext=(20, 30), textcoords='offset points',
+                 arrowprops=dict(arrowstyle='->', color='black', linewidth=3), fontsize=18, color='black')
+        
 
     
         
-    
+    ax[0].text(n_block[210000*1],10000,'1st Halving', color=Estilos[tipo][0], ha='right', va='center',size=15)
+    ax[0].text(n_block[210000*2],10000,'2nd Halving', color=Estilos[tipo][0], ha='right', va='center',size=15)
+    ax[0].text(n_block[210000*3],10000,'3rd Halving', color=Estilos[tipo][0], ha='right', va='center',size=15)
+
+    ax[1].text(n_block[210000*1],8.5,'1st Halving', color=Estilos[tipo][0], ha='right', va='center',size=15)
+    ax[1].text(n_block[210000*2],8.5,'2nd Halving', color=Estilos[tipo][0], ha='right', va='center',size=15)
+    ax[1].text(n_block[210000*3],8.5,'3rd Halving', color=Estilos[tipo][0], ha='right', va='center',size=15)
+
+
     ax[0].set_ylabel('Number of transactions\n', fontsize=23,**preferencias)
-    ax[0].set_xlabel('Number of Blocks\n', fontsize=23,**preferencias)
+    ax[0].set_xlabel('Number of Blocks\n', fontsize=23,**preferencias,labelpad=20)
     ax[0].axvline(x=210000, color=Estilos[tipo][0], linestyle='--', linewidth=1)
     ax[0].axvline(x=210000*2, color=Estilos[tipo][0], linestyle='--', linewidth=1)
     ax[0].axvline(x=210000*3, color=Estilos[tipo][0], linestyle='--', linewidth=1)
-    ax[0].tick_params(axis='both',colors=Estilos[tipo][0])
+    ax[0].tick_params(axis='both',colors=Estilos[tipo][0],labelsize=14)
     #ax[0].axvline(x=210000*3, color='red', linestyle='--', linewidth=1)
 
 
@@ -70,12 +80,12 @@ def crear_imagen_total(tipo='estilo_dark'):
 
     
     ax[1].set_ylabel('Number of transactions \n', fontsize=23,**preferencias)
-    ax[1].set_xlabel('Number of Blocks\n', fontsize=23,**preferencias)
+    ax[1].set_xlabel('Number of Blocks\n', fontsize=23,**preferencias,labelpad=20)
     #ax[1].scatter(n_block[indice], np.log(ntx_max), color ='red',label='Máximo', s=20)
     ax[1].axvline(x=210000, color=Estilos[tipo][0], linestyle='--', linewidth=1)
     ax[1].axvline(x=210000*2, color=Estilos[tipo][0], linestyle='--', linewidth=1)
     ax[1].axvline(x=210000*3, color=Estilos[tipo][0], linestyle='--', linewidth=1)
-    ax[1].tick_params(axis='both',colors=Estilos[tipo][0])
+    ax[1].tick_params(axis='both',colors=Estilos[tipo][0],labelsize=14)
 
     if tipo[7:8]=='d':
         tw1 = Image.open('bins/br_w.png')
@@ -83,7 +93,7 @@ def crear_imagen_total(tipo='estilo_dark'):
         tw1 = Image.open('bins/br_d.png')
     tw1_resized = tw1.resize((int(tw1.width * 0.65), int(tw1.height * 0.65)))
     tw1_array = np.array(tw1_resized)
-    fig.figimage(tw1_array, xo=2600, yo=1100, alpha=0.55, zorder=1)
+    fig.figimage(tw1_array, xo=3200, yo=1100, alpha=0.55, zorder=1)
     plt.subplots_adjust(wspace=0.25)
     plt.savefig('analisis/resultados/Numero_de_transacciones_'+tipo+'.png',bbox_inches='tight',pad_inches=0.5)
     #plt.show()

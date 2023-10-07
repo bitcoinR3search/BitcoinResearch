@@ -49,7 +49,7 @@ def crear_imagen_total(tipo='estilo_dark'):
 	ax.xaxis.set_major_locator(locator)
 	ax.xaxis.set_major_formatter(formatter)
 	ax.xaxis.set_tick_params(labelsize=10, rotation=20,color='w')
-	ax.tick_params(axis='x', color='w')
+	ax.tick_params(axis='both', labelcolor='w')
 
 	# Dibujar las líneas horizontales
 	#ax.axhline(10, color='black')
