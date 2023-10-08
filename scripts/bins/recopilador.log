@@ -5558,3 +5558,51 @@
 08-Oct-23,07:30:55,nuevo bloque encontrado 811214,INFO
 08-Oct-23,07:30:57,Guardado en DB  Last Block 811214 ,INFO
 08-Oct-23,07:31:26,******************EXIT**************************,INFO
+08-Oct-23,12:05:02,*****************START***************************,INFO
+08-Oct-23,12:05:02,Corriendo script 2023-10-08 12:05:02,INFO
+08-Oct-23,12:05:02,Autentificando sesion,INFO
+08-Oct-23,12:05:02,Se detecto la db en bins/database.npz,INFO
+08-Oct-23,12:05:23,ultimo bloque en db 811214,INFO
+08-Oct-23,12:05:23,nuevo bloque encontrado 811215,INFO
+08-Oct-23,12:05:25,nuevo bloque encontrado 811216,INFO
+08-Oct-23,12:05:27,nuevo bloque encontrado 811217,INFO
+08-Oct-23,12:05:29,nuevo bloque encontrado 811218,INFO
+08-Oct-23,12:05:32,nuevo bloque encontrado 811219,INFO
+08-Oct-23,12:05:34,nuevo bloque encontrado 811220,INFO
+08-Oct-23,12:05:36,nuevo bloque encontrado 811221,INFO
+08-Oct-23,12:05:38,nuevo bloque encontrado 811222,INFO
+08-Oct-23,12:05:40,nuevo bloque encontrado 811223,INFO
+08-Oct-23,12:05:42,nuevo bloque encontrado 811224,INFO
+08-Oct-23,12:05:45,nuevo bloque encontrado 811225,INFO
+08-Oct-23,12:05:48,nuevo bloque encontrado 811226,INFO
+08-Oct-23,12:05:50,nuevo bloque encontrado 811227,INFO
+08-Oct-23,12:05:52,nuevo bloque encontrado 811228,INFO
+08-Oct-23,12:05:54,nuevo bloque encontrado 811229,INFO
+08-Oct-23,12:05:57,nuevo bloque encontrado 811230,INFO
+08-Oct-23,12:06:01,nuevo bloque encontrado 811231,INFO
+08-Oct-23,12:06:04,nuevo bloque encontrado 811232,INFO
+08-Oct-23,12:06:08,nuevo bloque encontrado 811233,INFO
+08-Oct-23,12:06:13,nuevo bloque encontrado 811234,INFO
+08-Oct-23,12:06:15,nuevo bloque encontrado 811235,INFO
+08-Oct-23,12:06:17,nuevo bloque encontrado 811236,INFO
+08-Oct-23,12:06:20,nuevo bloque encontrado 811237,INFO
+08-Oct-23,12:06:22,nuevo bloque encontrado 811238,INFO
+08-Oct-23,12:06:24,nuevo bloque encontrado 811239,INFO
+08-Oct-23,12:06:25,Guardado en DB  Last Block 811239 ,INFO
+08-Oct-23,12:07:08,******************EXIT**************************,INFO
+08-Oct-23,12:16:04,*****************START***************************,INFO
+08-Oct-23,12:16:04,Corriendo script 2023-10-08 12:16:04,INFO
+08-Oct-23,12:16:04,Autentificando sesion,INFO
+08-Oct-23,12:16:04,Se detecto la db en bins/database.npz,INFO
+08-Oct-23,12:16:21,ultimo bloque en db 811239,INFO
+08-Oct-23,12:16:21,nuevo bloque encontrado 811240,INFO
+08-Oct-23,12:16:23,Guardado en DB  Last Block 811240 ,INFO
+08-Oct-23,12:16:49,******************EXIT**************************,INFO
+08-Oct-23,12:29:40,*****************START***************************,INFO
+08-Oct-23,12:29:40,Corriendo script 2023-10-08 12:29:40,INFO
+08-Oct-23,12:29:40,Autentificando sesion,INFO
+08-Oct-23,12:29:40,Se detecto la db en bins/database.npz,INFO
+08-Oct-23,12:29:51,ultimo bloque en db 811240,INFO
+08-Oct-23,12:29:51,nuevo bloque encontrado 811241,INFO
+08-Oct-23,12:29:53,Guardado en DB  Last Block 811241 ,INFO
+08-Oct-23,12:30:21,******************EXIT**************************,INFO
