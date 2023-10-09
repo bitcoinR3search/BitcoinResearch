@@ -5606,3 +5606,67 @@
 08-Oct-23,12:29:51,nuevo bloque encontrado 811241,INFO
 08-Oct-23,12:29:53,Guardado en DB  Last Block 811241 ,INFO
 08-Oct-23,12:30:21,******************EXIT**************************,INFO
+08-Oct-23,22:06:35,*****************START***************************,INFO
+08-Oct-23,22:06:35,Corriendo script 2023-10-08 22:06:35,INFO
+08-Oct-23,22:06:35,Autentificando sesion,INFO
+08-Oct-23,22:06:35,Se detecto la db en bins/database.npz,INFO
+08-Oct-23,22:06:57,ultimo bloque en db 811241,INFO
+08-Oct-23,22:06:57,nuevo bloque encontrado 811242,INFO
+08-Oct-23,22:06:59,nuevo bloque encontrado 811243,INFO
+08-Oct-23,22:07:01,nuevo bloque encontrado 811244,INFO
+08-Oct-23,22:07:03,nuevo bloque encontrado 811245,INFO
+08-Oct-23,22:07:06,nuevo bloque encontrado 811246,INFO
+08-Oct-23,22:07:08,nuevo bloque encontrado 811247,INFO
+08-Oct-23,22:07:10,nuevo bloque encontrado 811248,INFO
+08-Oct-23,22:07:24,nuevo bloque encontrado 811249,INFO
+08-Oct-23,22:07:26,nuevo bloque encontrado 811250,INFO
+08-Oct-23,22:07:28,nuevo bloque encontrado 811251,INFO
+08-Oct-23,22:07:30,nuevo bloque encontrado 811252,INFO
+08-Oct-23,22:07:33,nuevo bloque encontrado 811253,INFO
+08-Oct-23,22:07:39,nuevo bloque encontrado 811254,INFO
+08-Oct-23,22:07:41,nuevo bloque encontrado 811255,INFO
+08-Oct-23,22:07:43,nuevo bloque encontrado 811256,INFO
+08-Oct-23,22:07:59,nuevo bloque encontrado 811257,INFO
+08-Oct-23,22:08:02,nuevo bloque encontrado 811258,INFO
+08-Oct-23,22:08:05,nuevo bloque encontrado 811259,INFO
+08-Oct-23,22:08:08,nuevo bloque encontrado 811260,INFO
+08-Oct-23,22:08:10,nuevo bloque encontrado 811261,INFO
+08-Oct-23,22:08:12,nuevo bloque encontrado 811262,INFO
+08-Oct-23,22:08:14,nuevo bloque encontrado 811263,INFO
+08-Oct-23,22:08:16,nuevo bloque encontrado 811264,INFO
+08-Oct-23,22:08:17,nuevo bloque encontrado 811265,INFO
+08-Oct-23,22:08:19,nuevo bloque encontrado 811266,INFO
+08-Oct-23,22:08:21,nuevo bloque encontrado 811267,INFO
+08-Oct-23,22:08:23,nuevo bloque encontrado 811268,INFO
+08-Oct-23,22:08:25,nuevo bloque encontrado 811269,INFO
+08-Oct-23,22:08:28,nuevo bloque encontrado 811270,INFO
+08-Oct-23,22:08:30,nuevo bloque encontrado 811271,INFO
+08-Oct-23,22:08:46,nuevo bloque encontrado 811272,INFO
+08-Oct-23,22:08:48,nuevo bloque encontrado 811273,INFO
+08-Oct-23,22:08:50,nuevo bloque encontrado 811274,INFO
+08-Oct-23,22:08:51,nuevo bloque encontrado 811275,INFO
+08-Oct-23,22:08:53,nuevo bloque encontrado 811276,INFO
+08-Oct-23,22:08:55,nuevo bloque encontrado 811277,INFO
+08-Oct-23,22:08:57,nuevo bloque encontrado 811278,INFO
+08-Oct-23,22:09:00,nuevo bloque encontrado 811279,INFO
+08-Oct-23,22:09:02,nuevo bloque encontrado 811280,INFO
+08-Oct-23,22:09:05,nuevo bloque encontrado 811281,INFO
+08-Oct-23,22:09:07,nuevo bloque encontrado 811282,INFO
+08-Oct-23,22:09:09,nuevo bloque encontrado 811283,INFO
+08-Oct-23,22:09:12,nuevo bloque encontrado 811284,INFO
+08-Oct-23,22:09:14,nuevo bloque encontrado 811285,INFO
+08-Oct-23,22:09:17,nuevo bloque encontrado 811286,INFO
+08-Oct-23,22:09:19,nuevo bloque encontrado 811287,INFO
+08-Oct-23,22:09:40,nuevo bloque encontrado 811288,INFO
+08-Oct-23,22:09:42,nuevo bloque encontrado 811289,INFO
+08-Oct-23,22:09:46,nuevo bloque encontrado 811290,INFO
+08-Oct-23,22:09:48,nuevo bloque encontrado 811291,INFO
+08-Oct-23,22:09:51,nuevo bloque encontrado 811292,INFO
+08-Oct-23,22:09:53,nuevo bloque encontrado 811293,INFO
+08-Oct-23,22:09:54,nuevo bloque encontrado 811294,INFO
+08-Oct-23,22:09:58,nuevo bloque encontrado 811295,INFO
+08-Oct-23,22:09:59,nuevo bloque encontrado 811296,INFO
+08-Oct-23,22:10:01,nuevo bloque encontrado 811297,INFO
+08-Oct-23,22:10:05,nuevo bloque encontrado 811298,INFO
+08-Oct-23,22:10:07,Guardado en DB  Last Block 811298 ,INFO
+08-Oct-23,22:10:42,******************EXIT**************************,INFO
