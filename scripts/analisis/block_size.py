@@ -6,15 +6,14 @@
 
 # librerias a usar
 import os
+from datetime import datetime
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-from matplotlib.offsetbox import TextArea, DrawingArea, OffsetImage, AnnotationBbox
 from matplotlib import font_manager as fm
 from PIL import Image
-from datetime import datetime
 from app.styles import Estilos, colores
-from app.readata import leer_data,time_data,estado_data
+from app.readata import leer_data,time_data
 
 # Cambiar la tipografia
 fpath = os.path.join('bins/MonoLisaSimpson.ttf')
@@ -31,7 +30,7 @@ def crear_imagen(tipo='estilo_dark'):
     ax.patch.set_facecolor(Estilos[tipo][1])
 
     preferencias = {'color':Estilos[tipo][0],'fontproperties':prop}
-    plt.suptitle("  Bitcoin: Block Size\nHistory 2009-2023",fontsize=35,x=0.20,y=1.23,**preferencias)
+    plt.suptitle("  Bitcoin: Block Size\nHistory 2009-2023",fontsize=55,x=0.20,y=1.23,**preferencias)
     size,time = leer_data('size','time_b')
     size = np.array(size)/1000000
 
@@ -133,7 +132,7 @@ def crear_imagen(tipo='estilo_dark'):
     ax2.tick_params(axis='y', length=0)
 # Añade la imagen a la figura
     fig.figimage(tw1_array, xo=2400, yo=1000, alpha=0.55, zorder=1)
-    plt.savefig('analisis/resultados/block_size_'+tipo+'.png',bbox_inches='tight',pad_inches=0.5)
+    plt.savefig('analisis/resultados/blocksize_'+tipo+'.png',bbox_inches='tight',pad_inches=0.5)
 
 crear_imagen('estilo_dark')
 # for a in Estilos.keys():

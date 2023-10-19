@@ -4,9 +4,10 @@ import pandas as pd
 import matplotlib.dates as mdates
 
 
-#os.chdir('D:/proyectos/BitcoinResearch//BitcoinResearch/scripts/')
+os.chdir('D:/proyectos/BitcoinResearch/BitcoinResearch/scripts/')
 #os.chdir('/home/ghost/BitcoinResearch/scripts/')
-os.chdir('/home/richard/TRABAJO/BitcoinResearch/scripts/')
+#os.chdir('/home/richard/TRABAJO/BitcoinResearch/scripts/')
+
 
 def leer_data(*args):
     aux = np.load('bins/database.npz', allow_pickle='TRUE')
@@ -46,8 +47,6 @@ def bitcoins_emitidos(num=np.load('bins/database.npz', allow_pickle='TRUE')['n_b
         bitcoins_total += bloques_en_este_periodo * (recompensa_inicial / (2 ** i))    
     return bitcoins_total
 
-
-
 def punto_halv(b=np.load('bins/database.npz', allow_pickle='TRUE')['n_block'][-1]):
     bloque = int(b)
     bloques_por_halving = 210000
@@ -63,9 +62,3 @@ def last_block():
 
 if __name__ == '__main__':
     print(last_block())
-    
-
-
-
-
-
