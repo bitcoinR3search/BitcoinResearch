@@ -102,7 +102,7 @@ def crear_imagen_total(tipo='estilo_dark'):
     ax[1].set_title("Scale:'logy'",loc='right',fontsize=15,color='white')
        
     ax[0].set_yticks([0,1e2,2e2,3e2,4e2,5e2])
-    ytick_labels = ['0 EH\s','100 EH\s','200 EH\s','300 EH\s','400 EH\s','500 EH\s']
+    ytick_labels = ['0 EH\\s','100 EH\\s','200 EH\\s','300 EH\\s','400 EH\\s','500 EH\\s']
     ax[0].set_yticklabels(ytick_labels,rotation=23,**preferencias)
     ax[0].yaxis.set_tick_params(labelsize=15)
     ax[0].tick_params(axis='y',labelsize=15,rotation=25)  # Cambia 20 al tamaño que prefieras
