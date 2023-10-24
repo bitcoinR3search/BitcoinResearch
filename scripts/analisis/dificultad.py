@@ -19,6 +19,10 @@ from app.readata import leer_data,time_data,estado_data,last_block
 # Cambiar la tipografia
 fpath = os.path.join('bins/MonoLisaSimpson.ttf')
 prop = fm.FontProperties(fname=fpath)
+
+fpatht = os.path.join('bins/BigBlueTerm437NerdFont-Regular.ttf')
+title = fm.FontProperties(fname=fpatht)
+
 fname = os.path.split(fpath)[1]
 
 def bits_to_difficulty(bits):
@@ -39,7 +43,7 @@ def crear_imagen_total(tipo='estilo_dark'):
 
     preferencias = {'color':Estilos[tipo][0],'fontproperties':prop}
 
-    plt.suptitle("Bitcoin\n   Difficulty",fontsize=50,y=1.5,x=0.1,**preferencias)
+    plt.suptitle("Bitcoin\n   Difficulty",fontsize=50,y=1.5,x=0.18,color=Estilos[tipo][0],fontproperties=title)
     bits,time_s = leer_data('bits','time_b')
     difficulty = np.array([bits_to_difficulty(a) for a in bits])
     time = time_data(time_s)    
@@ -56,16 +60,16 @@ def crear_imagen_total(tipo='estilo_dark'):
 
 
     #ax[0].set_yscale('log')
-    locator = mdates.MonthLocator(interval=24)
-    formatter = mdates.DateFormatter('%B\n%Y')
+    locator = mdates.MonthLocator(interval=23)
+    formatter = mdates.DateFormatter('%b\n%Y')
     ax[0].xaxis.set_major_locator(locator)
     ax[0].xaxis.set_major_formatter(formatter)
-    ax[0].xaxis.set_tick_params(labelsize=13, rotation=30,length=5,width=3)
+    ax[0].xaxis.set_tick_params(labelsize=18, rotation=30,length=5,width=3)
     ax[0].tick_params(axis='both',colors=Estilos[tipo][0])
     ax[0].set_ylabel('Difficulty\n', fontsize=23,**preferencias)
     ax[0].set_title("Scale:'linear'",loc='right',fontsize=15,color='white')
-    ax[0].axhline(difficulty.max(),linestyle='dashed',color='red',linewidth=0.75)
-    ax[1].axhline(difficulty.max(),linestyle='dashed',color='red',linewidth=0.75)
+    ax[0].axhline(difficulty.max(),linestyle='dashed',color='red',linewidth=1)
+    ax[1].axhline(difficulty.max(),linestyle='dashed',color='red',linewidth=1)
 
     #ax[1].plot(time,difficulty,color=colores[3],zorder=1,linewidth=7)
 
@@ -80,24 +84,24 @@ def crear_imagen_total(tipo='estilo_dark'):
 
 
     ax[1].set_yscale('log')
-    locator = mdates.MonthLocator(interval=24)
-    formatter = mdates.DateFormatter('%B\n%Y')
+    locator = mdates.MonthLocator(interval=23)
+    formatter = mdates.DateFormatter('%b\n%Y')
     ax[1].xaxis.set_major_locator(locator)
     ax[1].xaxis.set_major_formatter(formatter)
-    ax[1].xaxis.set_tick_params(labelsize=13, rotation=30,length=5,width=3)
+    ax[1].xaxis.set_tick_params(labelsize=18, rotation=30,length=5,width=3)
     ax[1].tick_params(axis='both',colors=Estilos[tipo][0])
-    ax[1].set_ylabel('Difficulty\n', fontsize=23,**preferencias)
+    ax[1].set_ylabel('Difficulty log\n', fontsize=23,**preferencias)
 
     ax[1].set_title("Scale:'logy'",loc='right',fontsize=15,color='white')
        
     ax[0].set_yticks([0,1e13,2e13,3e13,4e13,5e13])
     ytick_labels = ['0',r"$1\times10^{13}$",r"$2\times10^{13}$",r"$3\times10^{13}$",r"$4\times10^{13}$",r"$5\times10^{13}$"]
     ax[0].set_yticklabels(ytick_labels,rotation=23,**preferencias)
-    ax[0].yaxis.set_tick_params(labelsize=15)
+    ax[0].yaxis.set_tick_params(labelsize=18)
+    ax[1].tick_params(axis='y',labelsize=18,rotation=25)  # Cambia 20 al tamaño que prefieras
 
-    ax[1].tick_params(axis='y',labelsize=15,rotation=25)  # Cambia 20 al tamaño que prefieras
-
-    
+    ax[0].grid(axis='y', linewidth=.5,linestyle='--')
+    ax[1].grid(axis='y', linewidth=.5,linestyle='--')
 
 
     for spine in ax[0].spines.values():
@@ -111,7 +115,7 @@ def crear_imagen_total(tipo='estilo_dark'):
         tw1 = Image.open('bins/br_d.png')
 
 
-    tw1_resized = tw1.resize((int(tw1.width * 0.65), int(tw1.height * 0.65)))  # Reduce el tamaño de la imagen a la mitad
+    tw1_resized = tw1.resize((int(tw1.width * 0.4), int(tw1.height * 0.4)))  # Reduce el tamaño de la imagen a la mitad
 # Convierte la imagen de PIL a una matriz de numpy para que matplotlib pueda trabajar con ella
     tw1_array = np.array(tw1_resized)
 
@@ -124,7 +128,7 @@ def crear_imagen_total(tipo='estilo_dark'):
 
     fig.text(0.5,1.15,mss1+mss2, ha='center', va='center', fontsize=20,**preferencias)
 
-    fig.figimage(tw1_array, xo=3100, yo=1000, alpha=0.55, zorder=1)
+    fig.figimage(tw1_array, xo=3100, yo=1250, alpha=0.55, zorder=1)
     plt.subplots_adjust(wspace=0.25)
     plt.savefig('analisis/resultados/dificultad_total_'+tipo+'.png',bbox_inches='tight',pad_inches=0.5)
 
@@ -145,7 +149,7 @@ def crear_imagen_h(tipo='estilo_dark'):
 
     preferencias = {'color':Estilos[tipo][0],'fontproperties':prop}
 
-    plt.suptitle("Difficulty\nper Halving",fontsize=35,x=0.20,y=1.23,**preferencias)
+    plt.suptitle("Difficulty\nper Halving",fontsize=45,x=0.28,y=1.4,fontproperties=title,color=Estilos[tipo][0])
     bits,time = leer_data('bits','time_b')
 
     difficulty_1 = np.array([bits_to_difficulty(a) for a in bits[:210000-1]])
@@ -176,7 +180,7 @@ def crear_imagen_h(tipo='estilo_dark'):
 
 
     locator1 = mdates.MonthLocator(interval=9)
-    formatter1 = mdates.DateFormatter('%B\n%Y')
+    formatter1 = mdates.DateFormatter('%b\n%Y')
     ax[0,0].xaxis.set_major_locator(locator1)
     ax[0,0].xaxis.set_major_formatter(formatter1)
     ax[0,0].xaxis.set_tick_params(labelsize=12, rotation=30,length=5,width=3)
@@ -207,7 +211,7 @@ def crear_imagen_h(tipo='estilo_dark'):
     
 
     locator2 = mdates.MonthLocator(interval=8)
-    formatter2 = mdates.DateFormatter('%B\n%Y')
+    formatter2 = mdates.DateFormatter('%b\n%Y')
     ax[0,1].xaxis.set_major_locator(locator2)
     ax[0,1].xaxis.set_major_formatter(formatter2)
     ax[0,1].xaxis.set_tick_params(labelsize=12, rotation=30,length=5,width=3)
@@ -239,7 +243,7 @@ def crear_imagen_h(tipo='estilo_dark'):
 
 
     locator3 = mdates.MonthLocator(interval=9)
-    formatter3 = mdates.DateFormatter('%B\n%Y')
+    formatter3 = mdates.DateFormatter('%b\n%Y')
     ax[1,0].xaxis.set_major_locator(locator3)
     ax[1,0].xaxis.set_major_formatter(formatter3)
     ax[1,0].xaxis.set_tick_params(labelsize=12, rotation=30,length=5,width=3)
@@ -254,11 +258,11 @@ def crear_imagen_h(tipo='estilo_dark'):
 
     date = datetime(2017, 1, 1)
     x_value = mdates.date2num(date) 
-    ax[1,0].scatter(x_value,.21,s=300,color=colores[3])
-    ax[1,0].scatter(x_value,.21,s=75,color=colores[8])
+    ax[1,0].scatter(x_value,.21,s=100,color=colores[3])
+    ax[1,0].scatter(x_value,.21,s=50,color=colores[8])
     ax[1,0].scatter(x_value,.21,s=5,color=colores[5])
     ax[1,0].vlines(x_value,0,.21, colors=Estilos[tipo][0], linestyles='dashed')
-    date = datetime(2017,10, 1)
+    date = datetime(2017,3,1)
     x_value = mdates.date2num(date) 
     ax[1,0].text(x_value,4, 'ASIC\n14nm', color=Estilos[tipo][0], ha='right', va='center',size=13)
 
@@ -274,7 +278,7 @@ def crear_imagen_h(tipo='estilo_dark'):
 
 
     locator4 = mdates.MonthLocator(interval=7)
-    formatter4 = mdates.DateFormatter('%B\n%Y')
+    formatter4 = mdates.DateFormatter('%b\n%Y')
     ax[1,1].xaxis.set_major_locator(locator4)
     ax[1,1].xaxis.set_major_formatter(formatter4)
     ax[1,1].xaxis.set_tick_params(labelsize=12, rotation=30,length=5,width=3)
@@ -341,16 +345,16 @@ def crear_imagen_h(tipo='estilo_dark'):
     ax[0,0].text(x_value,1e10,me1+me2, color=Estilos[tipo][0], ha='right', va='center',size=13)
 
 
-    tw1_resized = tw1.resize((int(tw1.width * 0.5), int(tw1.height * 0.5)))  # Reduce el tamaño de la imagen a la mitad
+    tw1_resized = tw1.resize((int(tw1.width * 0.3), int(tw1.height * 0.3)))  # Reduce el tamaño de la imagen a la mitad
 # Convierte la imagen de PIL a una matriz de numpy para que matplotlib pueda trabajar con ella
     tw1_array = np.array(tw1_resized)
 
 
 
 
-    fig.figimage(tw1_array, xo=1500, yo=1050, alpha=0.55, zorder=1)
+    fig.figimage(tw1_array, xo=1800, yo=1550, alpha=0.55, zorder=1)
     plt.subplots_adjust(wspace=0.3, hspace=1)
-    plt.savefig('analisis/resultados/dificultad_halv_'+tipo+'.png',bbox_inches='tight',pad_inches=0.5)
+    plt.savefig('analisis/resultados/dificultad_halv_'+tipo+'.png',bbox_inches='tight',pad_inches=0.75)
 
 
 

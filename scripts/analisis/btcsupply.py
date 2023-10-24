@@ -24,6 +24,10 @@ from app.readata import bitcoins_emitidos,punto_halv, last_block
 # Cambiar la tipografia
 fpath = os.path.join('bins/MonoLisaSimpson.ttf')
 prop = fm.FontProperties(fname=fpath)
+
+fpatht = os.path.join('bins/BigBlueTerm437NerdFont-Regular.ttf')
+title = fm.FontProperties(fname=fpatht)
+
 fname = os.path.split(fpath)[1]
 
 
@@ -69,20 +73,20 @@ def crear_imagen(tipo='estilo_dark'):
     fig.patch.set_facecolor(Estilos[tipo][1])
     ax.patch.set_facecolor(Estilos[tipo][1])
     preferencias = {'color':Estilos[tipo][0],'fontproperties':prop}
-    plt.suptitle("Bitcoin Supply\n2009 - 2140", fontsize=40,x=0.20,y=1.23,**preferencias)
-    ax.set_ylabel('BTC Supply %', fontsize=25,**preferencias)
+    plt.suptitle("Bitcoin Supply\n2009 - 2140", fontsize=45,x=0.1,y=1.4,fontproperties=title,color=Estilos[tipo][0])
+    ax.set_ylabel('BTC Supply', fontsize=25,**preferencias)
     ax.set_xlabel('Halving', fontsize=25,**preferencias)
     ax.tick_params(axis='both',colors=Estilos[tipo][0])
 
 
-    ax.plot(halvings[:],supply[:],color=colores[6],linewidth=5.5)
-    ax.plot([0,1,2,3,punto_halv()],[0,supply[0],supply[1],supply[2],bitcoins_emitidos()],color=colores[5],linewidth=2.5)
+    ax.plot(halvings[:],supply[:],color=colores[6],linewidth=7.5)
+    ax.plot([0,1,2,3,punto_halv()],[0,supply[0],supply[1],supply[2],bitcoins_emitidos()],color=colores[5],linewidth=5)
     ax.plot([0,1,2,3,punto_halv()],[0,supply[0],supply[1],supply[2],bitcoins_emitidos()],color=colores[0],linewidth=1)
     
 
        
     ax.set_yticks(supply[:5]+[supply[-1]])
-    ytick_labels = ['50 %','75 %','87.5 %','',' ','100 %']   
+    ytick_labels = ['50% ','75% ','87.5% ','','','100% ']   
     ax.set_yticklabels(ytick_labels,fontsize=15)
 
 
@@ -137,7 +141,7 @@ def crear_imagen(tipo='estilo_dark'):
 
 
 
-    fig.figimage(tw1_array, xo=2350, yo=1200, alpha=0.55, zorder=2)
+    fig.figimage(tw1_array, xo=2600, yo=1250, alpha=0.55, zorder=2)
 
 
 

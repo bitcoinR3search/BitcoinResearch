@@ -56,8 +56,8 @@ ax.patch.set_facecolor(Estilos[tipo][1])
 preferencias = {'color':Estilos[tipo][0],'fontproperties':prop}
 plt.suptitle("  Bitcoin: Block Size\nHistory 2009-2023",fontsize=35,x=0.20,y=1.23,**preferencias)
  
-locator = mdates.MonthLocator(interval=12)
-formatter = mdates.DateFormatter('%B\n%Y')
+locator = mdates.MonthLocator(interval=11)
+formatter = mdates.DateFormatter('%b\n%Y')
 ax.xaxis.set_major_locator(locator)
 ax.xaxis.set_major_formatter(formatter)
 ax.xaxis.set_tick_params(labelsize=13, rotation=30,length=5,width=3)
