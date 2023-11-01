@@ -45,7 +45,7 @@ def crear_imagen_total(tipo='estilo_dark'):
     formatter = mdates.DateFormatter('%Y-%m')
 
     # fig, ax = plt.subplots()
-
+#balbalabalblablalbasdasd
     # Configurar los ejes x
     ax.xaxis.set_major_locator(locator)
     ax.xaxis.set_major_formatter(formatter)
