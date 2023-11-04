@@ -1,4 +1,4 @@
 /scripts/bins/.env
 /scripts/bins/database.npz
 /scripts/bins/MonoLisaSimpson.ttf
-
+/scripts/analisis/app/__*
