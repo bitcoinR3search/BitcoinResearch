@@ -5670,3 +5670,8 @@
 08-Oct-23,22:10:05,nuevo bloque encontrado 811298,INFO
 08-Oct-23,22:10:07,Guardado en DB  Last Block 811298 ,INFO
 08-Oct-23,22:10:42,******************EXIT**************************,INFO
+03-Nov-23,23:28:41,*****************START***************************,INFO
+03-Nov-23,23:28:41,Corriendo script 2023-11-03 23:28:41,INFO
+03-Nov-23,23:28:41,Autentificando sesion,INFO
+03-Nov-23,23:28:41,Se detecto la db en bins/database.npz,INFO
+03-Nov-23,23:29:01,ultimo bloque en db 811298,INFO
