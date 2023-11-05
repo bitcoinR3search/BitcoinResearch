@@ -231,11 +231,12 @@ def crear_imagen_h(tipo='estilo_dark'):
     else:
         tw1 = Image.open('bins/br_d.png')
 
-    tw1_resized = tw1.resize((int(tw1.width * 0.5), int(tw1.height * 0.5)))  # Reduce el tamaño de la imagen a la mitad
+    tw1_resized = tw1.resize((int(tw1.width * 0.35), int(tw1.height * 0.35)))  # Reduce el tamaño de la imagen a la mitad
  # Convierte la imagen de PIL a una matriz de numpy para que matplotlib pueda trabajar con ella
     tw1_array = np.array(tw1_resized)
 
-    fig.figimage(tw1_array, xo=1500, yo=1150, alpha=0.55, zorder=1)
+    fig.figimage(tw1_array, xo=1850, yo=1300, alpha=0.55, zorder=1)
+
     plt.subplots_adjust(wspace=0.3, hspace=1)
     plt.savefig('analisis/resultados/Numero_de_transacciones_halv_'+tipo+'.png',bbox_inches='tight',pad_inches=0.5)
 
