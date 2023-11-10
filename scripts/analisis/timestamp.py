@@ -102,8 +102,8 @@ segundos = int((minutos-int(minutos)) * 60)
 
 mss = f'And the total average\nblock arrival time\n'
 mss2 = f'{int(minutos)} minutes\nand {segundos} seconds'
-ax.text(850000,-200,mss, color=Estilos[tipo][0], ha='right', va='center',size=15)
-ax.text(850000,-100,mss2, color=Estilos[tipo][0], ha='right', va='center',size=18)
+ax.text(850000,-400,mss, color=Estilos[tipo][0], ha='right', va='center',size=15)
+ax.text(850000,-600,mss2, color=Estilos[tipo][0], ha='right', va='center',size=18)
 
 
 if tipo[7:8] == 'd':
