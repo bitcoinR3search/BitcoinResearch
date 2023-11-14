@@ -58,12 +58,12 @@ def crear_imagen_total(tipo='estilo_dark'):
 
     preferencias = {'color':Estilos[tipo][0],'fontproperties':prop}
 
-    plt.suptitle("Bitcoin\n  Hashrate",fontsize=50,y=1.5,x=0.15,fontproperties=title,color=Estilos[tipo][0])
+    #plt.suptitle("Bitcoin\n  Hashrate",fontsize=50,y=1.5,x=0.15,fontproperties=title,color=Estilos[tipo][0])
 
 
-    ax[0].plot(time,hashrate_smoothed,color=colores[1],zorder=1,linewidth=7)
-    ax[0].plot(time,hashrate_smoothed,color=colores[2],zorder=1,linewidth=2)
-    ax[0].plot(time,hashrate_smoothed,color=colores[3],zorder=1,linewidth=0.5)
+    #ax[0].plot(time,hashrate_smoothed,color=colores[1],zorder=1,linewidth=7)
+    #ax[0].plot(time,hashrate_smoothed,color=colores[2],zorder=1,linewidth=2)
+    ax[0].plot(time,hashrate_smoothed,color=colores[3],zorder=1,linewidth=2)
     
 
 
@@ -75,7 +75,7 @@ def crear_imagen_total(tipo='estilo_dark'):
     ax[0].xaxis.set_tick_params(labelsize=15, rotation=30,length=5,width=3)
     ax[0].tick_params(axis='both',colors=Estilos[tipo][0])
     ax[0].set_ylabel('Hashrate\n', fontsize=25,**preferencias)
-    ax[0].set_title("Scale:'linear'",loc='right',fontsize=12,color='white')
+    ax[0].set_title("Scala:'lineal'",loc='right',fontsize=12,color='white')
     
     ax[0].axhline(hashrate_smoothed.max(),linestyle='dashed',color='red',linewidth=2)
     ax[1].axhline(1e18*hashrate_smoothed.max(),linestyle='dashed',color='red',linewidth=1)
@@ -84,9 +84,9 @@ def crear_imagen_total(tipo='estilo_dark'):
     ax[1].axhline(1e18*hashrate_smoothed.iloc[-1],linestyle='dashed',color='green',linewidth=1.5)
 
 
-    ax[1].plot(time,hashrate_smoothed*1e18,color=colores[1],zorder=1,linewidth=7)
-    ax[1].plot(time,hashrate_smoothed*1e18,color=colores[2],zorder=1,linewidth=2)
-    ax[1].plot(time,hashrate_smoothed*1e18,color=colores[3],zorder=1,linewidth=0.5)
+    #ax[1].plot(time,hashrate_smoothed*1e18,color=colores[1],zorder=1,linewidth=7)
+    #ax[1].plot(time,hashrate_smoothed*1e18,color=colores[2],zorder=1,linewidth=2)
+    ax[1].plot(time,hashrate_smoothed*1e18,color=colores[3],zorder=1,linewidth=2)
     
 
 
@@ -99,7 +99,7 @@ def crear_imagen_total(tipo='estilo_dark'):
     ax[1].tick_params(axis='both',colors=Estilos[tipo][0])
     ax[1].set_ylabel('Hashrate\n', fontsize=25,**preferencias)
 
-    ax[1].set_title("Scale:'logy'",loc='right',fontsize=15,color='white')
+    ax[1].set_title("Scala:'log'",loc='right',fontsize=15,color='white')
        
     ax[0].set_yticks([0,1e2,2e2,3e2,4e2,5e2])
     ytick_labels = ['0 EH\\s','100 EH\\s','200 EH\\s','300 EH\\s','400 EH\\s','500 EH\\s']
@@ -142,12 +142,12 @@ def crear_imagen_total(tipo='estilo_dark'):
     
     date = datetime(2020,5,21)
     x_value = mdates.date2num(date)
-    mss = 'China ban\nBitcoin mining' 
+    mss = 'Veto de China \nde la mineria de BTC' 
     ax[0].text(x_value,400, mss, color=Estilos[tipo][0], ha='right', va='center',size=18)
     
     date = datetime(2023,10,1)
     x_value = mdates.date2num(date)
-    mss = f'The Hashrate is estimated\nbased on variables such as\ndifficulty and chainwork.\n\nAs of block {round(last_block())} the \nvalue of chainwork is\n' 
+    mss = f'El Hashrate es estimado\nbasado en variables como la\ndificultad y chainwork.\n\nA partir del bloque {round(last_block())} el \nvalor del chainwork es\n' 
     mss2= r'$2.39\times10^{23}$'+' Hashes'
     ax[1].text(x_value,1e12,mss+mss2, color=Estilos[tipo][0], ha='right', va='center',size=18)
 
@@ -157,13 +157,13 @@ def crear_imagen_total(tipo='estilo_dark'):
 # Usa el índice para obtener la fecha correspondiente
     fecha_datetime = datetime.strptime(timestamp[np.argmax(hashrate)][:10],'%Y-%m-%d')
     formatted_date = fecha_datetime.strftime('%d of %B %Y')
-    mss1 = '*Up to block ' + str(last_block())+'\nthe All-Time High\nwas '
-    mss2 = str(round(hashrate_smoothed.max(),2))+' TH/s on\n'+str(formatted_date)
+    #mss1 = '*Up to block ' + str(last_block())+'\nthe All-Time High\nwas '
+    #mss2 = str(round(hashrate_smoothed.max(),2))+' TH/s on\n'+str(formatted_date)
 
-    fig.text(0.5,1.15,mss1+mss2, ha='center', va='center', fontsize=20,**preferencias)
+    #fig.text(0.5,1.15,mss1+mss2, ha='center', va='center', fontsize=20,**preferencias)
 
-    fig.figimage(tw1_array, xo=2800, yo=1200, alpha=0.55, zorder=1)
+    #fig.figimage(tw1_array, xo=2800, yo=1200, alpha=0.55, zorder=1)
     plt.subplots_adjust(wspace=0.25)
     plt.savefig('analisis/resultados/hashrate_'+tipo+'.png',bbox_inches='tight',pad_inches=0.5)
 
-crear_imagen_total('estilo_dark')
+crear_imagen_total('estilo_blanco')

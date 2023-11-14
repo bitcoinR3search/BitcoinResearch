@@ -22,11 +22,17 @@ Estilos = {
 # colores: ESTA VARIABLE CONTIENE COLORES
 colores = [(255,255,255),         #Blanco     0
             (0,0,0),                #negro      1        La escala de colores primario, fuerte, debil
-            (21,150,129),(170, 226, 255),(190, 247, 245), # Verde 2 3 4  
-            (255, 3, 45),(79, 32, 40),(255, 192, 203),   # Rojo 5 6 7 
+            (21,150,129),           #verde militar
+            (33, 72, 229),         #celeste neon
+            (190, 247, 245), # Celeste 
+            (255, 3, 45),    #ROJO
+            (79, 32, 40),    #Cafe
+            (255, 192, 203),   # ROSA 
             (7,25,82), #AZUL DE FONDO
             (170, 226, 255,),#CELESTE DE LINEA
-            (0, 128, 255)   #AZUl marino
+            (0, 128, 255),   #AZUl marino
+            (128,128,128),    #GRIS
+            (255,165,0)#     NARANJA
             ]
 
 

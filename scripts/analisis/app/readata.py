@@ -4,9 +4,9 @@ import pandas as pd
 import matplotlib.dates as mdates
 
 
-os.chdir('D:/proyectos/BitcoinResearch/BitcoinResearch/scripts/')
+#os.chdir('D:/proyectos/BitcoinResearch/BitcoinResearch/scripts/')
 #os.chdir('/home/ghost/BitcoinResearch/scripts/')
-#os.chdir('/home/richard/TRABAJO/BitcoinResearch/scripts/')
+os.chdir('/home/richard/TRABAJO/BitcoinResearch/scripts/')
 
 
 def leer_data(*args):
