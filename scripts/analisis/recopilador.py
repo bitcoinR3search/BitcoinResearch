@@ -20,7 +20,7 @@ from tqdm import tqdm
 
 
 # cargamos variables de autentificacion
-load_dotenv('/home/ghost/.env')
+load_dotenv('bins/.env')
 rpc_user = os.getenv('user')
 rpc_password = os.getenv('pass')
 
