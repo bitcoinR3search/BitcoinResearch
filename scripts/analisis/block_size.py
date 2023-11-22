@@ -14,6 +14,8 @@ from matplotlib import font_manager as fm
 from PIL import Image
 from app.styles import Estilos, colores
 from app.readata import leer_data, time_data
+import locale
+locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
 
 # Cambiar la tipografia
 fpath = os.path.join('bins/MonoLisaSimpson.ttf')
@@ -49,8 +51,14 @@ def crear_imagen(tipo='estilo_dark'):
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
 
+    #locator = mdates.MonthLocator(interval=10)
+    #formatter = mdates.DateFormatter('%B\ndel %Y')
+    
     locator = mdates.MonthLocator(interval=17)
     formatter = mdates.DateFormatter('%b\n%Y')
+
+    formatter.locale = locale.getlocale()
+
     ax.xaxis.set_major_locator(locator)
     ax.xaxis.set_major_formatter(formatter)
     ax.xaxis.set_tick_params(labelsize=15, rotation=30)

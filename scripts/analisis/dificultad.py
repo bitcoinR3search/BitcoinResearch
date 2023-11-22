@@ -14,7 +14,8 @@ from PIL import Image
 from datetime import datetime
 from app.styles import Estilos, colores
 from app.readata import leer_data,time_data,estado_data,last_block
-
+import locale
+locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
 
 # Cambiar la tipografia
 fpath = os.path.join('bins/MonoLisaSimpson.ttf')
@@ -62,6 +63,7 @@ def crear_imagen_total(tipo='estilo_dark'):
     #ax[0].set_yscale('log')
     locator = mdates.MonthLocator(interval=23)
     formatter = mdates.DateFormatter('%b\n%Y')
+    formatter.locale = locale.getlocale()
     ax[0].xaxis.set_major_locator(locator)
     ax[0].xaxis.set_major_formatter(formatter)
     ax[0].xaxis.set_tick_params(labelsize=18, rotation=30,length=5,width=3)
@@ -181,6 +183,7 @@ def crear_imagen_h(tipo='estilo_dark'):
 
     locator1 = mdates.MonthLocator(interval=9)
     formatter1 = mdates.DateFormatter('%b\n%Y')
+    formatter1.locale = locale.getlocale()
     ax[0,0].xaxis.set_major_locator(locator1)
     ax[0,0].xaxis.set_major_formatter(formatter1)
     ax[0,0].xaxis.set_tick_params(labelsize=12, rotation=30,length=5,width=3)

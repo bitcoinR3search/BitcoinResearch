@@ -26,7 +26,8 @@ from matplotlib import font_manager as fm
 from PIL import Image
 from datetime import datetime
 from app.styles import Estilos, colores
-
+import locale
+locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
 
 # tomamos los valores de la red
 chainw, timestamp = leer_data('chainwork','time_b')
@@ -70,6 +71,7 @@ def crear_imagen_total(tipo='estilo_dark'):
     #ax[0].set_yscale('log')
     locator = mdates.MonthLocator(interval=23)
     formatter = mdates.DateFormatter('%b\n%Y')
+    formatter.locale = locale.getlocale()
     ax[0].xaxis.set_major_locator(locator)
     ax[0].xaxis.set_major_formatter(formatter)
     ax[0].xaxis.set_tick_params(labelsize=15, rotation=30,length=5,width=3)
