@@ -10,8 +10,8 @@
 # Librerias
 
 import uvicorn
-from app.bot import actualizar, data_metrics, analisis
-from fastapi import FastAPI, HTTPException, Request
+from app.bot import analisis,actualizar_server
+from fastapi import FastAPI, HTTPException, Request, BackgroundTasks
 
 
 app = FastAPI()
@@ -31,19 +31,13 @@ async def notify_block(request: Request):
 
     print(f"Nuevo bloque recibido: {block_hash}")
     analisis(hash=block_hash)
+    actualizar_server()
     return {"message": "Notification received"}
 
 
 
 
 if __name__ == '__main__':
-    # lo primero que hace es sincronizar la base de datos 
-    # con el ultimo bloque de la red
-    actualizar()
-    # luego se realiza el calculo de ATH de la red con los
-    # datos actualizados
-    data_metrics()
-    # una vez que los datos estan procesados se lanza el
-    # servidor en localhost y puerto 8000
+    actualizar_server()
     uvicorn.run(app, host='127.0.0.1', port=8000)
 

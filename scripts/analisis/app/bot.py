@@ -15,7 +15,7 @@ from dotenv import load_dotenv
 from bitcoinrpc.authproxy import AuthServiceProxy
 #esta libreria se carga desde el otro script que invoca
 #por eso lleva app.readata
-from app.readata import time_data, leer_data
+from readata import time_data, leer_data
 
 #os.chdir('D://proyectos//BitcoinResearch//BitcoinResearch//scripts')
 os.chdir('/home/ghost/BitcoinResearch/scripts/')
@@ -26,23 +26,15 @@ rpc_user = os.getenv('user')
 rpc_pass = os.getenv('pass')  
 
 
-
-def actualizar(user=rpc_user,passw=rpc_pass):
+def actualizar_server(user=rpc_user,passw=rpc_pass):
     # este metodo actualiza la db.
     print('Actualizando la DB')
-
     aux = np.load('bins/database.npz', allow_pickle='TRUE')
-    n_block = aux['n_block']
     time_b = aux['time_b']
-    size = aux['size']
-    ntx = aux['ntx']
     bits = aux['bits']
     chainwork = aux['chainwork']
-    strippedsize = aux['strippedsize']
-    weight = aux['weight']
-    total = aux['total']
     flag = True
-    print(f'last block en db {int(n_block[-1])}')
+    print(f'last block en db {aux["n_block"][-1]}')
     # conectarse al nodo
     while(flag):
         try:
@@ -58,37 +50,31 @@ def actualizar(user=rpc_user,passw=rpc_pass):
                 return 
             else: pass
             while(last_block!=last_db_block):
-                print('Antualizando ...')
+                print('Actualizando ...')
                 #este bucle recopila rapidamente los valores del DB
                 print(f'Nuevo bloque encontrado {last_db_block+1}')
                 hash = node.getblockhash(last_db_block+1)
                 block = node.getblock(hash)
-                a_b, b, c, d, e, f, g, h = block['height'], block['time'], block['size'], block['nTx'], block['bits'], block['chainwork'], block['strippedsize'], block['weight']
-                n_block=np.append(n_block, a_b)
+                b, e, f = block['time'], block['bits'], block['chainwork']
                 date = datetime.datetime.utcfromtimestamp(b).strftime('%Y-%m-%d %H:%M:%S')
                 time_b=np.append(time_b, date)
-                size=np.append(size, c)
-                ntx=np.append(ntx, d)
                 bits=np.append(bits, e)
                 chainwork=np.append(chainwork, f)
-                strippedsize=np.append(strippedsize, g)
-                weight=np.append(weight, h)
                 last_db_block+=1
                 last_block = node.getblockcount()
                 sleep(1)
             print(f'Actualizado a {last_block}')
-            general = node.getblockchaininfo()          
-            total_size = general['size_on_disk']
-            print('Guardando DB, no cancele hasta que termine')
-            np.savez('bins/database.npz', n_block=n_block, time_b=time_b, size=size, ntx=ntx, bits=bits,chainwork=chainwork, strippedsize=strippedsize, weight=weight, total=total_size)
-            print('Guardado finalizado')
             flag=False
+
         except:
             # si el nodo no esta funcionando espera 
             # 5 minutos antes de volver a intentarlo
             print('error autentificando al nodo')
             print('Probando otra vez en 5 min...')
             sleep(300)
+    data_metrics(time_b, bits, chainwork)
+
+
 
 
 def bits_to_difficulty(bits):
@@ -101,35 +87,29 @@ def bits_to_difficulty(bits):
         return difficulty
 
 
-def data_metrics():
+def data_metrics(time_b,bits,chainw):
     #al llamar a esta función los valores ya estaran actualizados.
-    if(os.path.exists('bins/ath.npz')):
-         return print('ath database existe')
-    else:
-        print('calculando ATH')
-        aux = np.load('bins/database.npz', allow_pickle='TRUE')
-        print('Calculando ATH en DB')
-        #solo nos es de interes:
-        time_b = aux['time_b']
-        bits = aux['bits']
-        difficulty = np.array([bits_to_difficulty(a) for a in bits])
-        chainw=aux['chainwork']
-        time_block = pd.Series(pd.to_datetime(time_b)).diff().dt.total_seconds().dropna().replace(0, 1)
-        window=1008
-        chainwork = pd.Series([int(a,16) for a in chainw]).diff().dropna()
-        hashrate  = pd.Series([(chainwork[a]/1e18)/time_block[a] for a in range(1,len(time_block)+1)])
-        hashrate_smoothed = hashrate.rolling(window).median().fillna(np.mean(hashrate[:window]))
-
-        hashrate_ath = hashrate_smoothed.max()
-        time_ath = time_block.max()
-        time_ath_halv = time_block[3*210000:].max()
-        dif_ath = difficulty.max()
-        np.savez('bins/ath.npz', hash=hashrate_ath,time_total=time_ath,time_halv=time_ath_halv,dif=dif_ath)
-        return print('Guardado en disco')
+    print('Calculando ATH en database')
+    difficulty = np.array([bits_to_difficulty(a) for a in bits])
+    time_block = pd.Series(pd.to_datetime(time_b)).diff().dt.total_seconds().dropna().replace(0, 1)
+    window=1008
+    chainwork = pd.Series([int(a,16) for a in chainw]).diff().dropna()
+    hashrate  = pd.Series([(chainwork[a]/1e18)/time_block[a] for a in range(1,len(time_block)+1)])
+    hashrate_smoothed = hashrate.rolling(window).median().fillna(np.mean(hashrate[:window]))
+    hashrate_ath = hashrate_smoothed.max()
+    time_ath = time_block.max()
+    time_ath_halv = time_block[3*210000:].max()
+    dif_ath = difficulty.max()
+    np.save('bins/ath_hr.npy',hashrate_ath)
+    np.save('bins/ath_tt.npy',time_ath)
+    np.save('bins/ath_th.npy',time_ath_halv)
+    np.save('bins/ath_d.npy',dif_ath)
+    np.save('bins/ath_hrs.npy',hashrate_smoothed[-1008:])
+    return print('Guardado en disco')
 
 
 def alerta(n=0,data=0):
-    url = "http://nodeone.local:8001/notify"
+    url = "http://nodetwo.local:8001/notify"
     headers = {"accept": "application/json",
     "Content-Type": "application/json"}
     alerta_tipo = ['hashrate','time_b total','time_b halv','difficulty']
@@ -152,48 +132,59 @@ def analisis(hash=0,user=rpc_user,passw=rpc_pass):
             node = AuthServiceProxy("http://%s:%s@nodeone.local:8332" % (user,passw))
             print('nodo conectado')
             block = node.getblock(hash)
+            block_anterior_hash = node.getblockhash(block['height']-1)
+            block_anterior = node.getblock(block_anterior_hash)
             flag=False
         except:
             # si el nodo no esta funcionando espera 
             # 5 minutos antes de volver a intentarlo
             print('error autentificando al nodo')
             print('Probando otra vez en 5 min...')
-            sleep(300)
-    aux = np.load('bins/ath.npz',allow_pickle='TRUE')
+            sleep(120)
+    aux1 = np.load('bins/ath_hr.npy')
+    aux2 = np.load('bins/ath_tt.npy')
+    aux3 = np.load('bins/ath_th.npy')
+    aux4 = np.load('bins/ath_d.npy')
+    aux5 = np.load('bins/ath_hrs.npy')
+    print(aux1,aux2,aux3,aux4)
     print('Buscando ATH en bloque...')
-    #buscamos el valor de hashrate
-    chainw, timestamp = leer_data('chainwork','time_b')
-    np.append(chainw,block['chainwork'])
-    date = datetime.datetime.utcfromtimestamp(block['time']).strftime('%Y-%m-%d %H:%M:%S')
-    np.append(timestamp,date)
-    time_block = pd.Series(pd.to_datetime(timestamp)).diff().dt.total_seconds().dropna().replace(0, 1)
-    window=1008
-    chainwork = pd.Series([int(a,16) for a in chainw]).diff().dropna()
-    hashrate  = pd.Series([(chainwork[a]/1e18)/time_block[a] for a in range(1,len(time_block)+1)])
-    hashrate_smoothed = hashrate.rolling(window).median().fillna(np.mean(hashrate[:window]))
-    if(hashrate_smoothed.iloc[-1]>aux['hash']):
-        alerta(data=hashrate_smoothed.iloc[-1],n=0)
-        np.savez('bins/ath.npz',hash=hashrate_smoothed.iloc[-1])
+    # el primer y mas facil de calcular es el tiempo de llegada
+    # para lo cual recuperamos los valores de tiempo
+    tiempo_anterior = datetime.datetime.utcfromtimestamp(block_anterior['time']).strftime('%Y-%m-%d %H:%M:%S')
+    tiempo_nuevo = datetime.datetime.utcfromtimestamp(block['time']).strftime('%Y-%m-%d %H:%M:%S')
+    tiempo_bloque = pd.Series(pd.to_datetime([tiempo_anterior,tiempo_nuevo])).diff().dt.total_seconds().iloc[-1]
+    hashrate_new_block = (int(block['chainwork'],16)-int(block_anterior['chainwork'],16))/(1e18*tiempo_bloque)
+    print(f'hashrate bloque nuevo {hashrate_new_block}')
+    hashrate_mobil = aux5[-1007:]
+    #calculamos el hashrate con media movil incluyendo al nuevo dato
+    hsrt = np.append(hashrate_mobil,hashrate_new_block)
+    hashrate_new_block = hsrt.mean()
+    print(f'hashrate promediado {hashrate_new_block}')
+    hashrate_mobil = np.append(hashrate_mobil,hashrate_new_block)
+    np.save('bins/ath_hrs.npy',hashrate_mobil)
+    if(hashrate_new_block>aux1):
+        print('Nuevo ATH hashrate')
+        alerta(data=hashrate_new_block,n=0)
     else: pass
-    if(time_block.iloc[-1]>aux['time_total']):
-        alerta(n=1,data=time_block.iloc[-1])
-        np.savez('bins/ath.npz',time_total=time_block.iloc[-1])
+    if(tiempo_bloque>aux2):
+        print('Nuevo ATH total time')
+        alerta(n=1,data=tiempo_bloque)
     else: pass
-    if(time_block.iloc[-1]>aux['time_halv']):
-        alerta(n=2,data=time_block.iloc[-1])
-        np.savez('bins/ath.npz',time_halv=time_block.iloc[-1])
+    if(tiempo_bloque>aux3):
+        print('Nuevo ATH time halv')
+        alerta(n=2,data=tiempo_bloque)
     else: pass
     diff = bits_to_difficulty(block['bits'])
-    if(diff>aux['dif']):
+    if(diff>aux4):
+        print('Nuevo ATH diff')
         alerta(n=3,data=diff)
-        np.savez('bins/ath.npz',dif=diff)
     else: pass
+
     print('Sin cambios en ATH')
     return print('fin analisis bloque nuevo')
 
 
-#if __name__=='__main__':
+if __name__=='__main__':
+    actualizar_server(user=rpc_user,passw=rpc_pass)
 
-    #actualizar(user=rpc_user,passw=rpc_pass)
-    #data_metrics()
 
