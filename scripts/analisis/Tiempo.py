@@ -19,7 +19,15 @@ title = fm.FontProperties(fname=fpatht)
 fname = os.path.split(fpath)[1]
 
 
+<<<<<<< HEAD
 tipo = 'estilo_blanco'
+=======
+def crear_imagen_total(tipo='estilo_dark'):
+    fig, ax = plt.subplots(figsize=(20, 5), dpi=200)
+    preferencias = {'color': Estilos[tipo][0], 'fontproperties': prop}
+    plt.suptitle("Registro\nTemporal", fontsize=35, x=0.20, y=1.23, **preferencias)
+    time_b = leer_data('time_b')
+>>>>>>> 682a4ed (Estilos_blancos)
 
 fig, ax = plt.subplots(figsize=(20, 5), dpi=200)
 
@@ -38,6 +46,7 @@ A_n = np.where(diferencias.values < 0)[0]
 A_p = A_p[1:]
 A_n = A_n[1:]
 
+<<<<<<< HEAD
 d_max = diferencias[diferencias.idxmax()]
 d_min = diferencias[diferencias.idxmin()]
 
@@ -108,3 +117,95 @@ segundos = int((minutos-int(minutos)) * 60)  # Convertir la parte decimal a segu
 #fig.figimage(tw1_array, xo=2900, yo=1250, alpha=0.55, zorder=1)
 plt.savefig('analisis/resultados/timestamp_'+tipo +
                 '.png', bbox_inches='tight', pad_inches=0.75)
+=======
+    # fig, ax = plt.subplots()
+#balbalabalblablalbasdasd
+    # Configurar los ejes x
+    ax.xaxis.set_major_locator(locator)
+    ax.xaxis.set_major_formatter(formatter)
+    ax.xaxis.set_tick_params(labelsize=10, rotation=20, color='black')
+    ax.tick_params(axis='both', labelcolor='black')
+
+    # Dibujar las líneas horizontales
+    # ax.axhline(10, color='black')
+    # ax.axhline(np.mean(d), color='g')
+    # ============maximos======
+    ax.axvline(num_dates[210000*1], color=Estilos[tipo]
+               [0], linestyle='--', linewidth=1)
+    # date = datetime(2012,11, 28)
+    # x_value = mdates.date2num(date)
+    ax.text(num_dates[210000*1], 1450, '1er Halving',
+            color=Estilos[tipo][0], ha='right', va='center', size=15)
+    ##
+    ax.axvline(num_dates[210000*2], color=Estilos[tipo]
+               [0], linestyle='--', linewidth=1)
+    # date = datetime(2016,7, 9)
+    # x_value = mdates.date2num(date)
+    ax.text(num_dates[210000*2], 1450, '2do Halving',
+            color=Estilos[tipo][0], ha='right', va='center', size=15)
+    ##
+    ax.axvline(num_dates[210000*3], color=Estilos[tipo]
+               [0], linestyle='--', linewidth=1)
+    # date = datetime(2020,5, 11)
+    # x_value = mdates.date2num(date)
+    ax.text(num_dates[210000*3], 1450, '3er Halving',
+            color=Estilos[tipo][0], ha='right', va='center', size=15)
+    # =====
+    indice = np.where((d == np.max(d)))[0][0]
+    d_max = d[indice]
+
+    # ============minimos=====
+    indice2 = np.where((d == np.min(d)))[0][0]
+    d_min = d[indice2]
+    # print(d_min)
+    # Dibujar los puntos
+    ax.plot(num_dates, d, label="Datos sin anomalias", color=colores[12])
+
+#     ax.scatter(num_dates[indice], d_max,
+#                color=colores[9], label='Máximo', s=100)
+    ax.scatter(num_dates[indice], d_max,
+               color=colores[1], label='Máximo', s=40)
+    #ax.scatter(num_dates[indice], d_max, color='r', label='Máximo', s=10)
+
+    ax.scatter(num_dates[indice2], d_min,
+               color=colores[1], label='Minimo', s=40)
+#     ax.scatter(num_dates[indice2], d_min,
+#                color=colores[8], label='Minimo', s=40)
+#     ax.scatter(num_dates[indice2], d_min, color='red', label='Minimo', s=10)
+
+    # ax.scatter(num_dates[indice2], d_min, color ='red',label='Minimo', s=10)
+    # =========anomalias=======
+    ax.plot(num_dates[:len(A_N)], A_N, label="Anomalias",
+            color=colores[10])  # ,s=0.1)
+
+    # Color del fondo dentro la grafica
+
+    # fig.set_facecolor('gray')
+    #tw1 = Image.open('bins/br_w.png')
+    #tw1_resized = tw1.resize((int(tw1.width * 0.5), int(tw1.height * 0.5)))
+    #tw1_array = np.array(tw1_resized)
+    #fig.figimage(tw1_array, xo=2300, yo=850, alpha=0.55, zorder=1)
+    plt.subplots_adjust(wspace=0.3, hspace=1)
+    # color del fondo
+    # ax.patch.set_facecolor('white')
+    # ===== LEYENDA===
+    # scatter.legend_elements(prop="sizes", num=1)[0][0].set_markersize(10)
+    # legend_elements=[plt.Line2D([0],[0],marker='o',markersize=10,linewidth=2)]
+    # ax.legend(handles=legend_elements)
+    ###
+    ax.set_title("Análisis de los tiempos de llegada de los bloques",
+                 loc='left', **preferencias)
+    ax.set_xlabel("Fechas de registros", fontsize=17,**preferencias)
+    ax.set_ylabel("Diferencias de tiempo [min]", fontsize=17,**preferencias)
+    # cuadricula
+    ax.grid(axis='y')
+    # ax.legend(loc='upper right',title='Leyenda')
+    # plt.show()
+    # plt.imshow()
+    plt.savefig('analisis/resultados/TIEMPO'+tipo+'.png',
+                bbox_inches='tight', pad_inches=0.5)
+
+
+#crear_imagen_total('estilo_dark')
+crear_imagen_total('estilo_blanco')
+>>>>>>> 682a4ed (Estilos_blancos)

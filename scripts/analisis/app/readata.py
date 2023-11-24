@@ -5,8 +5,13 @@ import matplotlib.dates as mdates
 
 
 #os.chdir('D:/proyectos/BitcoinResearch/BitcoinResearch/scripts/')
+<<<<<<< HEAD
 os.chdir('/home/ghost/BitcoinResearch/scripts/')
 #os.chdir('/home/richard/TRABAJO/BitcoinResearch/scripts/')
+=======
+#os.chdir('/home/ghost/BitcoinResearch/scripts/')
+os.chdir('/home/richard/TRABAJO/BitcoinResearch/scripts/')
+>>>>>>> 682a4ed (Estilos_blancos)
 
 
 def leer_data(*args):
