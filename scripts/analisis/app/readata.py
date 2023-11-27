@@ -4,13 +4,13 @@ import pandas as pd
 import matplotlib.dates as mdates
 
 
-<<<<<<< HEAD
+
 #os.chdir('D:/proyectos/BitcoinResearch/BitcoinResearch/scripts/')
-os.chdir('/home/ghost/BitcoinResearch/scripts/')
-=======
+#os.chdir('/home/ghost/BitcoinResearch/scripts/')
+
 os.chdir('D:/proyectos/BitcoinResearch/BitcoinResearch/scripts/')
 #os.chdir('/home/ghost/BitcoinResearch/scripts/')
->>>>>>> 5983f6b (nuevas figuras hasta el bloque 818648)
+
 #os.chdir('/home/richard/TRABAJO/BitcoinResearch/scripts/')
 
 

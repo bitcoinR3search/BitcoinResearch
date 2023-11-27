@@ -19,19 +19,13 @@ title = fm.FontProperties(fname=fpatht)
 fname = os.path.split(fpath)[1]
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-tipo = 'estilo_blanco'
-=======
+
 def crear_imagen_total(tipo='estilo_dark'):
     fig, ax = plt.subplots(figsize=(20, 5), dpi=200)
     preferencias = {'color': Estilos[tipo][0], 'fontproperties': prop}
     plt.suptitle("Registro\nTemporal", fontsize=35, x=0.20, y=1.23, **preferencias)
     time_b = leer_data('time_b')
->>>>>>> 682a4ed (Estilos_blancos)
-=======
-tipo = 'estilo_blanco'
->>>>>>> 75a44f2 (Todo_-_price)
+
 
 fig, ax = plt.subplots(figsize=(20, 5), dpi=200)
 
@@ -50,8 +44,7 @@ A_n = np.where(diferencias.values < 0)[0]
 A_p = A_p[1:]
 A_n = A_n[1:]
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 d_max = diferencias[diferencias.idxmax()]
 d_min = diferencias[diferencias.idxmin()]
 
@@ -122,7 +115,7 @@ segundos = int((minutos-int(minutos)) * 60)  # Convertir la parte decimal a segu
 #fig.figimage(tw1_array, xo=2900, yo=1250, alpha=0.55, zorder=1)
 plt.savefig('analisis/resultados/timestamp_'+tipo +
                 '.png', bbox_inches='tight', pad_inches=0.75)
-=======
+
     # fig, ax = plt.subplots()
 #balbalabalblablalbasdasd
     # Configurar los ejes x
@@ -130,10 +123,7 @@ plt.savefig('analisis/resultados/timestamp_'+tipo +
     ax.xaxis.set_major_formatter(formatter)
     ax.xaxis.set_tick_params(labelsize=10, rotation=20, color='black')
     ax.tick_params(axis='both', labelcolor='black')
-=======
-d_max = diferencias[diferencias.idxmax()]
-d_min = diferencias[diferencias.idxmin()]
->>>>>>> 75a44f2 (Todo_-_price)
+
 
 ax.xaxis.set_tick_params(labelsize=18, rotation=20,color='black')
 ax.yaxis.set_tick_params(labelsize=13, rotation=10,color='black')
@@ -156,11 +146,7 @@ for spine in ax.spines.values():
     spine.set_color(Estilos[tipo][0])
 
 
-<<<<<<< HEAD
-#crear_imagen_total('estilo_dark')
-crear_imagen_total('estilo_blanco')
->>>>>>> 682a4ed (Estilos_blancos)
-=======
+
 ax.set_ylabel('Tiempo de Llegada de Bloques [min]',fontsize=18,**preferencias)
 ax.set_xlabel('\n# Bloque',fontsize=18,**preferencias)
 ax.set_ylim(-1400, 1600)
@@ -207,4 +193,3 @@ segundos = int((minutos-int(minutos)) * 60)  # Convertir la parte decimal a segu
 #fig.figimage(tw1_array, xo=2900, yo=1250, alpha=0.55, zorder=1)
 plt.savefig('analisis/resultados/timestamp_'+tipo +
                 '.png', bbox_inches='tight', pad_inches=0.75)
->>>>>>> 75a44f2 (Todo_-_price)
