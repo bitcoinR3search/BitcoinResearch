@@ -6,10 +6,7 @@ import matplotlib.dates as mdates
 
 #os.chdir('D:/proyectos/BitcoinResearch/BitcoinResearch/scripts/')
 os.chdir('/home/ghost/BitcoinResearch/scripts/')
-<<<<<<< HEAD
-=======
 #os.chdir('/home/richard/TRABAJO/BitcoinResearch/scripts/')
->>>>>>> fec1d88d107f5a9f1ffc0d1d515627a95977154b
 
 
 def leer_data(*args):
