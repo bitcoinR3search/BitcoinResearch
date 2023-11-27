@@ -4962,3 +4962,14 @@
 14-Nov-23,22:27:04,Error conección server, reconectando... ,INFO
 14-Nov-23,22:27:07,Error conección server, reconectando... ,INFO
 14-Nov-23,22:27:10,Error conección server, reconectando... ,INFO
+23-Nov-23,21:46:38,*****************START***************************,INFO
+23-Nov-23,21:46:38,Corriendo script 2023-11-23 21:46:38,INFO
+23-Nov-23,21:46:38,Autentificando sesion,INFO
+23-Nov-23,21:46:38,Se detecto la db en bins/database.npz,INFO
+23-Nov-23,21:46:43,ultimo bloque en db 818123,INFO
+23-Nov-23,21:46:46,Error conección server, reconectando... ,INFO
+23-Nov-23,21:46:49,Error conección server, reconectando... ,INFO
+23-Nov-23,21:46:53,Error conección server, reconectando... ,INFO
+23-Nov-23,21:46:56,Error conección server, reconectando... ,INFO
+23-Nov-23,21:46:59,Error conección server, reconectando... ,INFO
+23-Nov-23,21:47:03,Error conección server, reconectando... ,INFO
