@@ -91,7 +91,7 @@ def crear_imagen(tipo='estilo_dark'):
 
 
     ax.set_xticks([1,2,3,4])
-    xtick_labels = ['1st Halv\n28/12/2012','2nd Halv\n9/8/2016','3rd Halv\n11/6/2020','4th Halv\nEstimated:\n~24/12/2024']   
+    xtick_labels = ['1st Halv\n28/12/2012','2nd Halv\n9/8/2016','3rd Halv\n11/6/2020','4th Halv\nEstimated:\n~20/04/2024']   
     ax.set_xticklabels(xtick_labels,fontsize=15)
     
     ax.tick_params(axis='y', length=0)

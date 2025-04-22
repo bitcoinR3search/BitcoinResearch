@@ -96,8 +96,8 @@ hash_max = np.max(hash_array)
 hash_n = (hash_array - hash_min) / (hash_max - hash_min)
 
 
-ax.plot(fecha_array[360*6:],precio_n[360*6:],color=colores[3],label='Precio BTC')
-ax.plot(fecha_array[360*6:],hash_n[360*6:],color=colores[5],label='*Hash-Rate')
+ax.plot(fecha_array[360*6:-1],precio_n[360*6:-1],color=colores[3],label='Precio BTC')
+ax.plot(fecha_array[360*6:-1],hash_n[360*6:-1],color=colores[5],label='*Hash-Rate')
 
 
 legend = ax.legend(fontsize=18,loc='center', bbox_to_anchor=(0.12, 1))

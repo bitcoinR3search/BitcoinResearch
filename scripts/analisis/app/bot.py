@@ -17,8 +17,8 @@ from bitcoinrpc.authproxy import AuthServiceProxy
 #por eso lleva app.readata
 from readata import time_data, leer_data
 
-#os.chdir('D://proyectos//BitcoinResearch//BitcoinResearch//scripts')
-os.chdir('/home/ghost/BitcoinResearch/scripts/')
+os.chdir('D://proyectos//BitcoinResearch//BitcoinResearch//scripts')
+#os.chdir('/home/ghost/BitcoinResearch/scripts/')
 
 load_dotenv('bins/.env')
 
@@ -26,7 +26,7 @@ rpc_user = os.getenv('user')
 rpc_pass = os.getenv('pass')  
 
 
-def actualizar_server(user=rpc_user,passw=rpc_pass):
+def actualizar_server(user=rpc_user,passw=rpc_pass,db=False):
     # este metodo actualiza la db.
     print('Actualizando la DB')
     aux = np.load('bins/database.npz', allow_pickle='TRUE')
@@ -36,6 +36,8 @@ def actualizar_server(user=rpc_user,passw=rpc_pass):
     flag = True
     print(f'last block en db {aux["n_block"][-1]}')
     # conectarse al nodo
+    if db:
+          
     while(flag):
         try:
             print('Conectando al nodo ... ')
@@ -73,7 +75,7 @@ def actualizar_server(user=rpc_user,passw=rpc_pass):
             print('Probando otra vez en 5 min...')
             sleep(300)
     data_metrics(time_b, bits, chainwork)
-
+    return time_b, bits, chainwork
 
 
 
